@@ -1,0 +1,5 @@
+<?php
+
+// Fungsi untuk mengecek 
+
+?>
