@@ -2,22 +2,25 @@
 $title = "Silahkan masuk | Administrasi Laman Toko Makanan: Meatmaster";
 
 require("../base.php");
-require(BASEPATH."/adminLoginF.php");
-checkAdminTable(PDO_USED);
+require(BASEPATH."/app/fauth.php");
+checkAdminTable(PDO_Connect);
+if (!checkAdminSignIn($_SESSION['adminSignIn'])) {
+    header('Location: '.BASEURL.'/app/admin/register.php');
+}
 
-require(BASEPATH."/admin/header.php");
+require(BASEPATH."/app/admin/header.php");
 ?>
         <form action="<?= htmlspecialchars("login.php") ?>" method="POST">
-            <div>
-                <label for="admin_USE" class="form-element">Nama pengguna</label>
-                <input type="text" id="admin_USE" name="admin_USE" class="form-element"/>
+            <div class="form-element">
+                <label for="username" class="form-element">Nama pengguna</label>
+                <input type="text" id="username" name="username" class="form-element"/>
+            </div class="form-element">
+            <div class="form-element">
+                <label for="pwd" class="form-element">Kata sandi</label>
+                <input type="password" id="pwd" name="pwd" class="form-element"/>
             </div>
-            <div>
-                <label for="PWD_admin" class="form-element">Kata sandi</label>
-                <input type="password" id="PWD_admin" name="PWD_admin" class="form-element"/>
-            </div>
-            <div>
+            <div class="form-element">
                 <button type="submit" id="submit" value="Masuk" class="form-element">Masuk</button>
             </div>
         </form>
-<?php require("footer.php") ?>
+<?php require(BASEPATH."/app/admin/footer.php") ?>
