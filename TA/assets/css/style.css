@@ -24,6 +24,16 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
 }
 
+.txt-center {
+  text-align: center;
+}
+.txt-left {
+  text-align: left;
+}
+.txt-right {
+  text-align: right;
+}
+
 /* == NAVBAR == */
 .nav-container {
   display: flex;
@@ -394,6 +404,11 @@ h1,h2,h3,h4,h5,h6 {
 
 /* == FORM == */
 /* Login, Register, Profil */
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 section#login {
   width: 100vw;
   height: 100vh;
