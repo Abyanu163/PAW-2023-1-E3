@@ -10,7 +10,7 @@ function isRegisteredAdmin($setValue, $PDO_USED) { // Apakah pengguna sudah regi
 }
 function isRegisteredCustomer($setValue, $PDO_USED) { // Apakah pengguna sudah registrasi?
     $stateResult = $PDO_USED->prepare("SELECT emailPelanggan FROM customers WHERE emailPelanggan = :bindVar1 ;");
-    $stateResult->bindValue(":binVar1", $setValue);
+    $stateResult->bindValue(":bindVar1", $setValue);
     $stateResult->execute();
     if ($stateResult->rowCount() >= 1) {
         $GLOBALS['failRegist'] = TRUE;
@@ -85,9 +85,9 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
         return;
     } else {
         $stateExecute = $PDO_USED->prepare("INSERT INTO admin VALUES(:bindVal1 , :bindVal2 , SHA2( :bindVal3 , 256));");
-        $stateExecute->bindValue(":binVal1", $customerEmail);
-        $stateExecute->bindValue(":binVal2", $customeraddr);
-        $stateExecute->bindValue(":binVal3", $customerpwd);
+        $stateExecute->bindValue(":bindVal1", $customerEmail);
+        $stateExecute->bindValue(":bindVal2", $customeraddr);
+        $stateExecute->bindValue(":bindVal3", $customerpwd);
         $stateExecute->execute();
         header("Location: ".BASEURL."/app/customer/login.php");
         return exit();
