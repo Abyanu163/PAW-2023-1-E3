@@ -1,11 +1,6 @@
 <?php 
 $page = 'login';
-<<<<<<< HEAD
-$Title = 'Masuk | Toko makanan: Meatmaster';
-=======
-$title = 'Login';
-?>
->>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
+$title = 'Masuk | Toko makanan: Meatmaster';
 
 require_once 'templates/header.php';
 require(BASEPATH."/app/fauth.php");
@@ -24,13 +19,8 @@ if (checkSignIn($_SESSION['signedIn']) && ($_SERVER['REQUEST_METHOD'] == 'GET'))
             <h2>Masuk</h2>
           </div>
           <div class="form-element">
-<<<<<<< HEAD
             <label for="customerEmail">Surel</label>
             <input type="text" name="customerEmail" id="customerEmail">
-=======
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username">
->>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
           </div>
           <div class="form-element">
             <label for="customerpwd">Password</label>
