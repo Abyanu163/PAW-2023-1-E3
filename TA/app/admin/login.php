@@ -5,12 +5,17 @@ $title = "Silahkan masuk | Administrasi Laman Toko Makanan: Meatmaster";
 require("../base.php");
 require(BASEPATH."/app/fauth.php");
 checkAdminTable(PDO_Connect);
+<<<<<<< HEAD
 session_start();
 if (checkSignIn($_SESSION['adminSignIn']) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
     managerAuthRedirect($_SESSION['roleCode']);
     header('Location: '.BASEURL.'/app/admin/');
 }
 require(BASEPATH."/app/templates/header.php");
+=======
+
+require(BASEPATH."/app/admin/templates/header.php");
+>>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
 ?>
         <section id="login">
             <div class="login-container">
@@ -40,6 +45,11 @@ require(BASEPATH."/app/templates/header.php");
                     </div>
                 </form>
             </div>
+<<<<<<< HEAD
         </section>
     </body>
 </html>
+=======
+        </form>
+<?php require(BASEPATH."/app/admin/templates/footer.php") ?>
+>>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e

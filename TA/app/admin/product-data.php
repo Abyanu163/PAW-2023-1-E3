@@ -174,7 +174,11 @@ $title = 'Product Data';
     </div>
   </section>
 
+<<<<<<< HEAD
   <a href="<?= BASEURL ?>/app/admin/add-product.php" class="box-link">
+=======
+  <a href="<?= BASEURL ?>/app/admin/product-add.php" class="box-link">
+>>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
     <img src="<?= BASEURL  ?>/assets/img/plus.png" alt="plus">
     Add Product
   </a>

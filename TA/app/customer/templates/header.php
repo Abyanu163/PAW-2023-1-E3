@@ -17,7 +17,10 @@ require_once("../../base.php");
     }
     body {
       background-image: url('<?= BASEURL ?>/assets/img/white-wall-textures.jpg');
+<<<<<<< HEAD
       background-size: 20vw;
+=======
+>>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
     }
   </style>
 </head>
