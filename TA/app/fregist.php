@@ -38,7 +38,7 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
         case 'adminpwd':
             if (strlen($methodSend[$inValue]) < 8 || (strlen($methodSend[$inValue]) > 99)) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Terlalu banyak karakter akan bingung untuk Qiqi</span>";
+                return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi</span>";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $methodSend[$inValue])) {
                 $GLOBALS['failRegist'] = TRUE;
                 return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu.</span>";
@@ -66,6 +66,11 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
             break;
     }; return;
 }
+function setSameDiffValue($Value1, $Value2) {
+    if ($Value1 != $Value2) {
+        return "<span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
+    }
+}
 // Eksekusi dan pastikan aman
 function isOKRegistAdmin($inFailRegist, $PDO_USED, $adminusr, $adminpwd, $admintitlecode) {
     if ($inFailRegist == TRUE) {
@@ -84,7 +89,7 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
     if ($inFailRegist == TRUE) {
         return;
     } else {
-        $stateExecute = $PDO_USED->prepare("INSERT INTO admin VALUES(:bindVal1 , :bindVal2 , SHA2( :bindVal3 , 256));");
+        $stateExecute = $PDO_USED->prepare("INSERT INTO customers VALUES(:bindVal1 , :bindVal2 , SHA2( :bindVal3 , 256));");
         $stateExecute->bindValue(":bindVal1", $customerEmail);
         $stateExecute->bindValue(":bindVal2", $customeraddr);
         $stateExecute->bindValue(":bindVal3", $customerpwd);

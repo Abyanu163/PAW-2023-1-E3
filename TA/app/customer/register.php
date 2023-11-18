@@ -1,39 +1,55 @@
 <?php 
 $page = 'register';
-$title = 'Register';
-?>
+$title = 'Daftar sebagai pelanggan | Toko makanan: Meatmaster';
 
-<?php require_once 'templates/header.php' ?>
+require_once 'templates/header.php';
+require("../fregist.php");
+$failRegist = FALSE;
+?>
 
   <section id="login">
     <div class="login-container">
-      <form action="">
+      <form action="<?= htmlspecialchars("register.php") ?>" method="POST">
         <div class="form-container">
           <div class="form-title">
-            <h2>Register</h2>
+            <h2>Daftar</h2>
           </div>
           <div class="form-element">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <label for="customerEmail">Surel</label>
+            <input type="text" name="customerEmail" id="customerEmail">
           </div>
           <div class="form-element">
-            <label for="user-type">User Type</label>
-            <select name="user" id="user-type">
-              <option value="customer">Customer</option>
-              <option value="manager">Manager</option>
-              <option value="administrator">Administrator</option>
-            </select>
+            <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(isSetValue($_POST,'customerEmail'));} ?>
           </div>
           <div class="form-element">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
+            <label for="customeraddr">Alamat</label>
+          </div>
+          <div class="form element">
+            <textarea name="customeraddr" id="customeraddr"></textarea>
           </div>
           <div class="form-element">
-            <label for="conf-password">Confirm Password</label>
+            <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(isSetValue($_POST,'customeraddr'));} ?>
+          </div>
+          <div class="form-element">
+            <label for="customerpwd">Kata sandi</label>
+            <input type="password" name="customerpwd" id="customerpwd">
+          </div>
+          <div class="form-element">
+            <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(isSetValue($_POST,'customerpwd'));} ?>
+          </div>
+          <div class="form-element">
+            <label for="conf-password">Konfirmasi kata sandi</label>
             <input type="password" name="conf-password" id="conf-password">
           </div>
           <div class="form-element">
-            <button type="submit" name="login">Register</button>
+            <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(isSetValue($_POST,'conf-password')); echo(setSameDiffValue($_POST['cutomerpwd'], $_POST['conf-password']));} ?>
+          </div>
+          <div class="form-element">
+            <button type="submit" name="regist">Daftar</button>
+          </div>
+          <div class="form-element">
+            <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['customerEmail'] != "")) {echo(isRegisteredCustomer($_POST['customerEmail'], PDO_Connect));}
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($failRegist == FALSE)) {isOKRegistCsutomer($failRegist, PDO_Connect, $_POST['customerEmail'], $_POST['customerpwd'], $_POST['customeraddr']);} ?>
           </div>
         </div>
       </form>

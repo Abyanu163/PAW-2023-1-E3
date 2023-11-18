@@ -8,14 +8,18 @@ $title = 'Profil';
 
   <section>
     <div class="main-container">
-      <div class="profil-container">
+      <div class="formin-container">
         <form action="">
           <div class="form-title">
             <h2>Customer Profile</h2>
           </div>
           <div class="form-element">
+            <label for="username">Username</label>
+            <input type="text" id="username" disabled value="Username">
+          </div>
+          <div class="form-element">
             <label for="email">Email</label>
-            <input type="text" id="email">
+            <input type="text" id="email" value="Email">
           </div>
           <div class="form-element">
             <label for="alamat">Alamat</label>
