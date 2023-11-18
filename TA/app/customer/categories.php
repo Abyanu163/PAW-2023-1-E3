@@ -21,9 +21,59 @@ $title = 'Product Categories';
         <h2>Category List:</h2>
 
         <!-- Product List -->
-        <div class="card-list">
-          <div class="card">
-            <div class="card-desc">
+        <div class="card-list grid">
+          <div class="card categories">
+            <div class="card-desc no-pict">
+              <h3>Category name</h3>
+            </div>
+            <div class="browse-product">
+              <a href="#" class="goto-product">
+                Product List
+              </a>
+            </div>
+          </div>          
+          <div class="card categories">
+            <div class="card-desc no-pict">
+              <h3>Category name</h3>
+            </div>
+            <div class="browse-product">
+              <a href="#" class="goto-product">
+                Product List
+              </a>
+            </div>
+          </div>          
+          <div class="card categories">
+            <div class="card-desc no-pict">
+              <h3>Category name</h3>
+            </div>
+            <div class="browse-product">
+              <a href="#" class="goto-product">
+                Product List
+              </a>
+            </div>
+          </div>          
+          <div class="card categories">
+            <div class="card-desc no-pict">
+              <h3>Category name</h3>
+            </div>
+            <div class="browse-product">
+              <a href="#" class="goto-product">
+                Product List
+              </a>
+            </div>
+          </div>          
+          <div class="card categories">
+            <div class="card-desc no-pict">
+              <h3>Category name</h3>
+            </div>
+            <div class="browse-product">
+              <a href="#" class="goto-product">
+                Product List
+              </a>
+            </div>
+          </div>          
+          <div class="card categories">
+            <div class="card-desc no-pict">
               <h3>Category name</h3>
             </div>
             <div class="browse-product">

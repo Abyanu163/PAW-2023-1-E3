@@ -2,7 +2,7 @@
 $title = "Pendaftaran | Administrasi Laman Toko Makanan: Meatmaster";
 require("../base.php");
 require(BASEPATH."/app/fregist.php");
-require(BASEPATH."/app/admin/header.php");
+require(BASEPATH."/app/admin/templates/header.php");
 $failRegist = FALSE;
 ?>
         <section id="login">
@@ -45,4 +45,4 @@ $failRegist = FALSE;
                 </div>
             </form>
         </section>
-<?php require(BASEPATH."/app/admin/footer.php") ?>
+<?php require(BASEPATH."/app/admin/templates/footer.php") ?>

@@ -5,7 +5,7 @@ require("../base.php");
 require(BASEPATH."/app/fauth.php");
 checkAdminTable(PDO_Connect);
 
-require(BASEPATH."/app/admin/header.php");
+require(BASEPATH."/app/admin/templates/header.php");
 ?>
         <form action="<?= htmlspecialchars("login.php") ?>" method="POST" class="login">
             <div class="form-container">
@@ -22,4 +22,4 @@ require(BASEPATH."/app/admin/header.php");
                 </div>
             </div>
         </form>
-<?php require(BASEPATH."/app/admin/footer.php") ?>
+<?php require(BASEPATH."/app/admin/templates/footer.php") ?>

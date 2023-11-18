@@ -1,7 +1,7 @@
 
 <section>
     <div class="footer-container">
-      Copyright PAW2023-1-E03 - 2023
+      Copyright © 2023 - PAW2023-1-E03
     </div>
   </section>
 

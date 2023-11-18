@@ -13,8 +13,8 @@ $title = 'Register';
             <h2>Register</h2>
           </div>
           <div class="form-element">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username">
           </div>
           <div class="form-element">
             <label for="user-type">User Type</label>
@@ -34,6 +34,10 @@ $title = 'Register';
           </div>
           <div class="form-element">
             <button type="submit" name="login">Register</button>
+          </div>
+          <div class="account-link">
+            Have an account?
+            <a href="<?= BASEURL ?>/app/login.php">Login</a>
           </div>
         </div>
       </form>

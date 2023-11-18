@@ -6,7 +6,7 @@ $title = 'Product List';
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
 
-<section>
+<section id="content">
     <div class="main-container">
       <form action="#" method="get">
         <div class="search">
@@ -21,17 +21,115 @@ $title = 'Product List';
         <h2>Product List:</h2>
 
         <!-- Product List -->
-        <div class="card-list">
+        <div class="card-list grid">
           <div class="card">
-            <div class="card-pict"></div>
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
             <div class="card-desc">
               <h3>Product name</h3>
-              <p>Categories</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, rerum!</p>
-              <p>Stock: 0</p>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
             </div>
-            <div class="buy-product">
-              <a href="#" class="cart-button">
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
+                <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
+              </a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
+            <div class="card-desc">
+              <h3>Product name</h3>
+              <p class="prod-cate">Categories</p>
+              <p class="prod-desc">300gr</p>
+              <p class="prod-stok">Stock: 0</p>
+            </div>
+            <div class="act-product">
+              <a href="#" class="prod-button">
                 <img src="<?= BASEURL  ?>/assets/img/cart-plus.png" alt="cart">
               </a>
             </div>
@@ -45,7 +143,7 @@ $title = 'Product List';
   </section>
 
   
-  <a href="<?= BASEURL ?>/app/customer/shopping-cart.php" class="cart-link">
+  <a href="<?= BASEURL ?>/app/customer/cart.php" class="circle-link">
     <img src="<?= BASEURL  ?>/assets/img/cart-shopping.png" alt="cart-shopping">
   </a>
 
