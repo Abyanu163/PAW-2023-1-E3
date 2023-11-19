@@ -89,10 +89,10 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
     if ($inFailRegist == TRUE) {
         return;
     } else {
-        $stateExecute = $PDO_USED->prepare("INSERT INTO customers VALUES(:bindVal1 , :bindVal2 , SHA2( :bindVal3 , 256));");
-        $stateExecute->bindValue(":bindVal1", $customerEmail);
-        $stateExecute->bindValue(":bindVal2", $customeraddr);
-        $stateExecute->bindValue(":bindVal3", $customerpwd);
+        $stateExecute = $PDO_USED->prepare("INSERT INTO `customers` (`alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES(:bindVal1 , SHA2( :bindVal2 , 256) , :bindVal3;");
+        $stateExecute->bindValue(":bindVal1", $customeraddr);
+        $stateExecute->bindValue(":bindVal2", $customerpwd);
+        $stateExecute->bindValue(":bindVal3", $customerEmail);
         $stateExecute->execute();
         header("Location: ".BASEURL."/app/customer/login.php");
         return exit();
