@@ -3,11 +3,7 @@ $page = 'register';
 $title = "Pendaftaran | Administrasi Laman Toko Makanan: Meatmaster";
 require("../base.php");
 require(BASEPATH."/app/fregist.php");
-<<<<<<< HEAD
-require(BASEPATH."/app/templates/header.php");
-=======
 require(BASEPATH."/app/admin/templates/header.php");
->>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
 $failRegist = FALSE;
 ?>
         <section id="login">
@@ -50,9 +46,5 @@ $failRegist = FALSE;
                 </form>
             </div>
         </section>
-<<<<<<< HEAD
-    </body>
-</html>
-=======
 <?php require(BASEPATH."/app/admin/templates/footer.php") ?>
 >>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e
