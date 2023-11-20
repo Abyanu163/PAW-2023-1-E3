@@ -10,7 +10,7 @@ $title = 'Product Categories';
     <div class="main-container">
       <form action="#" method="get">
         <div class="search">
-          <input type="text" placeholder="Search product">
+          <input type="text" placeholder="Search product, categories">
           <button type="submit">
             <img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
           </button>

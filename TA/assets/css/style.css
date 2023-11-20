@@ -78,59 +78,6 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.card-row-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.5rem;
-  height: 300px;
-  overflow-y: scroll;
-}
-
-.card-row-container .card.row {
-  box-sizing: border-box;
-}
-
-.card.row {
-  margin-right: 0;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 0.5rem;
-  height: fit-content;
-}
-
-.card.row h3 {
-  font-size: 1rem;
-}
-
-.card.row p {
-  font-size: 0.7rem;
-}
-
-.card.row.header {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.card.row .col {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: auto;
-}
-
-.card.row .col {
-  border-left: 1px solid #999;
-}
-
-.card.row .col:nth-child(1) {
-  width: 30%;
-  border: none;
-}
-
-.card.row.customer .col:nth-child(2) {
-  width: 60%;
-}
-
 .card.categories {
   padding: 0.8rem 0.5rem;
 }
@@ -301,10 +248,6 @@
 .amount-product {
   font-size: 0.8rem;
   margin-right: 0.5rem;
-  /* padding-top: 1rem; */
-  /* position: absolute;
-  right: 0.8rem;
-  bottom: 0.5rem; */
 }
 
 .payment {
@@ -475,7 +418,6 @@ section#login {
   width: 100%;
   min-height: 600px;
   padding-bottom: 10rem;
-  /* background-color: #ddd; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -486,7 +428,6 @@ section#login {
   padding: 2rem 2rem;
   background-color: white;
   border-radius: 10px;
-  /* box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3); */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
@@ -500,26 +441,29 @@ section#login {
 }
 
 .form-element {
+  margin-bottom: 10px;
+}
+
+.input-field {
   width: 18rem;
   font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
-.form-element.remember {
+.input-field.remember {
   justify-content: flex-start;
 }
 
-.form-element label {
+.input-field label {
   width: fit-content;
 }
 
-.form-element input, 
-.form-element select,
-.form-element textarea,
-.form-element .form-gambar {
+.input-field input, 
+.input-field select,
+.input-field textarea,
+.input-field .form-gambar {
   width: 12rem;
   border-radius: 0.3rem;
   border: 0;
@@ -529,22 +473,29 @@ section#login {
   box-sizing: border-box;
 }
 
-.form-element input[type=checkbox] {
+.input-field .radio {
+  width: 12rem;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 1rem;
+}
+
+.input-field input[type=checkbox] {
   width: fit-content;
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
-.form-element select option {
+.input-field select option {
   font-size: 0.8rem;
 }
 
-.form-element textarea {
+.input-field textarea {
   height: 6rem;
   resize: none;
 }
 
-.form-element .form-gambar {
+.input-field .form-gambar {
   height: fit-content;
 }
 
@@ -553,7 +504,7 @@ section#login {
   margin-bottom: 0;
 }
 
-.form-element button {
+.input-field button {
   margin-top: 20px;
   width: 100%;
   height: 2.5rem;
@@ -563,11 +514,11 @@ section#login {
   color: white;
 }
 
-.form-element.button button {
+.input-field.button button {
   width: 48%;
 }
 
-.form-element button:hover {
+.input-field button:hover {
   filter: brightness(80%);
 }
 
@@ -596,12 +547,18 @@ button.cancel {
   padding-bottom: 3rem;
 }
 
-.formin-container .form-element {
+.formin-container .input-field {
   width: 20rem;
 }
 
 .form-gambar img {
   width: 100%;
+}
+
+.error-msg {
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 
@@ -800,22 +757,29 @@ button.cancel {
   .form-title {
     margin-bottom: 30px;
   }
-  
+
   .form-element {
-    width: 28rem;
-    font-size: 1rem;
     margin-bottom: 15px;
   }
+  
+  .input-field {
+    width: 28rem;
+    font-size: 1rem;
+  }
 
-  .form-element input, 
-  .form-element select,
-  .form-element textarea,
-  .form-element .form-gambar {
+  .input-field input, 
+  .input-field select,
+  .input-field textarea,
+  .input-field .form-gambar {
     font-size: 0.9rem;
     width: 18rem;
   }
+
+  .input-field .radio {
+    width: 18rem;
+  }
   
-  .form-element button {
+  .input-field button {
     font-size: 1.1rem;
   }
 
@@ -823,7 +787,7 @@ button.cancel {
     padding-bottom: 5rem;
   }
 
-  .formin-container .form-element {
+  .formin-container .input-field {
     width: 30rem;
   }
 

@@ -2,7 +2,7 @@
 $PDO_server = "localhost"; // Bisa localhost atau example.com atau base.example.svr
 $PDO_username = "root"; // Username / Nama pengguna
 $PDO_password = ""; // Kata sandi sangat sensitif. Harap hati-hati
-$PDO_dbname = "meatmaster"; // MySQL langsung, tapi kalau PosgreSQL seperti '"public"."ExampledataBase"'
+$PDO_dbname = "store"; // MySQL langsung, tapi kalau PosgreSQL seperti '"public"."ExampledataBase"'
 $PDOdatabaseProvider = "mysql"; // MySQL, MariaDB, PosgreSQL, AzureSQL, ...
 $PDO_dsn = $PDOdatabaseProvider.':dbname='.$PDO_dbname.';host='.$PDO_server; // Menggabungkan DSN yang variabel sebelumnya
 

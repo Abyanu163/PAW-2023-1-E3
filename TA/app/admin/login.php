@@ -20,15 +20,21 @@ require(BASEPATH."/app/templates/header.php");
                             <h2>Masuk</h2>
                         </div>
                         <div class="form-element">
-                            <label for="adminusr" >Nama pengguna</label>
-                            <input type="text" id="adminusr" name="adminusr"/>
+                            <div class="input-field">
+                                <label for="adminusr" >Nama pengguna</label>
+                                <input type="text" id="adminusr" name="adminusr"/>
+                            </div>
                         </div>
                         <div class="form-element">
-                            <label for="adminpwd" >Kata sandi</label>
-                            <input type="password" id="adminpwd" name="adminpwd"/>
+                            <div class="input-field">
+                                <label for="adminpwd" >Kata sandi</label>
+                                <input type="password" id="adminpwd" name="adminpwd"/>
+                            </div>
                         </div>
                         <div class="form-element">
-                            <button type="submit" id="submit" value="Masuk">Masuk</button>
+                            <div class="input-field">
+                                <button type="submit" id="submit" value="Masuk">Masuk</button>
+                            </div>
                         </div>
                         <div form="account-link">
                             <?php
