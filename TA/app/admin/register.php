@@ -57,4 +57,3 @@ $failRegist = FALSE;
             </div>
         </section>
 <?php require(BASEPATH."/app/admin/templates/footer.php") ?>
->>>>>>> 71dc182d35d0d106be0ee0bf052870000c8a086e

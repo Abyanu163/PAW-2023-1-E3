@@ -6,10 +6,22 @@ $title = 'Add Product';
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
 
+<?php 
+if(isset($_POST["tambah"])){
+	tambahProduk($_POST);
+	echo "<script>
+	alert('Data berhasil diupload');
+	window.location.href='product-data.php';
+	</script>";
+	exit();
+}
+$data=selectData("SELECT * FROM suplaier");
+?>
+
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="">
+			<form action="" method="post" enctype="multipart/form-data">
 				<div class="form-title">
 					<h2>Add Product</h2>
 				</div>
@@ -17,44 +29,45 @@ $title = 'Add Product';
 					<div class="input-field">
 						<label for="kategori">Kategori</label>
 						<select id="kategori" name="kategori">
-							<option value="1">kategori1</option>
-							<option value="2">kategori2</option>
-							<option value="3">kategori3</option>
+							<option value="1">Chiken</option>
+							<option value="2">Wagyu</option>
+							<option value="3">Local Cow</option>
+							<option value="4">Goat</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="supplier">Supplier</label>
-						<select id="supplier" name="supplier">
-							<option value="1">supplier1</option>
-							<option value="2">supplier2</option>
-							<option value="3">supplier3</option>
+						<select name="suplai" id="suplai">
+							<?php for($i = 0; $i<count($data); $i++){?>
+								<option value="<?= $data[$i]['kodeSuplaier']?>"><?= $data[$i]['namaSuplaier'] ?></option>
+							<?php }?>
 						</select>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="nama">Nama Produk</label>
-						<input type="text" id="nama">
+					<label for="namaProduk">Nama Produk</label>
+        <input type="text" name="namaProduk" id="namaProduk">
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="gambar">Gambar</label>
-						<input type="file" id="gambar">
+						<label for="gambar">Masukkan gambar</label>
+						<input type="file" name="gambar" id="gambar">
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="harga">Harga</label>
-						<input type="text" id="harga">
+						<label for="harga">Harga Produk</label>
+						<input type="text" name="harga" id="harga">
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="stok">Stok</label>
-						<input type="text" id="stok">
+						<label for="stok">Stok Produk</label>
+						<input type="text" name="stok" id="stok">
 					</div>
 				</div>
 				<div class="form-element">
@@ -65,8 +78,8 @@ $title = 'Add Product';
 				</div>
 				<div class="form-element">
 					<div class="input-field button">
-						<button href="">Add</button>
-						<button href="" class="cancel">Cancel</button>
+						<button type="submit" value="Tambah" name="tambah">Add</button>
+						<button onclick="location.href='product-data.php'" type="button" class="cancel">Cancel</button>
 					</div>
 				</div>
 			</form>
