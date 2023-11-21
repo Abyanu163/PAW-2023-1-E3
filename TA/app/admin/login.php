@@ -6,8 +6,10 @@ require("../base.php");
 require(BASEPATH."/app/fauth.php");
 checkAdminTable(PDO_Connect);
 session_start();
-if (checkSignIn($_SESSION['adminSignIn']) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
-    managerAuthRedirect($_SESSION['roleCode']);
+$adminSignIn = $_SESSION['adminSignIn'] ?? false;
+$roleCode = $_SESSION['roleCode'] ?? false;
+if (($adminSignIn != FALSE) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
+    managerAuthRedirect($roleCode);
     header('Location: '.BASEURL.'/app/admin/');
 }
 require(BASEPATH."/app/templates/header.php");

@@ -17,7 +17,7 @@ $failRegist = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="customerEmail">Surel</label>
-						<input type="text" name="customerEmail" id="customerEmail">
+						<input type="text" name="customerEmail" id="customerEmail" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(htmlspecialchars($_POST['customerEmail']));} ?>">
 					</div>
 					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,7 +28,7 @@ $failRegist = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="customeraddr">Alamat</label>
-						<textarea name="customeraddr" id="customeraddr"></textarea>
+						<textarea name="customeraddr" id="customeraddr"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(htmlspecialchars($_POST['customeraddr']));} ?></textarea>
 					</div>
 					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {

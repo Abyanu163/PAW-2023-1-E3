@@ -9,7 +9,7 @@ function isRegisteredAdmin($setValue, $PDO_USED) { // Apakah pengguna sudah regi
     } else { return; }
 }
 function isRegisteredCustomer($setValue, $PDO_USED) { // Apakah pengguna sudah registrasi?
-    $stateResult = $PDO_USED->prepare("SELECT emailPelanggan FROM customers WHERE emailPelanggan = :bindVar1 ;");
+    $stateResult = $PDO_USED->prepare("SELECT usernamePelanggan FROM customers WHERE usernamePelanggan = :bindVar1 ;");
     $stateResult->bindValue(":bindVar1", $setValue);
     $stateResult->execute();
     if ($stateResult->rowCount() >= 1) {
@@ -68,7 +68,7 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
 }
 function setSameDiffValue($Value1, $Value2) {
     if ($Value1 != $Value2) {
-        return "<span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
+        return "<br/><span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
     }
 }
 // Eksekusi dan pastikan aman
@@ -89,7 +89,7 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
     if ($inFailRegist == TRUE) {
         return;
     } else {
-        $stateExecute = $PDO_USED->prepare("INSERT INTO `customers` (`alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES(:bindVal1 , SHA2( :bindVal2 , 256) , :bindVal3;");
+        $stateExecute = $PDO_USED->prepare("INSERT INTO `customers` (`alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES(:bindVal1 , SHA2( :bindVal2 , 256) , :bindVal3);");
         $stateExecute->bindValue(":bindVal1", $customeraddr);
         $stateExecute->bindValue(":bindVal2", $customerpwd);
         $stateExecute->bindValue(":bindVal3", $customerEmail);
