@@ -44,7 +44,7 @@ function adminAuth($PDO_USED, $adminusr, $adminpwd) { // Autentikasi untuk admin
         </span>";
     }
 }
-function authIn($PDO_USED, $customerEmail, $customerpwd) { // Autentikasi untuk pelanggan dengan menyertakan kode pelanggan agar dapat dipahami.
+function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autentikasi untuk pelanggan dengan menyertakan kode pelanggan agar dapat dipahami.
     $stateExecuting = $PDO_USED->prepare("SELECT `kodePelanggan` FROM `customers`
     WHERE `usernamePelanggan` = :bindVal1 AND `passwordPelanggan` = SHA2( :bindVal2 , 256) ");
     $stateExecuting->bindValue("bindVal1" , $customerEmail);
@@ -56,6 +56,9 @@ function authIn($PDO_USED, $customerEmail, $customerpwd) { // Autentikasi untuk 
         // session_start();
         $_SESSION['signedIn'] = TRUE;
         $_SESSION['userID'] = $usrID[0]['kodePelanggan'];
+        if ($remember == 'on') {
+            setcookie("userIDSaved", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+        }
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/"); exit();
     } else {
@@ -127,5 +130,10 @@ function adminResetPWD($PDO_USED, $adminusr, $newAdminPWD) { // Sekarang eksekus
     $stateExecuting = NULL;
     return header("Location: ".BASEURL."/app/admin/login.php"); // Balik ke halaman masuk
     exit();
+}
+function rememberMe() {
+    $remember = $_POST['remember'] ?? false;
+    if ($remember != FALSE) {echo htmlspecialchars("checked"); return;}
+    return;
 }
 ?>

@@ -7,6 +7,11 @@ require(BASEPATH . "/app/fauth.php");
 checkAdminTable(PDO_Connect);
 session_start();
 $signedIn = $_SESSION['signedIn'] ?? false;
+$savedSignedIn = $_COOKIE['userIDSaved'] ?? false;
+if ($savedSignedIn != FALSE) {
+	$signedIn = TRUE;
+	$_SESSION['userID'] = $_COOKIE['userID'];
+}
 if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 	header('Location: ' . BASEURL . '/');
 }
@@ -33,7 +38,7 @@ if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 				</div>
 				<div class="form-element">
 					<div class="input-field remember">
-						<input type="checkbox" name="remember" id="remember">
+						<input type="checkbox" name="remember" id="remember" <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {rememberMe();} ?>>
 						<label for="remember">Remember me</label>
 					</div>
 				</div>
@@ -45,7 +50,7 @@ if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 				<div form="account-link">
 					<?php
 					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-						echo (authIn(PDO_Connect, $_POST['customerEmail'], $_POST['customerpwd']));
+						echo (authIn(PDO_Connect, $_POST['customerEmail'], $_POST['customerpwd'], ($_POST['remember'] ?? FALSE)));
 					}
 					?>
 				</div>
