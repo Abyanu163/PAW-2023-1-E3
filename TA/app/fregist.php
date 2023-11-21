@@ -9,7 +9,7 @@ function isRegisteredAdmin($setValue, $PDO_USED) { // Apakah pengguna sudah regi
     } else { return; }
 }
 function isRegisteredCustomer($setValue, $PDO_USED) { // Apakah pengguna sudah registrasi?
-    $stateResult = $PDO_USED->prepare("SELECT emailPelanggan FROM customers WHERE emailPelanggan = :bindVar1 ;");
+    $stateResult = $PDO_USED->prepare("SELECT usernamePelanggan FROM customers WHERE usernamePelanggan = :bindVar1 ;");
     $stateResult->bindValue(":bindVar1", $setValue);
     $stateResult->execute();
     if ($stateResult->rowCount() >= 1) {
@@ -68,7 +68,7 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
 }
 function setSameDiffValue($Value1, $Value2) {
     if ($Value1 != $Value2) {
-        return "<span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
+        return "<br/><span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
     }
 }
 // Eksekusi dan pastikan aman

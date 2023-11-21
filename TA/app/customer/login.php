@@ -6,7 +6,8 @@ require_once 'templates/header.php';
 require(BASEPATH . "/app/fauth.php");
 checkAdminTable(PDO_Connect);
 session_start();
-if (checkSignIn($_SESSION['signedIn']) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
+$signedIn = $_SESSION['signedIn'] ?? false;
+if ($signedIn == FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 	header('Location: ' . BASEURL . '/');
 }
 ?>
