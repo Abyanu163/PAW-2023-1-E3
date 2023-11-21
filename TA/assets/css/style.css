@@ -100,15 +100,20 @@
   font-size: 0.9rem;
 }
 
-.card-desc p:nth-child(2) {
+.card-desc p.prod-cate,
+.card-desc p.prod-sup,
+.card-desc ul {
   font-weight: 600;
   font-size: 0.8rem;
 }
 
-.card-desc p:nth-child(3), 
-.card-desc p:nth-child(4),
-.card-desc p:nth-child(5) {
+.card-desc p {
   font-size: 0.8rem;
+}
+
+.card-desc ul li {
+  list-style: none;
+  font-weight: 400;
 }
 
 .browse-product,
@@ -121,6 +126,12 @@
 .act-product {
   right: 0.4rem;
   bottom: 0.4rem;
+  box-sizing: border-box;
+}
+
+.act-product p.prod-price {
+  margin-right: 0.5rem;
+  font-weight: 500;
 }
 
 .browse-product {

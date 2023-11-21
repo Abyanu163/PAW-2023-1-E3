@@ -1,5 +1,6 @@
 <?php
 require_once("../base.php");
+require ("../function.php");
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +13,6 @@ require_once("../base.php");
 	<link rel="stylesheet" href="<?= BASEURL  ?>/assets/css/base.css">
 	<link rel="stylesheet" href="<?= BASEURL  ?>/assets/css/style.css">
 	<style>
-		@font-face {
-			font-family: 'Poppins';
-			src: url('<?= BASEURL  ?>/assets/fonts/Poppins-Regular.ttf');
-		}
-
 		body {
 			background-image: url('<?= BASEURL ?>/assets/img/white-wall-textures.jpg');
 			background-size: 20vw;
