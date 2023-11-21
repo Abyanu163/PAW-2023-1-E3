@@ -7,7 +7,7 @@ require(BASEPATH . "/app/fauth.php");
 checkAdminTable(PDO_Connect);
 session_start();
 $signedIn = $_SESSION['signedIn'] ?? false;
-if ($signedIn == FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
+if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 	header('Location: ' . BASEURL . '/');
 }
 ?>
