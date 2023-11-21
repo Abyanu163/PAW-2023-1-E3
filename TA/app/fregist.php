@@ -89,7 +89,7 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
     if ($inFailRegist == TRUE) {
         return;
     } else {
-        $stateExecute = $PDO_USED->prepare("INSERT INTO `customers` (`alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES(:bindVal1 , SHA2( :bindVal2 , 256) , :bindVal3;");
+        $stateExecute = $PDO_USED->prepare("INSERT INTO `customers` (`alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES(:bindVal1 , SHA2( :bindVal2 , 256) , :bindVal3);");
         $stateExecute->bindValue(":bindVal1", $customeraddr);
         $stateExecute->bindValue(":bindVal2", $customerpwd);
         $stateExecute->bindValue(":bindVal3", $customerEmail);
