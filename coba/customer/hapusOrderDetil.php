@@ -1,7 +1,7 @@
 <?php 
 require "../function.php";
 session_start();
-if(editOrderDetil($_GET["idProduk"],$_GET["idPesanan"])>0){
+if(hapusOrderDetil($_GET["idProduk"],$_GET["idPesanan"])>0){
     echo "
     <script>
     alert('Pesanan berhasil dihapus !!!!');
@@ -16,5 +16,4 @@ if(editOrderDetil($_GET["idProduk"],$_GET["idPesanan"])>0){
     </script>
     ";
 }
-
 ?>

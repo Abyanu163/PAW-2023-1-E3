@@ -145,7 +145,7 @@ function editSuplaier($data){
 /*  MEMBUAT ORDER */
 function makeOrder($data){
     global $conn;
-    $query="SELECT * FROM orders WHERE kodePelanggan={$data['kodePelanggan']}";
+    $query="SELECT * FROM orders WHERE kodePelanggan={$data['kodePelanggan']} AND keterangan='belum'";
     $hasil=selectData($query);
     if($hasil==[]){
         $stmt = $conn->prepare("INSERT INTO orders(kodePelanggan, keterangan)
@@ -153,56 +153,47 @@ function makeOrder($data){
         $stmt->bindvalue(":kode",$data["kodePelanggan"]);
         $stmt->bindValue(":ket","belum");
         $stmt->execute();
-        $newData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $newData;
-    } else{
-        $count=0;
-        foreach($hasil as $ch){
-            if($ch["keterangan"]=="belum"){
-                $count+=1;
-                return $ch;
-            }
-        }
-        if($count==0){
-            $stmt = $conn->prepare("INSERT INTO orders(kodePelanggan, keterangan)
-                                VALUES (:kode,:ket)");
-            $stmt->bindvalue(":kode",$data["kodePelanggan"]);
-            $stmt->bindValue(":ket","belum");
-            $stmt->execute();
-            $newData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $newData;
-        }
-    }
+        return $stmt->rowCount();
+    } 
 }
 
 /* ADD ORDER */
-function addOrderDetail($pesanan,$produk){
+function addOrderDetail($data){
     global $conn;
-    $harga=selectData("SELECT hargaProduk FROM products WHERE kodeProduk={$produk}");
-    $query="INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga)
-            VALUES (:kodeProduk,:kodePesanan,:subHarga)";
+    $query="INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga, qty)
+            VALUES (:kodeProduk,:kodePesanan,:subHarga,:qty)";
     $stmt = $conn->prepare($query);
-    $stmt->bindvalue(":kodeProduk", $produk);
-    $stmt->bindvalue(":kodePesanan", $pesanan);
-    $stmt->bindvalue(":subHarga", $harga[0]["hargaProduk"]);
+    $stmt->bindvalue(":kodeProduk", $data["kodeProduk"]);
+    $stmt->bindvalue(":kodePesanan", $data["kodePesanan"]);
+    $stmt->bindvalue(":subHarga", $data["subHarga"]);
+    $stmt->bindvalue(":qty", $data["jumlah"]);
     $stmt->execute();
 
-    // $stokLama=selectData("SELECT stokProduk FROM products WHERE kodeProduk={$data['kodeProduk']}");
-    // $hasil=$stokLama[0]["stokProduk"]-$data["jumlah"];
-    // $stokUpdate=$conn->prepare("UPDATE products SET stokProduk=:stokBaru WHERE kodeProduk=:kodeProduk");
-    // $stokUpdate->bindvalue(":stokBaru",$hasil);
-    // $stokUpdate->bindvalue(":kodeProduk",$data["kodeProduk"]);
-    // $stokUpdate->execute();
-    // return $stmt->rowCount();
+    $stokLama=selectData("SELECT stokProduk FROM products WHERE kodeProduk={$data['kodeProduk']}");
+    $hasil=$stokLama[0]["stokProduk"]-$data["jumlah"];
+    $stokUpdate=$conn->prepare("UPDATE products SET stokProduk=:stokBaru WHERE kodeProduk=:kodeProduk");
+    $stokUpdate->bindvalue(":stokBaru",$hasil);
+    $stokUpdate->bindvalue(":kodeProduk",$data["kodeProduk"]);
+    $stokUpdate->execute();
+
+    return $stmt->rowCount();
 }
 
 /* HAPUS ORDER */
 function hapusOrderDetil($idProduk,$idPesanan){
     global $conn;
+    $jumlahOrder=selectData("SELECT qty FROM orderdetail WHERE kodeProduk={$idProduk} AND kodePesanan={$idPesanan}");
+    $jumlahData=selectData("SELECT stokProduk FROM products WHERE kodeProduk={$idProduk}");
+    $hasil=$jumlahOrder[0]["qty"]+$jumlahData[0]["stokProduk"];
     $stmt = $conn->prepare("DELETE FROM orderdetail WHERE kodeProduk=:idProduk AND kodePesanan=:idPesan");
     $stmt->bindvalue(":idProduk",$idProduk);
     $stmt->bindvalue(":idPesan",$idPesanan);
     $stmt->execute();
+
+    $addStok =  $conn->prepare("UPDATE products SET stokProduk=:returnStok WHERE kodeProduk=:kodeProduk");
+    $addStok->bindvalue(":returnStok",$hasil);
+    $addStok->bindvalue(":kodeProduk",$idProduk);
+    $addStok->execute();
     return $stmt->rowCount();
 }
 

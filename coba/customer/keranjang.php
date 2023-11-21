@@ -7,7 +7,7 @@ var_dump($_SESSION);
 $data=selectData("SELECT * FROM orders o
 JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
 JOIN products p ON (od.kodeProduk=p.kodeProduk)
-WHERE o.kodePelanggan={$_SESSION['kodePelanggan']}
+WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 ");
 var_dump($data);
 ?>
@@ -28,7 +28,6 @@ var_dump($data);
                 <th>Sub Harga</th>
                 <th>Nama Produk</th>
                 <th>Gambar Produk</th>
-                <th>Stok</th>
             </tr>
         <?php foreach($data as $ch){?>
             <tr>
@@ -37,7 +36,6 @@ var_dump($data);
                 <td><?= $ch["subHarga"] ?></td>
                 <td><?= $ch["namaProduk"] ?></td>
                 <td><img src="../img/<?= $ch["gambarProduk"] ?>"></td>
-                <td><?= $ch["stokProduk"] ?></td>
             </tr>
         <?php }?>
         </table>
