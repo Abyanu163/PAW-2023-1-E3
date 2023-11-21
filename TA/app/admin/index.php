@@ -11,6 +11,7 @@ if ($adminSignIn == FALSE) {
     header('Location: '.BASEURL.'/app/admin/login.php');
 }
 require(BASEPATH."/app/templates/header.php");
+header('Location: '.BASEURL.'/app/admin/product-data.php');
 ?>
 
 

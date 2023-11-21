@@ -3,7 +3,7 @@ $page = 'register';
 $title = "Pendaftaran | Administrasi Laman Toko Makanan: Meatmaster";
 require("../base.php");
 require(BASEPATH."/app/fregist.php");
-require(BASEPATH."/app/admin/templates/header.php");
+require(BASEPATH."/app/templates/header.php");
 $failRegist = FALSE;
 ?>
         <section id="login">

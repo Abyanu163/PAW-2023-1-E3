@@ -1,6 +1,6 @@
 <?php
-require_once("../base.php");
-require ("../function.php");
+require("../base.php");
+require("../function.php");
 ?>
 
 <!DOCTYPE html>

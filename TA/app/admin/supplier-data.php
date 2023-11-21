@@ -28,7 +28,7 @@ $produk=selectData($query);
 			<h2>Supplier List:</h2>
 
 			<!-- Product List -->
-			<div class="card-list grid">
+			<!-- <div class="card-list grid">
 				<?php foreach ($data as $ch) : ?>
 					<div class="card categories">
 						<div class="card-desc no-pict">
@@ -61,6 +61,51 @@ $produk=selectData($query);
 					</div>
 				<?php endforeach; ?>
 
+			</div> -->
+
+			<div class="table-container supplier">
+				<table>
+					<tr>
+						<th>Nama</th>
+						<th>Alamat</th>
+						<th>No. Telp</th>
+						<th>Produk</th>
+						<th>Aksi</th>
+					</tr>
+					<?php foreach ($data as $ch) : ?>
+						<tr>
+							<td><?= $ch["namaSuplaier"] ?></td>
+							<td><?= $ch["alamatSuplaier"] ?></td>
+							<td><?= $ch["telpSuplaier"] ?></td>
+							<td>
+								<ul>
+									<?php
+									$count = 0;
+									foreach ($produk as $p) :
+										if ($p["namaSuplaier"] == $ch["namaSuplaier"]) { 
+									?>
+										<li><?= $p["namaProduk"] ?></li>
+										<?php $count++;} ?>
+									<?php endforeach;
+									if ($count == 0) { ?>
+										<b>Tidak Ada Produk</b>
+									<?php } ?>
+								</ul>
+							</td>
+							<td>
+								<div class="act-product">
+									<a href="<?= BASEURL  ?>/app/admin/supplier-edit.php?id=<?= $ch["kodeSuplaier"]?>" class="prod-button">
+										<img src="<?= BASEURL  ?>/assets/img/edit.png" alt="cart">
+									</a>
+									<a href="<?= BASEURL  ?>/app/admin/supplier-delete.php?id=<?= $ch["kodeSuplaier"]?>" class="prod-button delete">
+										<img src="<?= BASEURL  ?>/assets/img/delete.png" alt="cart">
+									</a>
+								</div>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+				<!-- end table -->
 			</div>
 
 		</div>

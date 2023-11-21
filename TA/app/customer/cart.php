@@ -1,10 +1,20 @@
 <?php
 $page = 'product';
 $title = 'Shopping Cart';
+
+session_start();
 ?>
 
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
+
+<?php 
+$data=selectData("SELECT * FROM orders o
+JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
+JOIN products p ON (od.kodeProduk=p.kodeProduk)
+WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
+");
+?>
 
 <section>
 	<div class="main-container">
@@ -22,135 +32,26 @@ $title = 'Shopping Cart';
 
 			<!-- Product List -->
 			<div class="card-list grid">
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
+				<?php foreach($data as $ch): ?>
+					<div class="card">
+						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
+						<div class="card-desc cart">
+							<h3><?= $ch["namaProduk"] ?></h3>
+							<p class="prod-price"><?= $ch["subHarga"] ?></p>
 						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
+						<div class="act-product">
+							<div class="amount-product">
+								Quantity: <?= $ch["qty"] ?>
+							</div>
+							<a href="cart-delete.php?idPesanan=<?= $ch["kodePesanan"] ?>&idProduk=<?= $ch['kodeProduk'] ?>" class="prod-button red">
+								<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
+							</a>
 						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
 					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
-						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
-						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
-						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
-						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/meat.jpg);"></div>
-					<div class="card-desc cart">
-						<h3>Product name</h3>
-						<p class="prod-cate">Categories</p>
-						<p class="prod-desc">300gr</p>
-					</div>
-					<div class="act-product">
-						<div class="quantity">
-							<a href="" class="minus">-</a>
-							<div class="amount">0</div>
-							<a href="" class="plus">+</a>
-						</div>
-						<a href="#" class="prod-button">
-							<img src="<?= BASEURL  ?>/assets/img/cart-minus.png" alt="cart-minus">
-						</a>
-					</div>
-				</div>
-
+				<?php endforeach; ?>
+			<!-- end card List -->
 			</div>
-
+		<!-- end card container -->
 		</div>
 
 	</div>

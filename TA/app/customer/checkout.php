@@ -20,6 +20,7 @@ $title = 'Check Out';
 						<p class="prod-desc">300gr</p>
 					</div>
 					<div class="act-product">
+						<p class="prod-price"><?= $ch["hargaProduk"] ?></p>
 						<div class="amount-product">
 							Quantity: 0
 						</div>

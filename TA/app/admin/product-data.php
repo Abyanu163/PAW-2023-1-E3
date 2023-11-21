@@ -32,7 +32,7 @@ $data = selectData(
 			<div class="card-list grid">
 				<?php foreach($data as $ch): ?>
 					<div class="card">
-						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/picture/<?= $ch['gambarProduk'] ?>);"></div>
+						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>);"></div>
 						<div class="card-desc">
 							<h3><?= $ch["namaProduk"] ?></h3>
 							<p class="prod-sup"><?= $ch["namaSuplaier"] ?></p>

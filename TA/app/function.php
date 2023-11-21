@@ -44,7 +44,7 @@ function hapusProduk($id){
     $stmt = $conn->prepare("DELETE FROM products WHERE  kodeProduk =:kodeProduk");
     $stmt->bindvalue(":kodeProduk", $id);
     $stmt->execute();
-    unlink('../../assets/img/picture/'.$data[0]["gambarProduk"]);
+    unlink('../../assets/img/product/'.$data[0]["gambarProduk"]);
     return $stmt->rowCount();
 }
 
@@ -59,7 +59,7 @@ function upload(){
     $namaFileBaru .='.';
     $namaFileBaru .= "$ekstensiGambar";
 
-    move_uploaded_file($tmpName, '../../assets/img/picture/'.$namaFileBaru);
+    move_uploaded_file($tmpName, '../../assets/img/product/'.$namaFileBaru);
     return $namaFileBaru;
 };
 
@@ -176,15 +176,16 @@ function makeOrder($data){
 }
 
 /* ADD ORDER */
-function addOrderDetail($pesanan,$produk){
+function addOrderDetail($pesanan,$produk,$jumlah){
     global $conn;
     $harga=selectData("SELECT hargaProduk FROM products WHERE kodeProduk={$produk}");
-    $query="INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga)
-            VALUES (:kodeProduk,:kodePesanan,:subHarga)";
+    $query="INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga, qty)
+            VALUES (:kodeProduk,:kodePesanan,:subHarga,:qty)";
     $stmt = $conn->prepare($query);
     $stmt->bindvalue(":kodeProduk", $produk);
     $stmt->bindvalue(":kodePesanan", $pesanan);
     $stmt->bindvalue(":subHarga", $harga[0]["hargaProduk"]);
+    $stmt->bindvalue(":qty", $jumlah);
     $stmt->execute();
 
     // $stokLama=selectData("SELECT stokProduk FROM products WHERE kodeProduk={$data['kodeProduk']}");
@@ -193,7 +194,7 @@ function addOrderDetail($pesanan,$produk){
     // $stokUpdate->bindvalue(":stokBaru",$hasil);
     // $stokUpdate->bindvalue(":kodeProduk",$data["kodeProduk"]);
     // $stokUpdate->execute();
-    // return $stmt->rowCount();
+    return $stmt->rowCount();
 }
 
 /* HAPUS ORDER */
