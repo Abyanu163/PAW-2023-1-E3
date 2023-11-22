@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 01:49 AM
+-- Generation Time: Nov 22, 2023 at 07:19 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,8 +60,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`kodePelanggan`, `alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES
-(1, NULL, '123', 'glendy11'),
-(2, NULL, '123', 'PPP');
+(1, 'Jl Setia Budi Surabaya', '123', 'glendy11'),
+(2, 'Gang Pop ice telang', '123', 'PPP'),
+(3, 'jl Tunjungan surabaya', '123', 'budi111');
 
 -- --------------------------------------------------------
 
@@ -105,8 +106,20 @@ CREATE TABLE `orderdetail` (
   `kodeProduk` int(11) NOT NULL,
   `kodePesanan` int(11) NOT NULL,
   `subHarga` int(11) NOT NULL,
-  `qty` int(11) NOT NULL DEFAULT 1
+  `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orderdetail`
+--
+
+INSERT INTO `orderdetail` (`kodeProduk`, `kodePesanan`, `subHarga`, `qty`) VALUES
+(21, 65, 444, 1),
+(21, 67, 2220, 5),
+(21, 68, 2220, 5),
+(51, 65, 80000, 8),
+(55, 64, 45000, 3),
+(55, 66, 75000, 5);
 
 -- --------------------------------------------------------
 
@@ -126,7 +139,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`kodePesanan`, `kodePelanggan`, `tanggalPesan`, `keterangan`) VALUES
-(42, 1, '2023-11-18 03:00:59', 'belum');
+(64, 1, '2023-11-21 07:10:53', 'sudah'),
+(65, 1, '2023-11-21 07:11:06', 'belum'),
+(66, 2, '2023-11-22 06:04:53', 'sudah'),
+(67, 2, '2023-11-22 06:05:03', 'belum'),
+(68, 3, '2023-11-22 06:05:37', 'belum');
 
 -- --------------------------------------------------------
 
@@ -165,10 +182,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`kodeProduk`, `kodeKategori`, `kodeSuplaier`, `namaProduk`, `gambarProduk`, `hargaProduk`, `stokProduk`, `deskripsiProduk`) VALUES
 (21, 1, 1, 'test123', 'tes.jpg', 444, 0, 'test123'),
-(22, 1, 1, 'oke', 'tes.jpg', 10000, 0, NULL),
+(22, 1, 1, 'oke', 'tes.jpg', 10000, 11, ''),
 (23, 1, 1, 'dfnlksdf', 'tes.jpg', 1313, 112, 'fakjgajknjkdgnjknsdljkg'),
 (25, 1, 1, '&lt;h1&gt;hahaha&lt;/h1&gt;', 'tes.jpg', 10000000, 90, '&lt;h1&gt;hahaha&lt;/h1&gt;'),
-(51, 1, 2, 'oke', '6553827578dc9.png', 10000, 21312, '');
+(51, 1, 2, 'oke', '6553827578dc9.png', 10000, 21304, ''),
+(55, 1, 9, 'coba', '655c2ef9d6280.', 15000, 0, '');
 
 -- --------------------------------------------------------
 
@@ -274,7 +292,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `kodePelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kodePelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jabatan`
@@ -292,7 +310,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `kodePesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `kodePesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -304,7 +322,7 @@ ALTER TABLE `pembayaran`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `kodeProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `kodeProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `suplaier`
