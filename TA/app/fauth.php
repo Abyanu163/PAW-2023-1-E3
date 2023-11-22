@@ -131,9 +131,30 @@ function adminResetPWD($PDO_USED, $adminusr, $newAdminPWD) { // Sekarang eksekus
     return header("Location: ".BASEURL."/app/admin/login.php"); // Balik ke halaman masuk
     exit();
 }
-function rememberMe() {
+function rememberMe() { // Centang mengingat. HTML centang $_POST['remember'] = 'on' . HTML tidak centang tidak ada $_POST['remember']
     $remember = $_POST['remember'] ?? false;
     if ($remember != FALSE) {echo htmlspecialchars("checked"); return;}
     return;
+}
+function getUserData($PDO_USED, $userID) { // Ambil salah satu data pengguna pelanggan untuk diubah
+    $stateExecute = $PDO_USED->prepare("SELECT `usernamePelanggan`, `alamatPelanggan` FROM `customers` WHERE `kodePelanggan` = :getUserID");
+    $stateExecute->bindValue(":getUserID", $userID); // JANGAN MENAMPILKAN KATA SANDI DI KUERI INI
+    $stateExecute->execute();
+    $GLOBALS['UIDFetched'] = $stateExecute->fetch(PDO::FETCH_ASSOC);
+    return $stateExecute = NULL;
+}
+// Muktahirkan data pengguna pelanggan dan memastikan dalam keadaan sah/valid untuk syarat eksekusi...
+function updateUserData($inFailRegist, $PDO_USED, $userID, $customerpwd, $customeraddr) {
+    if ($inFailRegist == TRUE) {
+        return;
+    } else { // ...muktahir data pengguna pelanggan
+        $stateExecute = $PDO_USED->prepare("UPDATE `customers` SET `alamatPelanggan` = :bindVar1, `passwordPelanggan` = SHA2( :bindVar2 , 256) WHERE `kodePelanggan` = :bindVar3");
+        $stateExecute->bindValue(":bindVar1", $customeraddr);
+        $stateExecute->bindValue(":bindVar2", $customerpwd);
+        $stateExecute->bindValue(":bindVar3", $userID);
+        $stateExecute->execute();
+        $stateExecute = NULL;
+        return "<span style='color: green;'>Data pengguna sudah diperbarui. Pastikan mengingat kata sandi yang sudah diperbarukan.</span>";
+    }
 }
 ?>
