@@ -2,14 +2,11 @@
 require "../function.php";
 session_start();
 
-var_dump($_SESSION);
-
 $data=selectData("SELECT * FROM orders o
 JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
 JOIN products p ON (od.kodeProduk=p.kodeProduk)
 WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 ");
-var_dump($data);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +17,7 @@ var_dump($data);
 </head>
 <body>
     <h1>Pembelian Barang</h1>
+    <a href="index.php">Kembali Belanja</a>
     <form action="" method="post">
         <table border="1" cellpadding=10 cellspacing=0>
             <tr>

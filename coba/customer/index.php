@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require "../function.php";
-$_SESSION["kodePelanggan"]=1;
+$_SESSION["kodePelanggan"]=3;
 $data=selectData("SELECT * FROM products p
                     JOIN categories c ON (p.kodeKategori = c.kodeKategori)");
 $keranjang=selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['kodePelanggan']} AND keterangan='belum'");
@@ -44,7 +44,7 @@ $keranjang=selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['kode
                 <td>
                     <?php if($ch["stokProduk"]>0 && !empty($keranjang)){?>
                         <a href="tambahKeranjang.php?id=<?= $ch["kodeProduk"] ?>">Masukkan Keranjang</a>
-                    <?php } else if($ch["stokProduk"]<0 && !empty($keranjang)){?>
+                    <?php } else if($ch["stokProduk"]==0){?>
                         <span" class="soldOut">Sold Out</span>
                     <?php }else {?>
                         <span" class="soldOut">BUAT KERANJANG DAHULU</span>

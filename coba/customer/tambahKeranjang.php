@@ -3,7 +3,6 @@ require "../function.php";
 session_start();
 $produk=selectData("SELECT * FROM products WHERE kodeProduk={$_GET['id']}");
 $cek=selectData("SELECT * FROM orderdetail WHERE kodePesanan={$_SESSION["kodePesanan"]} AND kodeProduk={$_GET['id']}");
-var_dump($_SESSION);
 if (isset($_POST['tambah'])) {
     if($_SESSION['jumlah']<$produk[0]["stokProduk"]){
         $_SESSION['jumlah'] += 1 ;
@@ -19,8 +18,6 @@ $_POST["jumlah"]=$_SESSION['jumlah'];
 $_POST["kodeProduk"]=intval($_GET['id']);
 $_POST["kodePesanan"]=$_SESSION["kodePesanan"];
 $_POST["subHarga"]=$produk[0]['hargaProduk']*$_SESSION["jumlah"];
-var_dump($_POST);
-echo($_SESSION['jumlah']);
 if($cek==[]){
     if(isset($_POST["masukkan"])){
         $tambah=addOrderDetail($_POST);
