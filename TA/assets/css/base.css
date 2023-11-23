@@ -2,7 +2,7 @@
   --primary: #A9907E;
   --secondary: #F3DEBA;
   --success: #82ae82;
-  --danger: rgb(240, 70, 70);
+  --danger: #F04646;
   --darker: #675D50;
 }
 
@@ -68,6 +68,7 @@ body {
   box-sizing: border-box;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
+  /* display: none; */
 }
 
 .logo {

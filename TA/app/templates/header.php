@@ -7,12 +7,6 @@
 	<title><?= $title ?></title>
 	<link rel="stylesheet" href="<?= BASEURL  ?>/assets/css/base.css">
 	<link rel="stylesheet" href="<?= BASEURL  ?>/assets/css/style.css">
-	<style>
-		body {
-			background-image: url('<?= BASEURL ?>/assets/img/white-wall-textures.jpg');
-			background-size: 20vw;
-		}
-	</style>
 </head>
 
 <body>

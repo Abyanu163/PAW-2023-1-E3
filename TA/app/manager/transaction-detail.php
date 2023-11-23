@@ -10,16 +10,18 @@ $page = $_GET['isPaid'];
 require_once 'templates/navbar.php'
 ?>
 
+<?php
+$data = selectData(
+	"SELECT * FROM orderDetail o
+	JOIN products p ON (o.kodeProduk = p.kodeProduk)
+	WHERE o.kodePesanan = {$_GET["kodePesanan"]}
+	;"
+);
+
+?>
+
 <section id="content">
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search customer, date, method, total">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
 			<h2>Transaction Detail:</h2>
@@ -32,12 +34,14 @@ require_once 'templates/navbar.php'
 						<th>Harga Satuan</th>
 						<th>Total Harga</th>
 					</tr>
-					<tr>
-						<td>Barang</td>
-						<td>10</td>
-						<td>Rp. 10.000,00</td>
-						<td>Rp. 200.000,00</td>
-					</tr>
+					<?php foreach($data as $ch): ?>
+						<tr>
+							<td><?= $ch['namaProduk'] ?></td>
+							<td><?= $ch['qty'] ?></td>
+							<td><?= $ch['hargaProduk'] ?></td>
+							<td><?= $ch['subHarga'] ?></td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 				<!-- end table -->
 				<a href="<?php if ($page == 'paid') echo BASEURL . '/app/manager/transaction-paid.php';

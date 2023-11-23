@@ -1,21 +1,24 @@
 <?php
 $page = 'transaction';
 $title = 'Transaction Data';
+session_start();
 ?>
 
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
 
+<?php
+$data = selectData(
+	"SELECT * FROM pembayaran p
+	JOIN orders o ON (p.kodePesanan = o.kodePesanan)
+	WHERE o.kodePelanggan = {$_SESSION["kodePelanggan"]} AND o.keterangan = 'sudah'
+	;"
+);
+
+?>
+
 <section id="content">
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search date, method, total">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
 			<h2>Transaction History:</h2>
@@ -28,36 +31,14 @@ $title = 'Transaction Data';
 						<th>Total</th>
 						<th>Detail</th>
 					</tr>
-					<tr>
-						<td>21-10-2023</td>
-						<td>DANA</td>
-						<td>Rp. 200.000,00</td>
-						<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?id=1">detail</a></td>
-					</tr>
-					<tr>
-						<td>21-10-2023</td>
-						<td>DANA</td>
-						<td>Rp. 200.000,00</td>
-						<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?id=1">detail</a></td>
-					</tr>
-					<tr>
-						<td>21-10-2023</td>
-						<td>DANA</td>
-						<td>Rp. 200.000,00</td>
-						<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?id=1">detail</a></td>
-					</tr>
-					<tr>
-						<td>21-10-2023</td>
-						<td>DANA</td>
-						<td>Rp. 200.000,00</td>
-						<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?id=1">detail</a></td>
-					</tr>
-					<tr>
-						<td>21-10-2023</td>
-						<td>DANA</td>
-						<td>Rp. 200.000,00</td>
-						<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?id=1">detail</a></td>
-					</tr>
+					<?php foreach($data as $ch): ?>
+						<tr>
+							<td><?= $ch['waktuBayar'] ?></td>
+							<td><?= $ch['metode'] ?></td>
+							<td><?= $ch['total'] ?></td>
+							<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?kodePesanan=<?= $ch['kodePesanan'] ?>">detail</a></td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 				<!-- end table -->
 			</div>

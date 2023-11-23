@@ -1,7 +1,6 @@
 <?php
 $page = 'product';
 $title = 'Shopping Cart';
-
 session_start();
 ?>
 
@@ -14,18 +13,11 @@ JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
 JOIN products p ON (od.kodeProduk=p.kodeProduk)
 WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 ");
+
 ?>
 
 <section>
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search product">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
 			<h2>Product List:</h2>
@@ -37,6 +29,7 @@ WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
 						<div class="card-desc cart">
 							<h3><?= $ch["namaProduk"] ?></h3>
+							<p class="prod-desc"><?= $ch["deskripsiProduk"] ?></p>
 							<p class="prod-price"><?= $ch["subHarga"] ?></p>
 						</div>
 						<div class="act-product">

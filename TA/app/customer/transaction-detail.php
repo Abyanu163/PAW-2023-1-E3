@@ -1,9 +1,26 @@
 <?php
-$page = 'transa';
+$page = 'transaction';
 $title = 'Detail Transaksi';
-require_once 'templates/header.php';
+session_start();
+?>
 
+<?php
+require_once 'templates/header.php';
 require_once 'templates/navbar.php'
+?>
+
+<?php
+if(!isset($_GET['kodePesanan'])) {
+	header('Location: Product.php');
+}
+
+$data = selectData(
+	"SELECT * FROM orderDetail o
+	JOIN products p ON (o.kodeProduk = p.kodeProduk)
+	WHERE o.kodePesanan = {$_GET["kodePesanan"]}
+	;"
+);
+
 ?>
 
 <section id="content">
@@ -28,12 +45,14 @@ require_once 'templates/navbar.php'
 						<th>Harga Satuan</th>
 						<th>Total Harga</th>
 					</tr>
-					<tr>
-						<td>Barang</td>
-						<td>10</td>
-						<td>Rp. 10.000,00</td>
-						<td>Rp. 200.000,00</td>
-					</tr>
+					<?php foreach($data as $ch): ?>
+						<tr>
+							<td><?= $ch['namaProduk'] ?></td>
+							<td><?= $ch['qty'] ?></td>
+							<td><?= $ch['hargaProduk'] ?></td>
+							<td><?= $ch['subHarga'] ?></td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 				<!-- end table -->
 				<a href="<?= BASEURL ?>/app/customer/transaction.php" class="back">Kembali</a>

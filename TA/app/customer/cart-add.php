@@ -1,7 +1,6 @@
 <?php
 $page = 'product';
 $title = 'Shopping Cart';
-
 session_start();
 ?>
 
@@ -9,9 +8,13 @@ session_start();
 <?php require_once 'templates/navbar.php' ?>
 
 <?php
+if (!$_GET['id']) {
+  header('location: cart.php');
+  exit();
+}
+
 $produk = selectData("SELECT * FROM products WHERE kodeProduk={$_GET['id']}");
 $cek = selectData("SELECT * FROM orderdetail WHERE kodePesanan={$_SESSION["kodePesanan"]} AND kodeProduk={$_GET['id']}");
-
 if (isset($_POST['tambah'])) {
   if ($_SESSION['jumlah'] < $produk[0]["stokProduk"]) {
     $_SESSION['jumlah'] += 1;
@@ -23,15 +26,13 @@ if (isset($_POST['tambah'])) {
 } else if (!isset($_POST['kurang']) && !isset($_POST['tambah']) && !isset($_POST['masukkan'])) {
   $_SESSION['jumlah'] = 1;
 }
-
 $_POST["jumlah"] = $_SESSION['jumlah'];
 $_POST["kodeProduk"] = intval($_GET['id']);
 $_POST["kodePesanan"] = $_SESSION["kodePesanan"];
 $_POST["subHarga"] = $produk[0]['hargaProduk'] * $_SESSION["jumlah"];
-
 if ($cek == []) {
   if (isset($_POST["masukkan"])) {
-    $tambah = addOrderDetail($_POST['kodePesanan'], $_POST['kodeProduk'], $_SESSION['jumlah']);
+    $tambah = addOrderDetail($_POST);
     if ($tambah > 0) {
       echo "<script>
             alert('BARANG BERHASIL DITAMBAHKAN KE KERANJANG !!!')

@@ -6,19 +6,25 @@ $title = 'Transaksi Belum Dibayar';
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
 
+<?php
+$data = selectData(
+	"SELECT o.kodePesanan, c.usernamePelanggan, 
+		(SELECT SUM(od.subHarga) FROM orderdetail od WHERE od.kodePesanan = o.kodePesanan) AS totalHarga, 
+		(SELECT SUM(od.qty) FROM orderdetail od WHERE od.kodePesanan = o.kodePesanan) AS totalBarang
+	FROM orders o
+	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
+	WHERE o.keterangan = 'belum'
+	;"
+);
+
+?>
+
 <section id="content">
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search customer, date, method, total">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
-			<h2>Transaction Unpaid:</h2>
+			<h2>Transaksi Belum Dibayar:</h2>
+			<!-- <?php var_dump($data) ?> -->
 
 			<div class="table-container unpaid">
 				<table>
@@ -28,12 +34,14 @@ $title = 'Transaksi Belum Dibayar';
 						<th>Total Barang</th>
 						<th>Detail</th>
 					</tr>
-					<tr>
-						<td>Username Customer</td>
-						<td>Rp. 200.000,00</td>
-						<td>10</td>
-						<td><a href="transaction-detail.php?isPaid=unpaid">detail</a></td>
-					</tr>
+					<?php foreach($data as $ch): ?>
+						<tr>
+							<td><?= $ch['usernamePelanggan'] ?></td>
+							<td><?= $ch['totalHarga'] ?></td>
+							<td><?= $ch['totalBarang'] ?></td>
+							<td><a href="transaction-detail.php?isPaid=unpaid&kodePesanan=<?= $ch['kodePesanan'] ?>">detail</a></td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 				<!-- end table -->
 			</div>

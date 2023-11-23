@@ -1,22 +1,25 @@
-<?php 
+<?php
 /* koneksi database */
-function connect($servername,$database,$username,$password){
+function connect($servername, $database, $username, $password)
+{
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     return $conn;
 }
-$conn=connect("localhost","store","root","");
+$conn = connect("localhost", "store", "root", "");
 
 /* AMBIL DATA */
-function selectData($query){
+function selectData($query)
+{
     global $conn;
-    $stmt = $conn->prepare($query); 
+    $stmt = $conn->prepare($query);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $data;
 }
 
 /* TAMBAH PRODUK */
-function tambahProduk($value){
+function tambahProduk($value)
+{
     global $conn;
     $gambar = upload();
     $suplai = htmlspecialchars($value["suplai"]);
@@ -38,69 +41,73 @@ function tambahProduk($value){
 }
 
 /* HAPUS PRODUK */
-function hapusProduk($id){
+function hapusProduk($id)
+{
     global $conn;
-    $data=selectData("SELECT gambarProduk FROM products WHERE kodeProduk=$id");
+    $data = selectData("SELECT gambarProduk FROM products WHERE kodeProduk=$id");
     $stmt = $conn->prepare("DELETE FROM products WHERE  kodeProduk =:kodeProduk");
     $stmt->bindvalue(":kodeProduk", $id);
     $stmt->execute();
-    unlink('../../assets/img/product/'.$data[0]["gambarProduk"]);
+    unlink('../../img/' . $data[0]["gambarProduk"]);
     return $stmt->rowCount();
 }
 
 /* UPLOAD GAMBAR */
-function upload(){
-    $namaFile=$_FILES['gambar']['name'];
-    $tmpName=$_FILES['gambar']['tmp_name'];
+function upload()
+{
+    $namaFile = $_FILES['gambar']['name'];
+    $tmpName = $_FILES['gambar']['tmp_name'];
 
-    $ekstensiGambar = explode('.',$namaFile);
+    $ekstensiGambar = explode('.', $namaFile);
     $ekstensiGambar = strtolower(end($ekstensiGambar));
-    $namaFileBaru=uniqid();
-    $namaFileBaru .='.';
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
     $namaFileBaru .= "$ekstensiGambar";
 
-    move_uploaded_file($tmpName, '../../assets/img/product/'.$namaFileBaru);
+    move_uploaded_file($tmpName, '../../img/' . $namaFileBaru);
     return $namaFileBaru;
 };
 
 /* EDIT PRODUK */
-function editProduk($data){
+function editProduk($data)
+{
     global $conn;
-    $id=$data["id"];
-    $kategori=$data["kategori"];
-    $suplai=$data["suplai"];
-    $nama=htmlspecialchars($data["namaProduk"]);
-    $harga=htmlspecialchars($data["harga"]);
-    $stok=htmlspecialchars($data["stok"]);
-    $deskripsi=htmlspecialchars($data["deskripsi"]);
-    $gambarLama=$data["gambarLama"];
+    $id = $data["id"];
+    $kategori = $data["kategori"];
+    $suplai = $data["suplai"];
+    $nama = htmlspecialchars($data["namaProduk"]);
+    $harga = htmlspecialchars($data["harga"]);
+    $stok = htmlspecialchars($data["stok"]);
+    $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $gambarLama = $data["gambarLama"];
 
-    if($_FILES["gambar"]["error"]===4){
-        $gambar=$gambarLama;
-    } else{
-        $gambar=upload();
-        $oldGambar=selectData("SELECT gambarProduk FROM products WHERE kodeProduk=$id");
-        unlink('../../img/'.$oldGambar[0]["gambarProduk"]);
+    if ($_FILES["gambar"]["error"] === 4) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+        $oldGambar = selectData("SELECT gambarProduk FROM products WHERE kodeProduk=$id");
+        unlink('../../img/' . $oldGambar[0]["gambarProduk"]);
     };
-    $query="UPDATE products 
+    $query = "UPDATE products 
     SET kodeKategori=:kategori, kodeSuplaier=:suplaier, namaProduk=:nama, gambarProduk=:gambar, hargaProduk=:harga, stokProduk=:stok, deskripsiProduk=:deskripsi
     WHERE kodeProduk=:id";
     $stmt = $conn->prepare($query);
-    $stmt->bindValue(":id",$id);
-    $stmt->bindValue(":kategori",$kategori);
-    $stmt->bindValue(":suplaier",$suplai);
-    $stmt->bindValue(":nama",$nama);
-    $stmt->bindValue(":gambar",$gambar);
-    $stmt->bindValue(":harga",$harga);
-    $stmt->bindValue(":stok",$stok);
-    $stmt->bindValue(":deskripsi",$deskripsi);
+    $stmt->bindValue(":id", $id);
+    $stmt->bindValue(":kategori", $kategori);
+    $stmt->bindValue(":suplaier", $suplai);
+    $stmt->bindValue(":nama", $nama);
+    $stmt->bindValue(":gambar", $gambar);
+    $stmt->bindValue(":harga", $harga);
+    $stmt->bindValue(":stok", $stok);
+    $stmt->bindValue(":deskripsi", $deskripsi);
     $stmt->execute();
     return $stmt->rowCount();
 };
 
 
 /* TAMBAH SUPLAIER */
-function tambahSuplaier($data){
+function tambahSuplaier($data)
+{
     global $conn;
     $nama = htmlspecialchars($data["nama"]);
     $no = htmlspecialchars($data["no"]);
@@ -115,7 +122,8 @@ function tambahSuplaier($data){
 }
 
 /* HAPUS SUPLAIER */
-function hapusSuplaier($id){
+function hapusSuplaier($id)
+{
     global $conn;
     $stmt = $conn->prepare("DELETE FROM suplaier WHERE  kodeSuplaier =:kode");
     $stmt->bindvalue(":kode", $id);
@@ -124,87 +132,103 @@ function hapusSuplaier($id){
 }
 
 /* EDIT SUPLAIER */
-function editSuplaier($data){
+function editSuplaier($data)
+{
     global $conn;
-    $id=$data["id"];
-    $nama=htmlspecialchars($data["nama"]);
-    $nomor=htmlspecialchars($data["nomor"]);
-    $alamat=htmlspecialchars($data["alamat"]);
-    $query="UPDATE suplaier 
+    $id = $data["id"];
+    $nama = htmlspecialchars($data["nama"]);
+    $nomor = htmlspecialchars($data["nomor"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $query = "UPDATE suplaier 
     SET namaSuplaier=:nama, telpSuplaier=:nomor,alamatSuplaier=:alamat
     WHERE kodeSuplaier=:id";
     $stmt = $conn->prepare($query);
-    $stmt->bindValue(":id",$id);
-    $stmt->bindvalue(":nama",$nama);
-    $stmt->bindvalue(":nomor",$nomor);
-    $stmt->bindvalue(":alamat",$alamat);
+    $stmt->bindValue(":id", $id);
+    $stmt->bindvalue(":nama", $nama);
+    $stmt->bindvalue(":nomor", $nomor);
+    $stmt->bindvalue(":alamat", $alamat);
     $stmt->execute();
     return $stmt->rowCount();
 }
 
 /*  MEMBUAT ORDER */
-function makeOrder($data){
+function makeOrder($data)
+{
     global $conn;
-    $query="SELECT * FROM orders WHERE kodePelanggan={$data['kodePelanggan']}";
-    $hasil=selectData($query);
-    if($hasil==[]){
+    $query = "SELECT * FROM orders WHERE kodePelanggan={$data['kodePelanggan']} AND keterangan='belum'";
+    $hasil = selectData($query);
+    if ($hasil == []) {
         $stmt = $conn->prepare("INSERT INTO orders(kodePelanggan, keterangan)
                                 VALUES (:kode,:ket)");
-        $stmt->bindvalue(":kode",$data["kodePelanggan"]);
-        $stmt->bindValue(":ket","belum");
+        $stmt->bindvalue(":kode", $data["kodePelanggan"]);
+        $stmt->bindValue(":ket", "belum");
         $stmt->execute();
-        $newData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $newData;
-    } else{
-        $count=0;
-        foreach($hasil as $ch){
-            if($ch["keterangan"]=="belum"){
-                $count+=1;
-                return $ch;
-            }
-        }
-        if($count==0){
-            $stmt = $conn->prepare("INSERT INTO orders(kodePelanggan, keterangan)
-                                VALUES (:kode,:ket)");
-            $stmt->bindvalue(":kode",$data["kodePelanggan"]);
-            $stmt->bindValue(":ket","belum");
-            $stmt->execute();
-            $newData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $newData;
-        }
+        return $stmt->rowCount();
     }
 }
 
 /* ADD ORDER */
-function addOrderDetail($pesanan,$produk,$jumlah){
+function addOrderDetail($data)
+{
     global $conn;
-    $harga=selectData("SELECT hargaProduk FROM products WHERE kodeProduk={$produk}");
-    $query="INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga, qty)
+    $query = "INSERT INTO orderdetail(kodeProduk, kodePesanan, subHarga, qty)
             VALUES (:kodeProduk,:kodePesanan,:subHarga,:qty)";
     $stmt = $conn->prepare($query);
-    $stmt->bindvalue(":kodeProduk", $produk);
-    $stmt->bindvalue(":kodePesanan", $pesanan);
-    $stmt->bindvalue(":subHarga", $harga[0]["hargaProduk"]);
-    $stmt->bindvalue(":qty", $jumlah);
+    $stmt->bindvalue(":kodeProduk", $data["kodeProduk"]);
+    $stmt->bindvalue(":kodePesanan", $data["kodePesanan"]);
+    $stmt->bindvalue(":subHarga", $data["subHarga"]);
+    $stmt->bindvalue(":qty", $data["jumlah"]);
     $stmt->execute();
 
-    // $stokLama=selectData("SELECT stokProduk FROM products WHERE kodeProduk={$data['kodeProduk']}");
-    // $hasil=$stokLama[0]["stokProduk"]-$data["jumlah"];
-    // $stokUpdate=$conn->prepare("UPDATE products SET stokProduk=:stokBaru WHERE kodeProduk=:kodeProduk");
-    // $stokUpdate->bindvalue(":stokBaru",$hasil);
-    // $stokUpdate->bindvalue(":kodeProduk",$data["kodeProduk"]);
-    // $stokUpdate->execute();
+    $stokLama = selectData("SELECT stokProduk FROM products WHERE kodeProduk={$data['kodeProduk']}");
+    $hasil = $stokLama[0]["stokProduk"] - $data["jumlah"];
+    $stokUpdate = $conn->prepare("UPDATE products SET stokProduk=:stokBaru WHERE kodeProduk=:kodeProduk");
+    $stokUpdate->bindvalue(":stokBaru", $hasil);
+    $stokUpdate->bindvalue(":kodeProduk", $data["kodeProduk"]);
+    $stokUpdate->execute();
+
     return $stmt->rowCount();
 }
 
 /* HAPUS ORDER */
-function hapusOrderDetil($idProduk,$idPesanan){
+function hapusOrderDetil($idProduk, $idPesanan)
+{
     global $conn;
+    $jumlahOrder = selectData("SELECT qty FROM orderdetail WHERE kodeProduk={$idProduk} AND kodePesanan={$idPesanan}");
+    $jumlahData = selectData("SELECT stokProduk FROM products WHERE kodeProduk={$idProduk}");
+    $hasil = $jumlahOrder[0]["qty"] + $jumlahData[0]["stokProduk"];
     $stmt = $conn->prepare("DELETE FROM orderdetail WHERE kodeProduk=:idProduk AND kodePesanan=:idPesan");
-    $stmt->bindvalue(":idProduk",$idProduk);
-    $stmt->bindvalue(":idPesan",$idPesanan);
+    $stmt->bindvalue(":idProduk", $idProduk);
+    $stmt->bindvalue(":idPesan", $idPesanan);
     $stmt->execute();
+
+    $addStok =  $conn->prepare("UPDATE products SET stokProduk=:returnStok WHERE kodeProduk=:kodeProduk");
+    $addStok->bindvalue(":returnStok", $hasil);
+    $addStok->bindvalue(":kodeProduk", $idProduk);
+    $addStok->execute();
     return $stmt->rowCount();
 }
 
-?>
+// ADD PEMBAYARAN
+function addPembayaran($kodePesanan, $metode)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "INSERT INTO pembayaran (kodePesanan, total, metode)
+        VALUES (:kodePesanan, (SELECT SUM(subHarga) FROM orderdetail 
+        WHERE kodePesanan = :kodePesanan), :metode)"
+    );
+    $stmt->bindValue(":kodePesanan", $kodePesanan);
+    $stmt->bindValue(":metode", $metode);
+    $stmt->execute();
+
+    $updateOrder = $conn->prepare(
+        "UPDATE orders
+        SET keterangan = 'sudah'
+        WHERE kodePesanan = :kodePesanan"
+    );
+    $updateOrder->bindValue(":kodePesanan", $kodePesanan);
+    $updateOrder->execute();
+
+    return $stmt->rowCount();
+}

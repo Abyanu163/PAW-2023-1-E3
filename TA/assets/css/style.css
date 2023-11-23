@@ -6,7 +6,7 @@
   padding-bottom: 10rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  min-height: 600px;
+  min-height: 800px;
 }
 
 .search {
@@ -274,6 +274,12 @@
   margin-top: 3rem;
 }
 
+.payment label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .payment select {
   display: block;
   background-color: #ccc;
@@ -527,6 +533,22 @@ button.cancel {
 }
 
 
+/* == CHART == */
+.chart-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.chart {
+  width: 600px;
+}
+
+
 
 
 
@@ -538,7 +560,6 @@ button.cancel {
   .main-container {
     padding-left: 4rem;
     padding-right: 4rem;
-    min-height: 600px;
     padding-bottom: 10rem;
   }
 
@@ -554,11 +575,14 @@ button.cancel {
   }
 
   .card-list.grid {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.5rem;
     justify-items: center;
-    justify-content: center;
+    justify-content: center; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .card-list.checkout {
@@ -584,7 +608,8 @@ button.cancel {
   }
 
   .card-list.grid .card {
-    margin-right: 0;
+    margin-left: 0.62rem;
+    margin-right: 0.62rem;
     margin-bottom: 1rem;
   }
   
