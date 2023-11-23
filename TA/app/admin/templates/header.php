@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("../base.php");
 require("../fauth.php");
 require("../function.php");
