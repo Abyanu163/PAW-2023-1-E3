@@ -5,11 +5,8 @@ require('../base.php');
 require(BASEPATH."/app/fauth.php");
 
 session_start();
-$adminSignIn = $_SESSION['adminSignIn'] ?? false;
-$roleCode = $_SESSION['roleCode'] ?? false;
-if ($adminSignIn == FALSE) {
-    header('Location: '.BASEURL.'/app/admin/login.php');
-}
+checkAdminSignedIn();
+whenIsManager();
 require(BASEPATH."/app/templates/header.php");
 header('Location: '.BASEURL.'/app/admin/product-data.php');
 ?>

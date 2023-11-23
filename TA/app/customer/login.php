@@ -3,8 +3,8 @@ $page = 'login';
 $title = 'Masuk | Toko makanan: Meatmaster';
 
 require_once 'templates/header.php';
-require(BASEPATH . "/app/fauth.php");
-checkAdminTable(PDO_Connect);
+// require(BASEPATH . "/app/fauth.php");
+checkCustomerTable(PDO_Connect);
 session_start();
 $signedIn = $_SESSION['signedIn'] ?? false;
 $savedSignedIn = $_COOKIE['userIDSaved'] ?? false;
@@ -55,8 +55,8 @@ if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 					?>
 				</div>
 				<div class="account-link">
-					Don't have an account?
-					<a href="<?= BASEURL ?>/app/register.php">Register</a>
+					Tidak punya akun pelanggan?
+					<a href="<?= BASEURL ?>/app/customer/register.php">Daftar di sini</a>.
 				</div>
 			</div>
 		</form>
