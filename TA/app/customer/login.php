@@ -2,8 +2,9 @@
 $page = 'login';
 $title = 'Masuk | Toko makanan: Meatmaster';
 
-require_once 'templates/header.php';
-// require(BASEPATH . "/app/fauth.php");
+require('../base.php');
+require_once '../templates/header.php';
+require(BASEPATH . "/app/fauth.php");
 checkCustomerTable(PDO_Connect);
 session_start();
 $signedIn = $_SESSION['signedIn'] ?? false;

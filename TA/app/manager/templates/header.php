@@ -1,6 +1,8 @@
 <?php
 require("../base.php");
+require("../fauth.php");
 require("../function.php");
+whenIsNOTManager();
 ?>
 
 <!DOCTYPE html>

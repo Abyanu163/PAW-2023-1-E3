@@ -56,6 +56,7 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
         // session_start();
         $_SESSION['signedIn'] = TRUE;
         $_SESSION['userID'] = $usrID[0]['kodePelanggan'];
+        $_SESSION['kodePelanggan'] = $usrID[0]['kodePelanggan'];
         if ($remember == 'on') {
             setcookie("userID", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
         }
@@ -231,10 +232,12 @@ function updateUserData($inFailUpdate, $PDO_USED, $userID, $customerEmail, $cust
 // Untuk redirect yang tidak ada akun?
 function checkSignedIn() { // untuk pelanggan
     $signedIn = $_SESSION['signedIn'] ?? false;
-    $savedSignedIn = $_COOKIE['userIDSaved'] ?? false;
+    $savedSignedIn = $_COOKIE['userID'] ?? false;
     if ($signedIn == FALSE) {
         if ($savedSignedIn != FALSE) {
-            $_SESSION['signedIn'] = $savedSignedIn;
+            $_SESSION['userID'] = $_COOKIE['userID'];
+            $_SESSION['kodePelanggan'] = $_COOKIE['userID'];
+            $_SESSION['signedIn'] = TRUE;
         } else {
             header('Location: '.BASEURL.'/app/customer/login.php');
         }
@@ -253,13 +256,24 @@ function whenIsManager() {
         header('Location: '.BASEURL.'/app/manager');
     }
 }
+// Jika bukan untuk manajer
+function whenIsNOTManager() {
+    $roleCode = $_SESSION['roleCode'] ?? false;
+    if ($roleCode != 2) {
+        header('Location: '.BASEURL.'/app/admin');
+    }
+}
 
 // Keluar dari akun ...
 function signOut () {
     $signOut = $_GET['authSign'] ?? false;
     if ($signOut == 'Redirect_Sign_Out_Enabled') {
         unset($_SESSION['signedIn']);
+        unset($_SESSION['userID']);
+        unset($_SESSION['kodePelanggan']);
+        setcookie("userID", "", time() - 9999, "/");
         setcookie("userIDSaved", "", time() - 9999, "/");
+        session_destroy();
         header ('Location: '.BASEURL);
         return exit();
     };

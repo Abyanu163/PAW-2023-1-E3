@@ -7,8 +7,8 @@ require(BASEPATH."/app/fauth.php");
 session_start();
 checkAdminSignedIn();
 whenIsManager();
+header("Location: product-data.php");
 require(BASEPATH."/app/templates/header.php");
-header('Location: '.BASEURL.'/app/admin/product-data.php');
 ?>
 
 

@@ -2,7 +2,8 @@
 $page = 'register';
 $title = 'Daftar sebagai pelanggan | Toko makanan: Meatmaster';
 
-require_once 'templates/header.php';
+require '../base.php';
+require_once '../templates/header.php';
 require("../fregist.php");
 $failRegist = FALSE;
 ?>

@@ -5,7 +5,7 @@ $title = 'Profil';
 $failUpdate = FALSE;
 ?>
 
-<?php require_once 'templates/header.php'; checkSignedIn(); getUserData(PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE)) ?>
+<?php require_once 'templates/header.php'; getUserData(PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE)) ?>
 <?php require_once 'templates/navbar.php' ?>
 
 <section>
