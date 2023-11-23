@@ -14,7 +14,7 @@ function checkCustomerTable($PDO_USED) { // Cek isian dari baris tabel pelanggan
     $stateResult->execute();
     if ($stateResult->rowCount() <= 0) { // Jika tidak ada, maka inilah pertama kali ke halaman registrasi
         $stateResult = NULL;
-        return header("Location: ".BASEURL."/app/admin/register.php");
+        return header("Location: ".BASEURL."/app/customer/register.php");
     } else {
         return;
     }
@@ -57,7 +57,7 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
         $_SESSION['signedIn'] = TRUE;
         $_SESSION['userID'] = $usrID[0]['kodePelanggan'];
         if ($remember == 'on') {
-            setcookie("userIDSaved", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+            setcookie("userID", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
         }
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/"); exit();
@@ -137,24 +137,131 @@ function rememberMe() { // Centang mengingat. HTML centang $_POST['remember'] = 
     return;
 }
 function getUserData($PDO_USED, $userID) { // Ambil salah satu data pengguna pelanggan untuk diubah
-    $stateExecute = $PDO_USED->prepare("SELECT `usernamePelanggan`, `alamatPelanggan` FROM `customers` WHERE `kodePelanggan` = :getUserID");
+    $stateExecute = $PDO_USED->prepare("SELECT `kodePelanggan`, `usernamePelanggan`, `alamatPelanggan` FROM `customers` WHERE `kodePelanggan` = :getUserID");
     $stateExecute->bindValue(":getUserID", $userID); // JANGAN MENAMPILKAN KATA SANDI DI KUERI INI
     $stateExecute->execute();
     $GLOBALS['UIDFetched'] = $stateExecute->fetch(PDO::FETCH_ASSOC);
     return $stateExecute = NULL;
 }
+function setted($METHOD, $arrayIn) { // apakah ini sudah diisi?
+    if (!isset($METHOD[$arrayIn]) or $METHOD[$arrayIn] == "" or $METHOD[$arrayIn] == NULL) {
+        $GLOBALS['failUpdate'] = TRUE;
+        return "<span style='color: red;'>Harusnya diisi</span>";
+    }
+    return validatingUpdate($METHOD, $arrayIn); // Sudah terisi, cek...
+}
+function validatingUpdate($METHOD, $arrayIn) { //... di sini
+    switch($arrayIn) {
+        case 'adminusr':
+            if (!preg_match("/^[a-zA-Z0-9]+$/", $METHOD[$arrayIn])) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Nama pengguna hanya huruf dan/atau angka</span>";
+            } else {
+                break;
+            }
+        case 'adminpwd':
+            if (strlen($METHOD[$arrayIn]) < 8 || (strlen($METHOD[$arrayIn]) > 99)) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi</span>";
+            } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu.</span>";
+            } else {
+                break;
+            }
+        case 'confirmAdminPwd':
+            if ($METHOD[$arrayIn] != $_POST['adminpwd']) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Konfirmasi kata sandi tidak sama</span>";
+            }
+        case 'customerEmail':
+            $surel = $GLOBALS['UIDFetched']['usernamePelanggan'] ?? FALSE;
+            if ($METHOD[$arrayIn] == $surel && $surel != FALSE) {
+                break;
+            }
+            if (!filter_var($METHOD[$arrayIn], FILTER_VALIDATE_EMAIL)) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Surel tidak absah/valid. Kadang @localhost tidak diizinkan.</span>";
+            } else {
+                break;
+            }
+        case 'customerpwdNEW':
+            if (strlen($METHOD[$arrayIn]) < 8) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Kata sandi kuranag dari 8 karakter</span>";
+            } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu.</span>";
+            } else {
+                break;
+            }
+        case 'customerpwdOLD':
+            $PDO_USED = PDO_Connect;
+            $getUserID = $_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE;
+            $stateExecute = $PDO_USED->prepare("SELECT `kodePelanggan` FROM `customers`
+            WHERE `kodePelanggan` = :bindValue1 AND `passwordPelanggan` = SHA2( :bindValue2 , 256)");
+            $stateExecute->bindValue(":bindValue1", $getUserID);
+            $stateExecute->bindValue(":bindValue2", $METHOD[$arrayIn]);
+            $stateExecute->execute();
+            if ($stateExecute->rowCount() < 1) {
+                $GLOBALS['failUpdate'] = TRUE;
+                return "<span style='color: red;'>Sayangnya salah. Apa lupa kata sandi lama? Qiqi sering begitu.</span><br/>
+                <span>Jika lupa kata sandi, klik <a href='".BASEURL."/app/customer/lostpwd.php' title='PASTIKAN BENAR-BENAR PEMILIK AKUN'>di sini</a>.</span>";
+            }
+        default:
+            break;
+    }; return;
+}
 // Muktahirkan data pengguna pelanggan dan memastikan dalam keadaan sah/valid untuk syarat eksekusi...
-function updateUserData($inFailRegist, $PDO_USED, $userID, $customerpwd, $customeraddr) {
-    if ($inFailRegist == TRUE) {
+function updateUserData($inFailUpdate, $PDO_USED, $userID, $customerEmail, $customerpwd, $customeraddr) {
+    if ($inFailUpdate == TRUE) {
         return;
     } else { // ...muktahir data pengguna pelanggan
-        $stateExecute = $PDO_USED->prepare("UPDATE `customers` SET `alamatPelanggan` = :bindVar1, `passwordPelanggan` = SHA2( :bindVar2 , 256) WHERE `kodePelanggan` = :bindVar3");
+        $stateExecute = $PDO_USED->prepare("UPDATE `customers` SET `usernamePelanggan` = :bindVar4, `alamatPelanggan` = :bindVar1, `passwordPelanggan` = SHA2( :bindVar2 , 256) WHERE `kodePelanggan` = :bindVar3");
         $stateExecute->bindValue(":bindVar1", $customeraddr);
         $stateExecute->bindValue(":bindVar2", $customerpwd);
         $stateExecute->bindValue(":bindVar3", $userID);
+        $stateExecute->bindValue(":bindVar4", $customerEmail);
         $stateExecute->execute();
         $stateExecute = NULL;
         return "<span style='color: green;'>Data pengguna sudah diperbarui. Pastikan mengingat kata sandi yang sudah diperbarukan.</span>";
     }
+}
+
+// Untuk redirect yang tidak ada akun?
+function checkSignedIn() { // untuk pelanggan
+    $signedIn = $_SESSION['signedIn'] ?? false;
+    $savedSignedIn = $_COOKIE['userIDSaved'] ?? false;
+    if ($signedIn == FALSE) {
+        if ($savedSignedIn != FALSE) {
+            $_SESSION['signedIn'] = $savedSignedIn;
+        } else {
+            header('Location: '.BASEURL.'/app/customer/login.php');
+        }
+    }
+}
+function checkAdminSignedIn() { // untuk admin
+    $adminSignIn = $_SESSION['adminSignIn'] ?? false;
+    if ($adminSignIn == FALSE) {
+        header('Location: '.BASEURL.'/app/admin/login.php');
+    }
+}
+// Semisal nih untuk manajer
+function whenIsManager() {
+    $roleCode = $_SESSION['roleCode'] ?? false;
+    if ($roleCode == 2) {
+        header('Location: '.BASEURL.'/app/manager');
+    }
+}
+
+// Keluar dari akun ...
+function signOut () {
+    $signOut = $_GET['authSign'] ?? false;
+    if ($signOut == 'Redirect_Sign_Out_Enabled') {
+        unset($_SESSION['signedIn']);
+        setcookie("userIDSaved", "", time() - 9999, "/");
+        header ('Location: '.BASEURL);
+        return exit();
+    };
 }
 ?>

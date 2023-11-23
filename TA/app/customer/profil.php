@@ -1,46 +1,60 @@
 <?php
+session_start();
 $page = 'profil';
 $title = 'Profil';
+$failUpdate = FALSE;
 ?>
 
-<?php require_once 'templates/header.php' ?>
+<?php require_once 'templates/header.php'; checkSignedIn(); getUserData(PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE)) ?>
 <?php require_once 'templates/navbar.php' ?>
 
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="">
+			<form action="" method="POST">
 				<div class="form-title">
 					<h2>Customer Profile</h2>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="username">Username</label>
-						<input type="text" id="username" disabled value="Username">
+						<input type="text" id="username" disabled value="<?= $UIDFetched['kodePelanggan'] ?>">
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="email">Email</label>
-						<input type="text" id="email" value="Email">
+						<label for="customerEmail">Email</label>
+						<input type="text" id="customerEmail" name="customerEmail" value="<?= $UIDFetched['usernamePelanggan'] ?>">
+					</div>
+					<div>
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerEmail"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="alamat">Alamat</label>
-						<textarea name="alamat" id="alamat"></textarea>
+						<textarea name="alamat" id="alamat"><?= $UIDFetched['alamatPelanggan'] ?></textarea>
+					</div>
+					<div>
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "alamat"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="email">Old Password</label>
-						<input type="text" id="email">
+						<label for="customerpwdOLD">Old Password</label>
+						<input type="password" id="customerpwdOLD" name="customerpwdOLD">
+					</div>
+					<div>
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerpwdOLD"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="email">New Password</label>
-						<input type="text" id="email">
+						<label for="customerpwdNEW">New Password</label>
+						<input type="password" id="customerpwdNEW" name="customerpwdNEW">
+					</div>
+					<div>
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerpwdNEW"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
