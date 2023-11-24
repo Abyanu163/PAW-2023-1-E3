@@ -232,3 +232,31 @@ function addPembayaran($kodePesanan, $metode)
 
     return $stmt->rowCount();
 }
+
+
+// Mengabsahan / validasi suatu data
+function terisikan($metodeKirim, $dalamIsian) { // Apakah sudah terisi?
+	if (!isset($metodeKirim[$dalamIsian])) {
+		return "<span style='color: red;'>Harusnya diisi</span>"; // Kembali jika tidak terisi
+	} else {
+		return validasiSesuatu_1($metodeKirim, $dalamIsian); // Lanjut ke...
+	}
+}
+function validasiSesuatu_1($metodeKirim, $dalamIsian) { // ... fungsi validasi validasiSesuatu_1
+	switch ($dalamIsian) {
+		case 'namaPemasok':
+			break;
+		case 'namaProduk':
+			break;
+		case 'deskripsi':
+			break;
+		case 'nomortlp':
+			break;
+		case 'harga':
+			break;
+		case 'suplaier':
+			break;
+		default:
+			break;
+	}
+}
