@@ -271,7 +271,7 @@ function validasiSesuatu_1($metodeKirim, $dalamIsian) { // ... fungsi validasi v
                 return "<span style='color: red;'>Stok yang diisikan hanyalah angka</span>";
             } break;
         case 'deskripsi':
-			if (preg_match("/^[\w\-\d\.\!\%\&]$/", $metodeKirim[$dalamIsian])) {
+			if (!preg_match("/^[\w\-\d\.\!\%\&]$/", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
                 return "<span style='color: red;'>Biasanya deskripsi yang singkat dan teks latin</span>";
             } break;

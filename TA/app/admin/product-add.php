@@ -51,7 +51,7 @@ $data=selectData("SELECT * FROM suplaier");
 				<div class="form-element">
 					<div class="input-field">
 						<label for="gambar">Masukkan gambar</label>
-						<input type="file" name="gambar" id="gambar" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["gambar"]);} ?>">
+						<input type="file" name="gambar" id="gambar">
 					</div>
 				</div>
 				<div class="form-element">
