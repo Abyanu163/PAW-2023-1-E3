@@ -10,14 +10,6 @@ $title = 'Customer Data';
 
 <section id="content">
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search customer">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
 			<h2>Customer List:</h2>
