@@ -162,7 +162,7 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
                 return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi</span>";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu.</span>";
+                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
             } else {
                 break;
             }
@@ -188,7 +188,7 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
                 return "<span style='color: red;'>Kata sandi kuranag dari 8 karakter</span>";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu.</span>";
+                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
             } else {
                 break;
             }

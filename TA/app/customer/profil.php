@@ -18,7 +18,7 @@ $failUpdate = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="customerEmail">Email</label>
-						<input type="text" id="customerEmail" name="customerEmail" value="<?= $UIDFetched['usernamePelanggan'] ?>">
+						<input type="text" id="customerEmail" name="customerEmail" readonly value="<?= $UIDFetched['usernamePelanggan'] ?>">
 					</div>
 					<div>
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerEmail"));} ?>
@@ -27,7 +27,7 @@ $failUpdate = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="alamat">Alamat</label>
-						<textarea name="alamat" id="alamat"><?= $UIDFetched['alamatPelanggan'] ?></textarea>
+						<textarea name="alamat" id="alamat"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['alamat']);} else {echo($UIDFetched['alamatPelanggan']);} ?></textarea>
 					</div>
 					<div>
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "alamat"));} ?>
@@ -56,6 +56,7 @@ $failUpdate = FALSE;
 						<button>Edit Profil</button>
 					</div>
 				</div>
+				<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {updateUserData($failUpdate, PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE), $_POST['customerEmail'], $_POST['customerpwdNEW'], $_POST['alamat']);} ?>
 			</form>
 		</div>
 

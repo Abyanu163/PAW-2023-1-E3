@@ -7,14 +7,7 @@ $title = 'Add Product';
 <?php require_once 'templates/navbar.php' ?>
 
 <?php 
-if(isset($_POST["tambah"])){
-	tambahProduk($_POST);
-	echo "<script>
-	alert('Data berhasil diupload');
-	window.location.href='product-data.php';
-	</script>";
-	exit();
-}
+$gagal = FALSE;
 $data=selectData("SELECT * FROM suplaier");
 ?>
 
@@ -49,7 +42,10 @@ $data=selectData("SELECT * FROM suplaier");
 				<div class="form-element">
 					<div class="input-field">
 					<label for="namaProduk">Nama Produk</label>
-        <input type="text" name="namaProduk" id="namaProduk">
+        			<input type="text" name="namaProduk" id="namaProduk" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["namaProduk"]);} ?>">
+					</div>
+					<div class="input-field">
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(terisikan($_POST, "namaProduk"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
@@ -61,19 +57,28 @@ $data=selectData("SELECT * FROM suplaier");
 				<div class="form-element">
 					<div class="input-field">
 						<label for="harga">Harga Produk</label>
-						<input type="text" name="harga" id="harga">
+						<input type="text" name="harga" id="harga" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["harga"]);} ?>">
+					</div>
+					<div class="input-field">
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(terisikan($_POST, "harga"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="stok">Stok Produk</label>
-						<input type="text" name="stok" id="stok">
+						<input type="text" name="stok" id="stok" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["stok"]);} ?>">
+					</div>
+					<div class="input-field">
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(terisikan($_POST, "stok"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="deskripsi">Deskripsi</label>
-						<textarea name="deskripsi" id="deskripsi"></textarea>
+						<textarea name="deskripsi" id="deskripsi"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["deskripsi"]);} ?></textarea>
+					</div>
+					<div class="input-field">
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(terisikan($_POST, "deskripsi"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
@@ -88,4 +93,13 @@ $data=selectData("SELECT * FROM suplaier");
 	</div>
 </section>
 
-<?php require_once 'templates/footer.php'; ?>
+<?php 
+if(isset($_POST["tambah"]) && $gagal == FALSE){
+	tambahProduk($_POST);
+	echo "<script>
+	alert('Data berhasil diupload');
+	window.location.href='product-data.php';
+	</script>";
+	exit();
+}
+require_once 'templates/footer.php'; ?>
