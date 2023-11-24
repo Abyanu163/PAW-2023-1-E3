@@ -8,7 +8,7 @@
 				<ul class="link-list">
 					<li><a href="<?= BASEURL ?>/app/manager/transaction-paid.php" class="<?php if ($page == 'paid') echo 'link-active' ?>">Sudah Dibayar</a></li>
 					<li><a href="<?= BASEURL ?>/app/manager/transaction-unpaid.php" class="<?php if ($page == 'unpaid') echo 'link-active' ?>">Belum Dibayar</a></li>
-					<li><a href="#" class="logout">Log out</a></li>
+					<li><a href="?ADMIN_AUTH=Redirect_Sign_Out_Enabled" class="logout">Log out</a></li>
 				</ul>
 				<div class="hamburger-menu">
 					<span></span>
@@ -18,3 +18,4 @@
 			</div>
 		</nav>
 	</section>
+	<?php ADMIN_AUTH_SignOut() ?>

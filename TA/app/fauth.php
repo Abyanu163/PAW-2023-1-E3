@@ -278,4 +278,14 @@ function signOut () {
         return exit();
     };
 }
+function ADMIN_AUTH_SignOut() {
+    $signOut = $_GET['ADMIN_AUTH'] ?? false;
+    if ($signOut == 'Redirect_Sign_Out_Enabled') {
+        unset($_SESSION['adminSignIn']);
+        unset($_SESSION['kodeKaryawan']);
+        unset($_SESSION['roleCode']);
+        header ('Location: '.BASEURL."/app/admin/login.php");
+        return exit();
+    };
+}
 ?>

@@ -9,7 +9,7 @@
 					<li><a href="<?= BASEURL ?>/app/admin/product-data.php" class="<?php if ($page == 'product') echo 'link-active' ?>">Product Data</a></li>
 					<li><a href="<?= BASEURL ?>/app/admin/supplier-data.php" class="<?php if ($page == 'supplier') echo 'link-active' ?>">Supplier Data</a></li>
 					<li><a href="<?= BASEURL ?>/app/admin/customer-data.php" class="<?php if ($page == 'customer') echo 'link-active' ?>">Customer Data</a></li>
-					<li><a href="#" class="logout">Log out</a></li>
+					<li><a href="?ADMIN_AUTH=Redirect_Sign_Out_Enabled" class="logout">Log out</a></li>
 				</ul>
 				<div class="hamburger-menu">
 					<span></span>
@@ -19,3 +19,4 @@
 			</div>
 		</nav>
 	</section>
+	<?php ADMIN_AUTH_SignOut() ?>
