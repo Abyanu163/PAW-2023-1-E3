@@ -38,7 +38,7 @@ require(BASEPATH."/app/templates/header.php");
                                 <button type="submit" id="submit" value="Masuk">Masuk</button>
                             </div>
                         </div>
-                        <div form="account-link">
+                        <div class="account-link">
                             <?php
                             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 echo (adminAuth(PDO_Connect, $_POST['adminusr'], $_POST['adminpwd']));

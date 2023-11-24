@@ -8,7 +8,6 @@ session_start();
 <?php require_once 'templates/navbar.php' ?>
 
 <?php
-$_SESSION["kodePelanggan"] = 1;
 $data = selectData(
 	"SELECT * FROM products p
 	JOIN categories c ON (p.kodeKategori = c.kodeKategori)"

@@ -26,10 +26,10 @@ $title = 'Customer Data';
 				<table>
 					<tr>
 						<th>No.</th>
-						<th>Username</th>
+						<th>Email</th>
 						<th>Alamat</th>
 					</tr>
-					<?php $i = 0; foreach($data as $ch): ?>
+					<?php $i = 1; foreach($data as $ch): ?>
 						<tr>
 							<td><?= $i; ?></td>
 							<td><?= $ch["usernamePelanggan"] ?></td>

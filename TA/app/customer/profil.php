@@ -17,14 +17,8 @@ $failUpdate = FALSE;
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="username">Username</label>
-						<input type="text" id="username" disabled value="<?= $UIDFetched['kodePelanggan'] ?>">
-					</div>
-				</div>
-				<div class="form-element">
-					<div class="input-field">
 						<label for="customerEmail">Email</label>
-						<input type="text" id="customerEmail" name="customerEmail" value="<?= $UIDFetched['usernamePelanggan'] ?>">
+						<input type="text" id="customerEmail" name="customerEmail" disabled value="<?= $UIDFetched['usernamePelanggan'] ?>">
 					</div>
 					<div>
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerEmail"));} ?>

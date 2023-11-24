@@ -502,6 +502,7 @@ button.cancel {
 }
 
 .account-link {
+  width: 18rem;
   font-size: 0.9rem;
 }
 
@@ -779,6 +780,10 @@ button.cancel {
 
   .formin-container .input-field {
     width: 30rem;
+  }
+
+  .account-link {
+    width: 28rem;
   }
 
 }

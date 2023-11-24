@@ -48,7 +48,7 @@ if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
 						<button type="submit" name="login">Masuk</button>
 					</div>
 				</div>
-				<div form="account-link">
+				<div class="account-link">
 					<?php
 					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						echo (authIn(PDO_Connect, $_POST['customerEmail'], $_POST['customerpwd'], ($_POST['remember'] ?? FALSE)));

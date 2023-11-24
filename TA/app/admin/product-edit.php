@@ -78,7 +78,7 @@ if(isset($_POST["edit"])){
 					<div class="input-field">
 						<label for="gambar">Gambar lama</label>
 						<div class="form-gambar">
-							<img src="<?= BASEURL ?>/assets/img/picture/<?= $data[0]['gambarProduk'] ?>" alt="">
+							<img src="<?= BASEURL ?>/assets/img/product/<?= $data[0]['gambarProduk'] ?>" alt="">
 						</div>
 					</div>
 				</div>
