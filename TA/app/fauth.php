@@ -18,7 +18,6 @@ function checkCustomerTable($PDO_USED) { // Cek isian dari baris tabel pelanggan
     } else {
         return;
     }
-    return;
 }
 function checkSignIn($checking) { // Fungsi untuk mengecek kondisi sudah masuk
     return isset($checking);
@@ -36,12 +35,9 @@ function adminAuth($PDO_USED, $adminusr, $adminpwd) { // Autentikasi untuk admin
         $_SESSION['adminSignIn'] = TRUE;
         $_SESSION['roleCode'] = $roleCode[0]['kodeJabatan'];
         $stateExecuting = NULL;
-        return header ("Location: ".BASEURL."/app/admin/"); exit();
+        return header ("Location: ".BASEURL."/app/admin/");
     } else {
-        return "<span style='color: red;'>Autentikasi gagal. Apakah pengguna sudah terdaftar?</span><br/>
-        <span>Jika belum daftar, maka silahkan ke halaman registrasi akun untuk manajer dan karyawan di
-        <a href='".BASEURL."/app/admin/register.php' title='Pastikan sudah jadi karyawan/admin/manajer di tempat kami'>sini</a>.
-        </span>";
+        return "<p style='color: red;'>Autentikasi gagal. Apakah pengguna sudah terdaftar?</p>";
     }
 }
 function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autentikasi untuk pelanggan dengan menyertakan kode pelanggan agar dapat dipahami.
@@ -61,7 +57,7 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
             setcookie("userID", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
         }
         $stateExecuting = NULL;
-        return header ("Location: ".BASEURL."/"); exit();
+        return header ("Location: ".BASEURL."/");
     } else {
         return "<div>
         <span style='color: red;'>Autentikasi gagal. Pastikan ingat surel dan kata sandi</span>
@@ -73,7 +69,7 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
 }
 function managerAuthRedirect($rolebased) { // Jika ditemukan sebagai manajer
     if ($rolebased == 2) {
-        return header("Location: ".BASEURL."/app/manager"); exit();
+        return header("Location: ".BASEURL."/app/manager");
     }
 }
 function matchingCustomerResetPWD($PDO_USED, $customerEmail, $newCustomerPWD, $confirmNewCustomerPWD) { // Reset kata sandi buat pelanggan atau konsumer
@@ -102,7 +98,7 @@ function customerResetPWD($PDO_USED, $customerEmail, $newCustomerPWD) { // Sekar
     $stateExecuting->execute();
     $stateExecuting = NULL;
     return header("Location: ".BASEURL."/app/customer/login.php"); // Balik ke halaman masuk
-    exit();
+
 }
 function matchingAdminResetPWD($PDO_USED, $adminusr, $newAdminPWD, $confirmNewAdminPWD) { // Reset kata sandi buat manajer dan admin + karyawan
     $failResetCustomPWD = FALSE;
@@ -130,7 +126,7 @@ function adminResetPWD($PDO_USED, $adminusr, $newAdminPWD) { // Sekarang eksekus
     $stateExecuting->execute();
     $stateExecuting = NULL;
     return header("Location: ".BASEURL."/app/admin/login.php"); // Balik ke halaman masuk
-    exit();
+
 }
 function rememberMe() { // Centang mengingat. HTML centang $_POST['remember'] = 'on' . HTML tidak centang tidak ada $_POST['remember']
     $remember = $_POST['remember'] ?? false;
