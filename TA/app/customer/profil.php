@@ -27,7 +27,7 @@ $failUpdate = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="alamat">Alamat</label>
-						<textarea name="alamat" id="alamat"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($UIDFetched['alamatPelanggan']);} else {echo($_POST['alamat']);} ?></textarea>
+						<textarea name="alamat" id="alamat"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['alamat']);} else {echo($UIDFetched['alamatPelanggan']);} ?></textarea>
 					</div>
 					<div>
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "alamat"));} ?>
