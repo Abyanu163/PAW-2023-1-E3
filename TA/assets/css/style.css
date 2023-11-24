@@ -1,3 +1,83 @@
+/* == HOMEPAGE == */
+section#homepage {
+  /* width: 100vw; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--darker);
+  /* background-image: url('../img/meat.jpg'); */
+  background-size: cover;
+  background-position: center;
+  color: var(--secondary);
+}
+
+.main-logo {
+  display: flex;
+  align-items: center;
+}
+
+.main-logo img {
+  width: 7rem;
+  height: fit-content;
+  margin-right: 0.5rem;
+}
+
+.main-logo h1 {
+  font-size: 5rem;
+  font-weight: 600;
+}
+
+.link-login {
+  margin-top: 50px;
+  display: flex;
+  width: 380px;
+  justify-content: space-between;
+}
+
+.link-login a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: var(--success);
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.link-login a:hover {
+  filter: brightness(80%);
+}
+
+section#deskripsi-toko {
+  padding: 5rem 0 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p1 {
+  width: 800px;
+  display: flex;
+}
+
+section#deskripsi-toko img {
+  width: 300px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+section#deskripsi-toko p {
+  width: 800px;
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+
 /* == MAIN == */
 /* == Product, Categories, Payment, Cart == */
 .main-container {
