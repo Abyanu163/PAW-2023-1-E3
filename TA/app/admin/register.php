@@ -35,7 +35,7 @@ $failRegist = FALSE;
                             <div class="input-field">
                                 <label for="jabatan" >Jabatan</label>
                                 <div class="radio">
-                                    <input type="radio" name="jabatan" value="1" checked/>Karyawan
+                                    <input type="radio" name="jabatan" value="1" checked/>Admin
                                     <input type="radio" name="jabatan" value="2"/>Manajer
                                 </div>
                             </div>
