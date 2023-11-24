@@ -44,6 +44,8 @@ require(BASEPATH."/app/templates/header.php");
                                 echo (adminAuth(PDO_Connect, $_POST['adminusr'], $_POST['adminpwd']));
                             }
                             ?>
+                            <span>Belum memiliki akun ? </span>
+                            <a href='<?=BASEURL?>/app/admin/register.php' title='Pastikan sudah jadi karyawan/admin/manajer di tempat kami'>Daftar di sini</a>.
                         </div>
                     </div>
                 </form>
