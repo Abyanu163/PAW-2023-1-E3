@@ -9,8 +9,8 @@ session_start();
 $adminSignIn = $_SESSION['adminSignIn'] ?? false;
 $roleCode = $_SESSION['roleCode'] ?? false;
 if (($adminSignIn != FALSE) && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
-    managerAuthRedirect($roleCode);
-    header('Location: '.BASEURL.'/app/manager/');
+    whenIsManager();
+    header('Location: '.BASEURL.'/app/admin/');
 }
 require(BASEPATH."/app/templates/header.php");
 ?>
