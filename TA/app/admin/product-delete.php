@@ -2,14 +2,15 @@
 
 <?php 
 $kodeProduk=$_GET["id"];
-if (hapusProduk($kodeProduk)>0){
+try {
+    hapusProduk($kodeProduk);
     echo "
     <script>
         alert('Data Berhasil Dihapus !!!');
         document.location.href='product-data.php';
     </script>
     ";
-} else{
+} catch(Exception $e) {
     echo "
     <script>
         alert('Data Gagal Dihapus !!!');
