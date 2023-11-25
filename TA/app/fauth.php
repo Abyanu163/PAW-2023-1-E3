@@ -57,7 +57,7 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
             setcookie("userID", $usrID[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
         }
         $stateExecuting = NULL;
-        return header ("Location: ".BASEURL."/");
+        return header ("Location: ".BASEURL."/app/customer");
     } else {
         return "<div>
         <span style='color: red;'>Autentikasi gagal. Pastikan ingat surel dan kata sandi</span>
@@ -270,7 +270,7 @@ function signOut () {
         setcookie("userID", "", time() - 9999, "/");
         setcookie("userIDSaved", "", time() - 9999, "/");
         session_destroy();
-        header ('Location: '.BASEURL);
+        header ('Location: '.BASEURL. '/app');
         return exit();
     };
 }

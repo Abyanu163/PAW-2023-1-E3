@@ -1,13 +1,11 @@
 /* == HOMEPAGE == */
 section#homepage {
-  /* width: 100vw; */
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--darker);
-  /* background-image: url('../img/meat.jpg'); */
   background-size: cover;
   background-position: center;
   color: var(--secondary);
@@ -495,8 +493,12 @@ section#login {
   margin-bottom: 10px;
 }
 
-.input-field {
+.input-field,
+.error-msg {
   width: 18rem;
+}
+
+.input-field {
   font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
@@ -581,6 +583,17 @@ button.cancel {
   background-color: var(--danger);
 }
 
+.radio label {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+input[type=radio] {
+  width: fit-content;
+  margin-right: 1rem;
+}
+
 .account-link {
   width: 18rem;
   font-size: 0.9rem;
@@ -608,7 +621,6 @@ button.cancel {
 }
 
 .error-msg {
-  width: 100%;
   font-size: 0.8rem;
   text-align: center;
 }
@@ -656,11 +668,14 @@ button.cancel {
   }
 
   .card-list.grid {
-    /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 240px);
     gap: 0.5rem;
     justify-items: center;
-    justify-content: center; */
+    justify-content: start;
+  }
+  
+  .card-list.flex {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -833,8 +848,12 @@ button.cancel {
     margin-bottom: 15px;
   }
   
-  .input-field {
+  .input-field,
+  .error-msg {
     width: 28rem;
+  }
+
+  .input-field {
     font-size: 1rem;
   }
 
@@ -844,6 +863,10 @@ button.cancel {
   .input-field .form-gambar {
     font-size: 0.9rem;
     width: 18rem;
+  }
+
+  input[type=radio] {
+    width: fit-content;
   }
 
   .input-field .radio {

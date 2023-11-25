@@ -14,7 +14,7 @@ if ($savedSignedIn != FALSE) {
 	$_SESSION['userID'] = $_COOKIE['userID'];
 }
 if ($signedIn != FALSE && ($_SERVER['REQUEST_METHOD'] == 'GET')) {
-	header('Location: ' . BASEURL . '/');
+	header('Location: ' . BASEURL . '/app/customer');
 }
 ?>
 

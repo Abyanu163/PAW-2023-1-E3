@@ -20,7 +20,7 @@ $failUpdate = FALSE;
 						<label for="customerEmail">Email</label>
 						<input type="text" id="customerEmail" name="customerEmail" readonly value="<?= $UIDFetched['usernamePelanggan'] ?>">
 					</div>
-					<div>
+					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerEmail"));} ?>
 					</div>
 				</div>
@@ -29,25 +29,25 @@ $failUpdate = FALSE;
 						<label for="alamat">Alamat</label>
 						<textarea name="alamat" id="alamat"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['alamat']);} else {echo($UIDFetched['alamatPelanggan']);} ?></textarea>
 					</div>
-					<div>
+					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "alamat"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="customerpwdOLD">Old Password</label>
+						<label for="customerpwdOLD">Password Lama</label>
 						<input type="password" id="customerpwdOLD" name="customerpwdOLD">
 					</div>
-					<div>
+					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerpwdOLD"));} ?>
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="customerpwdNEW">New Password</label>
+						<label for="customerpwdNEW">Password Baru</label>
 						<input type="password" id="customerpwdNEW" name="customerpwdNEW">
 					</div>
-					<div>
+					<div class="error-msg">
 						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(setted($_POST, "customerpwdNEW"));} ?>
 					</div>
 				</div>

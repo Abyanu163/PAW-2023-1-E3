@@ -35,8 +35,12 @@ $failRegist = FALSE;
                             <div class="input-field">
                                 <label for="jabatan" >Jabatan</label>
                                 <div class="radio">
-                                    <input type="radio" name="jabatan" value="1" checked/>Admin
-                                    <input type="radio" name="jabatan" value="2"/>Manajer
+                                    <label for="admin">
+                                        <input type="radio" name="jabatan" value="1" id="admin" checked/>Admin
+                                    </label>
+                                    <label for="manajer">
+                                        <input type="radio" name="jabatan" id="manajer" value="2"/>Manajer
+                                    </label>
                                 </div>
                             </div>
                             <div class="error-msg">

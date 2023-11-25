@@ -23,7 +23,7 @@ WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 			<h2>Product List:</h2>
 
 			<!-- Product List -->
-			<div class="card-list grid">
+			<div class="card-list flex">
 				<?php foreach($data as $ch): ?>
 					<div class="card">
 						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
