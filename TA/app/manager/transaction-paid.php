@@ -14,9 +14,6 @@ $data = selectData(
 	WHERE o.keterangan = 'sudah'
 	;"
 );
-
-$labelChart = [];
-$valueChart = [];
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -32,9 +29,9 @@ $valueChart = [];
 					<canvas id="myChart"></canvas>
 				</div>
 			</div>
-			
+
 			<div class="table-container paid">
-					<table>
+				<table>
 					<tr>
 						<th>Username</th>
 						<th>Tanggal Transaksi</th>
@@ -42,12 +39,9 @@ $valueChart = [];
 						<th>Total Bayar</th>
 						<th>Detail</th>
 					</tr>
-					<?php foreach($data as $ch): ?>
+
+					<?php foreach ($data as $ch) : ?>
 						<tr>
-							<?php 
-							$labelChart[] = $ch['waktuBayar'];
-							$valueChart[] = $ch['total'];
-							?>
 							<td><?= $ch['usernamePelanggan'] ?></td>
 							<td><?= $ch['waktuBayar'] ?></td>
 							<td><?= $ch['metode'] ?></td>
@@ -64,28 +58,68 @@ $valueChart = [];
 	</div>
 </section>
 
+<?php
+$labelChart = [];
+$valueChart = [];
+$penjualan = 0;
+
+$year = date('Y');
+$month =  date('m');
+
+$lastDate = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+$data = selectData(
+	"SELECT * FROM pembayaran p
+	JOIN orders o ON (p.kodePesanan = o.kodePesanan)
+	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
+	WHERE o.keterangan = 'sudah' AND p.waktuBayar BETWEEN '$year-$month-1 00:00:01' AND '$year-$month-$lastDate 23:59:59'
+	;"
+);
+
+foreach ($data as $ch) :
+	$waktu = explode(' ', $ch['waktuBayar'])[0];
+	if (!in_array($waktu, $labelChart)) {
+		$labelChart[] = $waktu;
+	}
+endforeach;
+
+$i = 0;
+foreach ($data as $ch) :
+	$waktu = explode(' ', $ch['waktuBayar'])[0];
+	if ($waktu == $labelChart[$i]) {
+		$penjualan += (int)$ch['total'];
+	} else {
+		$valueChart[] = $penjualan;
+		$penjualan = 0;
+		$i++;
+		$penjualan += (int)$ch['total'];
+	}
+endforeach;
+$valueChart[] = $penjualan;
+?>
+
 <script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: <?= json_encode($labelChart); ?>,
-            datasets: [{
-                label: 'Daftar Pembelian',
-                data: <?= json_encode($valueChart); ?>,
-                borderWidth: 1,
-								borderColor: '#36A2EB',
-								backgroundColor: '#9BD0F5'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: <?= json_encode($labelChart); ?>,
+			datasets: [{
+				label: 'Grafik Pembelian Bulan <?= date('F')." $year" ?>',
+				data: <?= json_encode($valueChart); ?>,
+				borderWidth: 1,
+				borderColor: '#36A2EB',
+				backgroundColor: '#9BD0F5'
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		}
+	});
 </script>
 
 <?php require_once 'templates/footer.php'; ?>

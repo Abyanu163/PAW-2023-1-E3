@@ -607,7 +607,6 @@ input[type=radio] {
   display: flex;
   justify-content: center;
   padding-top: 2rem;
-  /* height: 60vh; */
   position: relative;
   padding-bottom: 3rem;
 }
@@ -642,11 +641,6 @@ input[type=radio] {
 }
 
 
-
-
-
-
-
 @media only screen and (min-width: 768px) {
   /* == MAIN == */
   /* Product, categories, Payment, cart */
@@ -669,7 +663,7 @@ input[type=radio] {
 
   .card-list.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 240px);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 0.5rem;
     justify-items: center;
     justify-content: start;
@@ -679,6 +673,7 @@ input[type=radio] {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 0.5rem;
   }
 
   .card-list.checkout {
@@ -697,39 +692,9 @@ input[type=radio] {
 
   .card {
     padding: 0.8rem;
-    width: 200px;
+    min-width: 180px;
+    max-width: 210px;
     flex-direction: column;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-
-  .card-list.grid .card {
-    margin-left: 0.62rem;
-    margin-right: 0.62rem;
-    margin-bottom: 1rem;
-  }
-  
-  .card-row-container .card.row {
-    padding-left: 1.2rem;
-  }
-
-  .card.row {
-    width: 100%;
-    padding: 1rem;
-    margin-right: 0;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-
-  .card.row h3 {
-    font-size: 1.1rem;
-  }
-  
-  .card.row p {
-    font-size: 0.9rem;
   }
 
   .card-pict {
