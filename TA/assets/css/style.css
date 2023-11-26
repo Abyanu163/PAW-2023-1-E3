@@ -463,6 +463,11 @@ a.back:hover {
 
 /* == FORM == */
 /* Login, Register, Profil */
+input, textarea, button {
+  font-family: inherit;
+  /* font-size: inherit; */
+}
+
 #login {
   width: 100%;
   min-height: 600px;

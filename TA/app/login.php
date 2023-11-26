@@ -18,13 +18,13 @@ include('templates/header.php');
 				<div class="form-element">
 					<div class="input-field">
 						<label for="username">Nama pengguna</label>
-						<input type="text" name="username" id="username">
+						<input type="text" name="username" id="username" placeholder="penggun4 atau surel@example.net">
 					</div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="passwd">Kata sandi</label>
-						<input type="password" name="passwd" id="passwd">
+						<input type="password" name="passwd" id="passwd" placeholder="Entahlah, saya tidak bisa kasih tau">
 					</div>
 				</div>
 				<div class="form-element">
