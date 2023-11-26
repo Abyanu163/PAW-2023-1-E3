@@ -86,7 +86,9 @@ function editProduk($data)
     } else {
         $gambar = upload();
         $oldGambar = selectData("SELECT gambarProduk FROM products WHERE kodeProduk=$id");
-        unlink('../../assets/img/product/' . $oldGambar[0]["gambarProduk"]);
+        if(file_exists('../../assets/img/product/' . $oldGambar[0]["gambarProduk"])){
+            unlink('../../assets/img/product/' . $oldGambar[0]["gambarProduk"]);
+        }        
     };
     $query = "UPDATE products 
     SET kodeKategori=:kategori, kodeSuplaier=:suplaier, namaProduk=:nama, gambarProduk=:gambar, hargaProduk=:harga, stokProduk=:stok, deskripsiProduk=:deskripsi
