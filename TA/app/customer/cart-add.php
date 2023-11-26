@@ -14,6 +14,13 @@ if (!$_GET['id']) {
 }
 
 $produk = selectData("SELECT * FROM products WHERE kodeProduk={$_GET['id']}");
+
+// cek apakah produk ada didatabase (url injection)
+if($produk==[]){
+  header('location: product.php');
+  exit();
+}
+
 $cek = selectData("SELECT * FROM orderdetail WHERE kodePesanan={$_SESSION["kodePesanan"]} AND kodeProduk={$_GET['id']}");
 if (isset($_POST['tambah'])) {
   if ($_SESSION['jumlah'] < $produk[0]["stokProduk"]) {
@@ -45,6 +52,14 @@ if ($cek == []) {
     alert('BARANG SUDAH ADA DI KERANJANG !!!')
     document.location.href='cart.php';
     </script>";
+}
+?>
+
+<?php 
+// mengecek stok dari produk kosong atau tidak
+if($produk[0]["stokProduk"]<=0){
+  header('location: product.php');
+  exit();
 }
 ?>
 
