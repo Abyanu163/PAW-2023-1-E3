@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 07:19 AM
+-- Generation Time: Nov 26, 2023 at 04:50 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,7 +62,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`kodePelanggan`, `alamatPelanggan`, `passwordPelanggan`, `usernamePelanggan`) VALUES
 (1, 'Jl Setia Budi Surabaya', '123', 'glendy11'),
 (2, 'Gang Pop ice telang', '123', 'PPP'),
-(3, 'jl Tunjungan surabaya', '123', 'budi111');
+(3, 'jl Tunjungan surabaya', '123', 'budi111'),
+(4, '12', 'a9f0e71fd97a882a27b3e2614026758a27de262ab3df7c18a01a7ff25e092ba5', 'g@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -96,6 +97,13 @@ CREATE TABLE `karyawan` (
   `passwordKaryawan` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`kodeKaryawan`, `kodeJabatan`, `usernameKaryawan`, `passwordKaryawan`) VALUES
+(1, 1, 'glendy', 'a9f0e71fd97a882a27b3e2614026758a27de262ab3df7c18a01a7ff25e092ba5');
+
 -- --------------------------------------------------------
 
 --
@@ -116,10 +124,11 @@ CREATE TABLE `orderdetail` (
 INSERT INTO `orderdetail` (`kodeProduk`, `kodePesanan`, `subHarga`, `qty`) VALUES
 (21, 65, 444, 1),
 (21, 67, 2220, 5),
-(21, 68, 2220, 5),
 (51, 65, 80000, 8),
+(51, 70, 70000, 7),
 (55, 64, 45000, 3),
-(55, 66, 75000, 5);
+(55, 66, 75000, 5),
+(58, 71, 615, 5);
 
 -- --------------------------------------------------------
 
@@ -140,10 +149,13 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`kodePesanan`, `kodePelanggan`, `tanggalPesan`, `keterangan`) VALUES
 (64, 1, '2023-11-21 07:10:53', 'sudah'),
-(65, 1, '2023-11-21 07:11:06', 'belum'),
+(65, 1, '2023-11-22 11:38:13', 'sudah'),
 (66, 2, '2023-11-22 06:04:53', 'sudah'),
 (67, 2, '2023-11-22 06:05:03', 'belum'),
-(68, 3, '2023-11-22 06:05:37', 'belum');
+(68, 3, '2023-11-22 06:05:37', 'belum'),
+(69, 1, '2023-11-22 12:25:01', 'sudah'),
+(70, 1, '2023-11-22 12:26:39', 'belum'),
+(71, 4, '2023-11-24 10:36:28', 'sudah');
 
 -- --------------------------------------------------------
 
@@ -158,6 +170,13 @@ CREATE TABLE `pembayaran` (
   `total` int(11) NOT NULL,
   `metode` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`kodePembayaran`, `kodePesanan`, `waktuBayar`, `total`, `metode`) VALUES
+(1, 71, '2023-11-24 10:36:28', 615, 'COD');
 
 -- --------------------------------------------------------
 
@@ -181,12 +200,13 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`kodeProduk`, `kodeKategori`, `kodeSuplaier`, `namaProduk`, `gambarProduk`, `hargaProduk`, `stokProduk`, `deskripsiProduk`) VALUES
-(21, 1, 1, 'test123', 'tes.jpg', 444, 0, 'test123'),
-(22, 1, 1, 'oke', 'tes.jpg', 10000, 11, ''),
-(23, 1, 1, 'dfnlksdf', 'tes.jpg', 1313, 112, 'fakjgajknjkdgnjknsdljkg'),
+(21, 1, 1, 'hahahahah', '6561c6c594ace.png', 1244555, 123, '100 gr'),
 (25, 1, 1, '&lt;h1&gt;hahaha&lt;/h1&gt;', 'tes.jpg', 10000000, 90, '&lt;h1&gt;hahaha&lt;/h1&gt;'),
-(51, 1, 2, 'oke', '6553827578dc9.png', 10000, 21304, ''),
-(55, 1, 9, 'coba', '655c2ef9d6280.', 15000, 0, '');
+(51, 1, 2, 'oke', '6553827578dc9.png', 10000, 21297, ''),
+(55, 1, 9, 'coba', '655c2ef9d6280.', 15000, 0, ''),
+(56, 2, 11, 'asdad', '6560203d9e113.png', 123, 1, '100gr'),
+(57, 1, 1, '', '6560208fdbd2a.png', 0, 0, ''),
+(58, 1, 1, 'manusia', '6560210565212.png', 123, 217, 'sfsdfd');
 
 -- --------------------------------------------------------
 
@@ -206,12 +226,24 @@ CREATE TABLE `suplaier` (
 --
 
 INSERT INTO `suplaier` (`kodeSuplaier`, `namaSuplaier`, `telpSuplaier`, `alamatSuplaier`) VALUES
-(1, 'PT MegaChan', '09932847983', 'jakarta'),
+(1, 'asasasasas', '099328432423', 'jakarta 5'),
 (2, 'CV Anubis aja', '0857483784', 'Jl Mawar'),
-(4, 'PT King Meat', '', ''),
 (9, 'PT Rizky kanibal', '0895637284', 'simo jawar'),
-(10, 'test', '89379282427498', 'jasldjkfhjkd'),
-(11, '&lt;h1&gt;testtest&lt;/h1&gt;', '', '');
+(11, 'Rizkyan Kanibal', '09866474', 'addsad'),
+(13, 'PT Rizky Karnivora', '0895377321', 'Jl Mawar VA no 120');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wallet`
+--
+
+CREATE TABLE `wallet` (
+  `kodeWallet` int(11) NOT NULL,
+  `kodePelanggan` int(11) NOT NULL,
+  `namaWallet` varchar(64) NOT NULL,
+  `nomorWallet` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -279,6 +311,13 @@ ALTER TABLE `suplaier`
   ADD PRIMARY KEY (`kodeSuplaier`);
 
 --
+-- Indexes for table `wallet`
+--
+ALTER TABLE `wallet`
+  ADD PRIMARY KEY (`kodeWallet`),
+  ADD KEY `fk_wallet_kodePelanggan` (`kodePelanggan`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -292,7 +331,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `kodePelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kodePelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jabatan`
@@ -304,31 +343,37 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `kodeKaryawan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kodeKaryawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `kodePesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `kodePesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kodePembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kodePembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `kodeProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `kodeProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `suplaier`
 --
 ALTER TABLE `suplaier`
-  MODIFY `kodeSuplaier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `kodeSuplaier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `wallet`
+--
+ALTER TABLE `wallet`
+  MODIFY `kodeWallet` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -365,6 +410,12 @@ ALTER TABLE `pembayaran`
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_kodeSuplaier` FOREIGN KEY (`kodeSuplaier`) REFERENCES `suplaier` (`kodeSuplaier`),
   ADD CONSTRAINT `fk_products_mempunyai_kategori` FOREIGN KEY (`kodeKategori`) REFERENCES `categories` (`kodeKategori`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `wallet`
+--
+ALTER TABLE `wallet`
+  ADD CONSTRAINT `fk_wallet_kodePelanggan` FOREIGN KEY (`kodePelanggan`) REFERENCES `customers` (`kodePelanggan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
