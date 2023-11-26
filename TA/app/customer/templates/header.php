@@ -2,7 +2,7 @@
 require("../base.php");
 require('../fauth.php');
 require("../function.php");
-checkSignedIn();
+isNotSignedIn();
 ?>
 
 <!DOCTYPE html>

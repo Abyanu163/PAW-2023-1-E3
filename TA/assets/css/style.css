@@ -463,7 +463,7 @@ a.back:hover {
 
 /* == FORM == */
 /* Login, Register, Profil */
-section#login {
+#login {
   width: 100%;
   min-height: 600px;
   padding-bottom: 10rem;

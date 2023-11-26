@@ -3,7 +3,7 @@ session_start();
 require("../base.php");
 require("../fauth.php");
 require("../function.php");
-whenIsNOTManager();
+isNotSignedIn();
 ?>
 
 <!DOCTYPE html>

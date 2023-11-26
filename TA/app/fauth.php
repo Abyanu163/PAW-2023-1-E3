@@ -282,4 +282,25 @@ function ADMIN_AUTH_SignOut() {
         return exit();
     };
 }
+// Gunakan yang cek sudah masuk akun di halaman login
+function isSignedIn() {
+    $userType = $_SESSION['userType'] ?? $_COOKIE['userType'] ?? FALSE; // Katakanlah tipe admin dan customer
+    $userRoleID = $_SESSION['userRoleID'] ?? $_COOKIE['userRoleID'] ?? FALSE; // Untuk tipe admin
+    if ($userType == 'admin') { // admin --> manajer (2) dan admin (1)
+        if ($userRoleID == '2') {
+            header('Location: manager/transaction-detail.php');
+        } else if ($userRoleID == '1') {
+            header('Location: admin/');
+        }
+    } else if ($userType == 'customer') { // customer
+        header('Location: customer/');
+    }
+}
+// Gunakan selain halaman login
+function isNotSignedIn() {
+    $userID = $_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE;
+    if ($userID == FALSE) {
+        header('Location: '.BASEURL.'/app/login.php');
+    }
+}
 ?>
