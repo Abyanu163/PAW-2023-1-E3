@@ -3,6 +3,7 @@ require("../base.php");
 require('../fauth.php');
 require("../function.php");
 isNotSignedIn();
+whenIsNotCustomer();
 ?>
 
 <!DOCTYPE html>
