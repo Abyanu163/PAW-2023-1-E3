@@ -48,7 +48,9 @@ function hapusProduk($id)
     $stmt = $conn->prepare("DELETE FROM products WHERE  kodeProduk =:kodeProduk");
     $stmt->bindvalue(":kodeProduk", $id);
     $stmt->execute();
-    unlink('../../assets/img/product/' . $data[0]["gambarProduk"]);
+    if(file_exists("../../assets/img/product/{$data[0]["gambarProduk"]}")){
+        unlink('../../assets/img/product/' . $data[0]["gambarProduk"]);
+    }
     return $stmt->rowCount();
 }
 
