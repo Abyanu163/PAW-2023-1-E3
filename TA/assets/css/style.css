@@ -621,6 +621,7 @@ input[type=radio] {
 
 .error-msg {
   font-size: 0.8rem;
+  color: red;
   text-align: center;
 }
 
@@ -843,7 +844,7 @@ input[type=radio] {
   }
 
   .formin-container {
-    padding-bottom: 5rem;
+    /* padding-bottom: 5rem; */
   }
 
   .formin-container .input-field {
