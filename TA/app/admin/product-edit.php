@@ -10,7 +10,19 @@ $title = 'Edit Product';
 $data = selectData("SELECT * FROM products WHERE kodeProduk=$_GET[id]");
 $suplai = selectData("SELECT * FROM suplaier");
 $kategori = selectData("SELECT * FROM categories");
+
+// pemanggilan validasi
+$errors = [];
 if(isset($_POST["edit"])){
+    validAll($errors, $_POST);
+    validAlfa($errors, $_POST,"namaProduk");
+    validNum($errors, $_POST,"harga");
+    validNum($errors, $_POST,"stok");
+    validAlfaNum($errors, $_POST, "deskripsi");
+}
+
+// cek apakah sudah submit dan tidak ada yg error (validasi aman)
+if(isset($_POST["edit"]) && $errors==[]){
     if (editProduk($_POST)>0){
         echo "
         <script>
@@ -71,8 +83,9 @@ if(isset($_POST["edit"])){
 				<div class="form-element">
 					<div class="input-field">
 						<label for="nama">Nama Produk</label>
-						<input type="text" name="namaProduk" id="namaProduk" value="<?= $data[0]["namaProduk"] ?>">
+						<input type="text" name="namaProduk" id="namaProduk" value="<?php if(!isset($_POST["edit"])){echo $data[0]["namaProduk"];} else {echo $_POST["namaProduk"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"namaProduk");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
@@ -91,20 +104,23 @@ if(isset($_POST["edit"])){
 				<div class="form-element">
 					<div class="input-field">
 						<label for="harga">Harga</label>
-						<input type="text" name="harga" id="harga" value="<?= $data[0]["hargaProduk"] ?>">
+						<input type="text" name="harga" id="harga" value="<?php if(!isset($_POST["edit"])){echo $data[0]["hargaProduk"];} else {echo $_POST["harga"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"harga");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="stok">Stok</label>
-						<input type="text" name="stok" id="stok" value="<?= $data[0]["stokProduk"] ?>">
+						<input type="text" name="stok" id="stok" value="<?php if(!isset($_POST["edit"])){echo $data[0]["stokProduk"];} else {echo $_POST["stok"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"stok");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="deskripsi">Deskripsi</label>
-						<textarea name="deskripsi" id="deskripsi"><?= $data[0]["deskripsiProduk"] ?></textarea>
+						<textarea name="deskripsi" id="deskripsi"><?php if(!isset($_POST["edit"])){echo $data[0]["deskripsiProduk"];} else {echo $_POST["deskripsi"];}?></textarea>
 					</div>
+					<div class="error-msg"><?php cekError($errors,"deskripsi");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field button">

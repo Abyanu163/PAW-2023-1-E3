@@ -279,3 +279,54 @@ function validasiSesuatu_1($metodeKirim, $dalamIsian) { // ... fungsi validasi v
 			break;
 	}
 }
+
+/* VALIDASI */
+
+// Inputan tidak boleh kosong produk & supplier
+function validAll(&$errors, $arr){
+    $ket="Wajib diisi !!!";
+    foreach($arr as $key => $val){
+        if($val==""){
+            $errors[$key] = $ket;
+        }
+    }
+}
+
+// validasi alfa numerik produk & supplier
+function validAlfa(&$errors, $arr, $val){
+    $pattern = "/^(?=.*[a-zA-Z])[a-zA-Z ]+$/";
+    if (!preg_match($pattern, $arr[$val]) && $arr[$val]!=""){
+        $errors[$val] = "Inputan harus huruf (Alfabet) !!!";
+    }
+}
+
+// validasi numerik produk & supplier
+function validNum(&$errors, $arr, $val){
+    $pattern = "/^[0-9]+$/";
+    if (!preg_match($pattern, $arr[$val]) && $arr[$val]!=""){
+        $errors[$val] = "Inputan harus angka (jangan ada spasi dan '.') !!!";
+    }
+}
+
+// validasi Alfa numerik produk & supplier
+function validAlfaNum(&$errors, $arr, $val){
+    $pattern = "/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z \d]+$/";
+    if (!preg_match($pattern, $arr[$val]) && $arr[$val]!=""){
+        $errors[$val] = "Inputan harus huruf dan angka saja (tanpa simbol)!!!";
+    }
+}
+
+// validasi numerik length for no supplier
+function validNumLen(&$errors, $arr, $val){
+    $pattern = "/^[0-9]{10,13}+$/";
+    if (!preg_match($pattern, $arr[$val]) && $arr[$val]!=""){
+        $errors[$val] = "Inputan harus angka (awalan 0 bukan +62) (tanpa '-' dan 'spasi') (berjumlah  10-13 digit) !!!";
+    }
+}
+
+// mengecek error
+function cekError($errors,$val){
+    if(isset($errors[$val])){
+        echo $errors[$val];
+    }
+}
