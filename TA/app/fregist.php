@@ -81,7 +81,7 @@ function isOKRegistAdmin($inFailRegist, $PDO_USED, $adminusr, $adminpwd, $admint
         $stateExecute->bindValue(":adminusr", $adminusr);
         $stateExecute->bindValue(":adminpwd", $adminpwd);
         $stateExecute->execute();
-        header("Location: ".BASEURL."/app/admin/login.php");
+        header("Location: ".BASEURL."/app/login.php");
         return exit();
     }
 }
@@ -94,7 +94,7 @@ function isOKRegistCustomer($inFailRegist, $PDO_USED, $customerEmail, $customerp
         $stateExecute->bindValue(":bindVal2", $customerpwd);
         $stateExecute->bindValue(":bindVal3", $customerEmail);
         $stateExecute->execute();
-        header("Location: ".BASEURL."/app/customer/login.php");
+        header("Location: ".BASEURL."/app/login.php");
         return exit();
     }
 }

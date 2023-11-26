@@ -242,7 +242,8 @@ function checkAdminSignedIn() { // untuk admin
     if ($adminSignIn == 'customer') {
         header('Location: '.BASEURL.'/app/customer');
     } else if ($adminSignIn == FALSE) {
-        header('Location: '.BASEURL.'/app/login.php')
+        header('Location: '.BASEURL.'/app/login.php');
+    }
 }
 // Semisal nih untuk manajer
 function whenIsManager() {
