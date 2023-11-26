@@ -9,7 +9,18 @@ $title = 'Edit Supplier';
 <?php 
 $id=$_GET['id'];
 $data = selectData("SELECT * FROM suplaier WHERE kodeSuplaier = $id");
+
+// pemanggilan fungsi validasi dan disimpan di errors apabila tidak valid
+$errors = [];
 if(isset($_POST["edit"])){
+    validAll($errors, $_POST);
+    validAlfa($errors, $_POST,"nama");
+    validNumLen($errors, $_POST,"nomor");
+    validAlfaNum($errors, $_POST, "alamat");
+}
+
+// Pengecekan tombol submit sdh ditekan atau belum dan error kosong (valid)
+if(isset($_POST["edit"])  && $errors==[]){
     if(editSuplaier($_POST)>0){
         echo "<script>
         alert('suplaier Berhasil Diedit !!!');
@@ -36,20 +47,23 @@ if(isset($_POST["edit"])){
 				<div class="form-element">
 					<div class="input-field">
 						<label for="nama">Nama Supplier</label>
-						<input type="text" id="nama" name="nama" value="<?= $data[0]['namaSuplaier'] ?>">
+						<input type="text" id="nama" name="nama" value="<?php if(!isset($_POST["edit"])){echo $data[0]["namaSuplaier"];} else {echo $_POST["nama"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"nama");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="alamat">Alamat Supplier</label>
-						<input type="text" id="alamat" name="alamat" value="<?= $data[0]['alamatSuplaier'] ?>">
+						<input type="text" id="alamat" name="alamat" value="<?php if(!isset($_POST["edit"])){echo $data[0]["alamatSuplaier"];} else {echo $_POST["alamat"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"alamat");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="nomor">No. telp Supplier</label>
-						<input type="text" id="nomor" name="nomor" value="<?= $data[0]['telpSuplaier'] ?>">
+						<input type="text" id="nomor" name="nomor" value="<?php if(!isset($_POST["edit"])){echo $data[0]["telpSuplaier"];} else {echo $_POST["nomor"];}?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"nomor");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field button">

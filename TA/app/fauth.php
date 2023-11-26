@@ -59,11 +59,9 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/app/customer");
     } else {
-        return "<div>
-        <span style='color: red;'>Autentikasi gagal. Pastikan ingat surel dan kata sandi</span>
-        </div>
+        return "
         <div>
-        <span>Kehilangan kata sandi? <a href='".BASEURL."/app/customer/lostpwd.php'>Klik atau tekan tautan ini</a> untuk reset kata sandi.</span>
+        <span style='color: red;'>Autentikasi gagal. Akun ada tidak terdaftar</span>
         </div>";
     }
 }
@@ -283,5 +281,76 @@ function ADMIN_AUTH_SignOut() {
         header ('Location: '.BASEURL."/app/admin/login.php");
         return exit();
     };
+}
+// Gunakan yang cek sudah masuk akun di halaman login
+function isSignedIn() {
+    $userType = $_SESSION['userType'] ?? $_COOKIE['userType'] ?? FALSE; // Katakanlah tipe admin dan customer
+    $userRoleID = $_SESSION['userRoleID'] ?? $_COOKIE['userRoleID'] ?? FALSE; // Untuk tipe admin
+    if ($userType == 'admin') { // admin --> manajer (2) dan admin (1)
+        if ($userRoleID == '2') {
+            header('Location: manager/transaction-detail.php');
+        } else if ($userRoleID == '1') {
+            header('Location: admin/');
+        }
+    } else if ($userType == 'customer') { // customer
+        header('Location: customer/');
+    }
+}
+// Gunakan selain halaman login
+function isNotSignedIn() {
+    $userID = $_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE;
+    if ($userID == FALSE) {
+        header('Location: '.BASEURL.'/app/login.php');
+    }
+}
+// Autentikasi admin + customer
+function loginAuth($PDO_USED, $username, $password) {
+    $remember = $_POST['remember'] ?? FALSE; // Admin dulu --> admin + manajer
+    $stateExecuting = $PDO_USED->prepare("SELECT `karyawan`.`kodeJabatan`, `usernameKaryawan` FROM `karyawan`, `jabatan`
+    WHERE `karyawan`.`kodeJabatan` = `jabatan`.`kodeJabatan` AND `usernameKaryawan` = :bindVal1 AND `passwordKaryawan` = SHA2(:bindVal2, 256);");
+    $stateExecuting->bindValue("bindVal1" , $username);
+    $stateExecuting->bindValue("bindVal2" , $password);
+    $stateExecuting->execute();
+    $getUser = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+    $rowCount = $stateExecuting->rowCount();
+    if ($rowCount >= 1) {
+        // session_start();
+        $_SESSION['userID'] = $getUser[0]['usernameKaryawan'];
+        $_SESSION['userType'] = 'admin';
+        $_SESSION['userRoleID'] = $getUser[0]['kodeJabatan'];
+        if ($remember == 'on') {
+            setcookie("userID", $getUser[0]['usernameKaryawan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+            setcookie("userType", 'admin', time() + (60 * 60 * 24 * 30), "/");
+            setcookie("userRoleID", $getUser[0]['kodeJabatan'], time() + (60 * 60 * 24 * 30), "/");
+        }
+        $stateExecuting = NULL;
+        return header ("Location: ".$_SERVER['PHP_SELF']);
+    } else { // Baru di sini kalau nggak ketemu di sini sebagai pelanggan
+        $stateExecuting = $PDO_USED->prepare("SELECT `kodePelanggan` FROM `customers`
+        WHERE `usernamePelanggan` = :bindVal1 AND `passwordPelanggan` = SHA2( :bindVal2 , 256) ");
+        $stateExecuting->bindValue("bindVal1" , $username);
+        $stateExecuting->bindValue("bindVal2" , $password);
+        $stateExecuting->execute();
+        $getUser = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+        $rowCount = $stateExecuting->rowCount();
+        if ($rowCount >= 1) {
+            // session_start();
+            $_SESSION['userID'] = $getUser[0]['kodePelanggan'];
+            $_SESSION['userType'] = 'customer';
+            $_SESSION['userRoleID'] = 0;
+            if ($remember == 'on') {
+                setcookie("userID", $getUser[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+                setcookie("userType", 'customer', time() + (60 * 60 * 24 * 30), "/");
+                setcookie("userRoleID", 0, time() + (60 * 60 * 24 * 30), "/");
+            }
+            $stateExecuting = NULL;
+            return header ("Location: ".$_SERVER['PHP_SELF']);
+        } else {
+            return "
+            <div>
+            <span style='color: red;'>Autentikasi gagal. Coba ingat-ingat atau biasanya kan di simpan di pengelola masuk.</span>
+            </div>"; // Autentikasi gagal karena input.
+        }
+    }
 }
 ?>
