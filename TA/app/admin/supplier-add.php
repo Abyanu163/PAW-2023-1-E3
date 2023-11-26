@@ -7,57 +7,17 @@ $title = 'Add Supplier';
 <?php require_once 'templates/navbar.php' ?>
 
 <?php 
-$gagal = FALSE;
-?>
+// pemanggilan fungsi validasi dan disimpan di errors apabila tidak valid
+$errors = [];
+if(isset($_POST["tambah"])){
+    validAll($errors, $_POST);
+    validAlfa($errors, $_POST,"nama");
+    validNumLen($errors, $_POST,"no");
+    validAlfaNum($errors, $_POST, "alamat");
+}
 
-<section>
-	<div class="main-container">
-		<div class="formin-container">
-			<form action="" method="POST">
-				<div class="form-title">
-					<h2>Add Supplier</h2>
-				</div>
-				<div class="form-element">
-					<div class="input-field">
-						<label for="nama">Nama Supplier</label>
-						<input type="text" name="nama" id="nama" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['nama']);} ?>">
-					</div>
-					<div class="input-field">
-						<?php if ($_SERVER['REQUEST_METHOD'] == "POST") {echo(terisikan($_POST, "nama"));} ?>
-					</div>
-				</div>
-				<div class="form-element">
-					<div class="input-field">
-						<label for="alamat">Alamat Supplier</label>
-						<input type="text" name="alamat" id="alamat" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['alamat']);} ?>">
-					</div>
-					<div class="input-field">
-						<?php if ($_SERVER['REQUEST_METHOD'] == "POST") {echo(terisikan($_POST, "alamat"));} ?>
-					</div>
-				</div>
-				<div class="form-element">
-					<div class="input-field">
-						<label for="no">No. Telp Supplier</label>
-						<input type="text" name="no" id="no" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST['no']);} ?>">
-					</div>
-					<div class="input-field">
-						<?php if ($_SERVER['REQUEST_METHOD'] == "POST") {echo(terisikan($_POST, "no"));} ?>
-					</div>
-				</div>
-				<div class="form-element">
-					<div class="input-field button">
-						<button type="submit" name="tambah" value="Tambah">Add</button>
-						<button onclick="location.href='supplier-data.php'" type="button" class="cancel">Cancel</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-	</div>
-</section>
-
-<?php 
-if(isset($_POST["tambah"]) && $gagal == FALSE){
+// pengecekan apabila tombol submit ditekan dan validasi aman
+if(isset($_POST["tambah"]) && $errors==[]){
 	$tambah=tambahSuplaier($_POST);
 	if($tambah>0){
 			echo "<script>
@@ -71,4 +31,46 @@ if(isset($_POST["tambah"]) && $gagal == FALSE){
 			</script>";
 	}   
 }
-require_once 'templates/footer.php'; ?>
+?>
+
+<section>
+	<div class="main-container">
+		<div class="formin-container">
+			<form action="" method="POST">
+				<div class="form-title">
+					<h2>Add Supplier</h2>
+				</div>
+				<div class="form-element">
+					<div class="input-field">
+						<label for="nama">Nama Supplier</label>
+						<input type="text" name="nama" id="nama" value="<?php if (isset($_POST["tambah"])) {echo($_POST['nama']);} ?>">
+					</div>
+					<div class="error-msg"><?php cekError($errors,"nama");?></div>
+				</div>
+				<div class="form-element">
+					<div class="input-field">
+						<label for="alamat">Alamat Supplier</label>
+						<input type="text" name="alamat" id="alamat" value="<?php if (isset($_POST["tambah"])) {echo($_POST['alamat']);} ?>">
+					</div>
+					<div class="error-msg"><?php cekError($errors,"alamat");?></div>
+				</div>
+				<div class="form-element">
+					<div class="input-field">
+						<label for="no">No. Telp Supplier</label>
+						<input type="text" name="no" id="no" value="<?php if (isset($_POST["tambah"])) {echo($_POST['no']);} ?>">
+					</div>
+					<div class="error-msg"><?php cekError($errors,"no");?></div>
+				</div>
+				<div class="form-element">
+					<div class="input-field button">
+						<button type="submit" name="tambah" value="Tambah">Add</button>
+						<button onclick="location.href='supplier-data.php'" type="button" class="cancel">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</section>
+
+<?php require_once 'templates/footer.php'; ?>
