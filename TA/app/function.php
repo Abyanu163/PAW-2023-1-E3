@@ -233,6 +233,51 @@ function addPembayaran($kodePesanan, $metode)
     return $stmt->rowCount();
 }
 
+// ADD WALLET
+function addWallet($kodePelanggan) {
+    global $conn;
+    $stmt = $conn->prepare(
+        "INSERT INTO wallet (kodePelanggan, namaWallet)
+        VALUES (:kodePelanggan, 'DANA'), (:kodePelanggan, 'GOPAY'), (:kodePelanggan, 'OVO')"
+    );
+    $stmt->bindValue(":kodePelanggan", $kodePelanggan);
+    $stmt->execute();
+}
+
+// EDIT WALLET
+function editWallet($kodePelanggan, $nomorDana, $nomorGopay, $nomorOvo) {
+    global $conn;
+
+    if($nomorDana) {
+        $stmt = $conn->prepare(
+            "UPDATE wallet 
+            SET nomorWallet = '$nomorDana'
+            WHERE namaWallet = 'DANA' AND kodePelanggan = '$kodePelanggan'"
+        );
+        $stmt->execute();
+    }
+
+    if($nomorGopay) {
+        $stmt = $conn->prepare(
+            "UPDATE wallet 
+            SET nomorWallet = '$nomorGopay'
+            WHERE namaWallet = 'GOPAY' AND kodePelanggan = '$kodePelanggan'"
+        );
+        $stmt->execute();
+    }
+
+    if($nomorOvo) {
+        $stmt = $conn->prepare(
+            "UPDATE wallet 
+            SET nomorWallet = '$nomorOvo'
+            WHERE namaWallet = 'OVO' AND kodePelanggan = '$kodePelanggan'"
+        );
+        $stmt->execute();
+    }
+
+    header('location: profil.php');
+}
+
 
 // Mengabsahan / validasi suatu data
 function terisikan($metodeKirim, $dalamIsian) { // Apakah sudah terisi?

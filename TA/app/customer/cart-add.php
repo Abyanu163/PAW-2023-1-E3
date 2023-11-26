@@ -55,7 +55,7 @@ if ($cek == []) {
       <h2>Jumlah Produk:</h2>
       <form action="" method="post">
         <!-- Product List -->
-        <div class="card-list grid">
+        <div class="card-list flex">
           <div class="card">
             <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $produk[0]['gambarProduk'] ?>);"></div>
             <div class="card-desc cart">

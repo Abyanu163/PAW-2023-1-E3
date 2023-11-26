@@ -87,6 +87,12 @@ section#deskripsi-toko p {
   min-height: 800px;
 }
 
+.main-container.profil {
+  display: flex;
+  justify-content: space-around;
+  min-height: 600px;
+}
+
 .search {
   padding: 1rem 0;
   margin-bottom: 1rem;
@@ -137,7 +143,7 @@ section#deskripsi-toko p {
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .card {
@@ -358,7 +364,8 @@ section#deskripsi-toko p {
   margin-bottom: 0.5rem;
 }
 
-.payment select {
+.payment select,
+.payment input {
   display: block;
   background-color: #ccc;
   width: 100%;
@@ -367,6 +374,11 @@ section#deskripsi-toko p {
   outline: 0;
   border-radius: 0.5rem;
   font-size: 1rem;
+  box-sizing: content-box;
+}
+
+.payment input {
+  font-size: 0.8rem;
 }
 
 .payment button {
@@ -378,10 +390,16 @@ section#deskripsi-toko p {
   border-radius: 0.5rem;
   margin-top: 1rem;
   font-size: 1rem;
+  box-sizing: content-box;
 }
 
 .payment button:hover {
   filter: brightness(80%);
+}
+
+.payment button.disabled {
+  filter: brightness(80%);
+  cursor: not-allowed;
 }
 
 /* == TABLE == */
@@ -778,7 +796,8 @@ input[type=radio] {
     margin-top: 1rem;
   }
 
-  .payment select {
+  .payment select,
+  .payment input {
     width: 30%;
   }
   
@@ -844,7 +863,7 @@ input[type=radio] {
   }
 
   .formin-container {
-    /* padding-bottom: 5rem; */
+    padding-bottom: 2rem;
   }
 
   .formin-container .input-field {

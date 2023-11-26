@@ -48,7 +48,7 @@ if(isset($_GET['search'])) {
 		</form>
 
 		<div class="card-container">
-			<h2>Product List:</h2>
+			<h2>List Produk:</h2>
 
 			<!-- Product List -->
 			<div class="card-list grid">

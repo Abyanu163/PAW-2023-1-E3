@@ -8,17 +8,24 @@ session_start();
 <?php require_once 'templates/navbar.php' ?>
 
 
-<?php 
-$data=selectData("SELECT * FROM orders o
+<?php
+$data = selectData("SELECT * FROM orders o
 JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
 JOIN products p ON (od.kodeProduk=p.kodeProduk)
 WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 ");
+
+$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION['kodePelanggan']}");
+if(empty($wallet)) {
+	addWallet($_SESSION['kodePelanggan']);
+}
+
+$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION["kodePelanggan"]} AND nomorWallet <> ''");
 ?>
 
-<?php 
-if(isset($_POST['pay'])) {
-	if(addPembayaran($data[0]['kodePesanan'], $_POST['payment-method'])) {
+<?php
+if (isset($_POST['bayar'])) {
+	if (addPembayaran($data[0]['kodePesanan'], $_POST['metode'])) {
 		echo "
     <script>
     alert('Pembayaran Berhasil');
@@ -32,39 +39,39 @@ if(isset($_POST['pay'])) {
     </script>
     ";
 	}
-
 }
 ?>
 
 <section>
 	<div class="main-container">
 		<div class="card-container">
-			<h2>Check Out:</h2>
+			<h2>Pembayaran:</h2>
 
 			<!-- Product List -->
 			<div class="card-list checkout">
-				<?php 
-				$totalHarga = 0; 
+				<?php
+				$totalHarga = 0;
 				$jumlahBarang = 0;
+				// var_dump($wallet);
 				?>
-				<?php foreach($data as $ch): ?>
-				<div class="card">
-					<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
-					<div class="card-desc checkout">
-						<h3><?= $ch["namaProduk"] ?></h3>
-						<p class="prod-desc"><?= $ch["deskripsiProduk"] ?></p>
-					</div>
-					<div class="act-product">
-						<p class="prod-price"><?= $ch["subHarga"] ?></p>
-						<div class="amount-product">
-							Quantity: <?= $ch["qty"] ?>
+				<?php foreach ($data as $ch) : ?>
+					<div class="card">
+						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
+						<div class="card-desc checkout">
+							<h3><?= $ch["namaProduk"] ?></h3>
+							<p class="prod-desc"><?= $ch["deskripsiProduk"] ?></p>
+						</div>
+						<div class="act-product">
+							<p class="prod-price"><?= $ch["subHarga"] ?></p>
+							<div class="amount-product">
+								Quantity: <?= $ch["qty"] ?>
+							</div>
 						</div>
 					</div>
-				</div>
-				<?php 
-				$totalHarga += (int)$ch["subHarga"];
-				$jumlahBarang += (int)$ch['qty'];
-				?>
+					<?php
+					$totalHarga += (int)$ch["subHarga"];
+					$jumlahBarang += (int)$ch['qty'];
+					?>
 				<?php endforeach; ?>
 
 			</div>
@@ -75,13 +82,24 @@ if(isset($_POST['pay'])) {
 			<div class="payment">
 				<h3>Jumlah Barang: <?= $totalHarga; ?></h3>
 				<h3>Total Bayar: <?= $jumlahBarang; ?></h3>
-				<label for="payment-method">Payment Method:</label>
-				<select name="payment-method" id="payment-method">
-					<option value="DANA">DANA</option>
-					<option value="GOPAY">GOPAY</option>
-					<option value="COD">COD</option>
-				</select>
-				<button type="submit" name="pay">Pay</button>
+				<label for="payment-method">Metode Pembayaran:</label>
+				<?php if(empty($wallet)){ ?>
+					<input type="text" value="Anda belum memiliki wallet, tambahkan melalui halaman profil" disabled >
+				<?php } else { ?>
+					<select name="metode" id="metode">
+						<?php foreach ($wallet as $w) {
+							if ($w['namaWallet'] == $data[0]['metode']) { ?>
+								<option value="<?= $w['namaWallet'] ?>"><?= $w['namaWallet'] ?></option>
+						<?php }
+						} ?>
+						<?php foreach ($wallet as $w) {
+							if ($w['namaWallet'] != $data[0]['metode']) { ?>
+								<option value="<?= $w['namaWallet'] ?>"><?= $w['namaWallet'] ?></option>
+						<?php }
+						} ?>
+					</select>
+				<?php } ?>
+				<button type="submit" name="bayar" <?= (empty($wallet)) ? 'class="disabled" disabled' : '' ?>>Bayar</button>
 			</div>
 		</form>
 	</div>

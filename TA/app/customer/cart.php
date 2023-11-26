@@ -20,7 +20,7 @@ WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
 	<div class="main-container">
 
 		<div class="card-container">
-			<h2>Product List:</h2>
+			<h2>List Pesanan:</h2>
 
 			<!-- Product List -->
 			<div class="card-list flex">

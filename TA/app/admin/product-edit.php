@@ -57,11 +57,11 @@ if(isset($_POST["edit"]) && $errors==[]){
 								<?php foreach($kategori as $ch){
 										if($ch["kodeKategori"]==$data[0]["kodeKategori"]){?>
 												<option value="<?= $ch["kodeKategori"] ?>"><?= $ch["namaKategori"] ?></option>
-										<?php }}?>
-										<?php foreach($kategori as $ch){
+								<?php }}?>
+								<?php foreach($kategori as $ch){
 										if($ch["kodeKategori"]!=$data[0]["kodeKategori"]){?>
 												<option value="<?= $ch["kodeKategori"] ?>"><?= $ch["namaKategori"] ?></option>
-										<?php }}?>
+								<?php }}?>
 						</select>
 					</div>
 				</div>
