@@ -59,11 +59,9 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/app/customer");
     } else {
-        return "<div>
-        <span style='color: red;'>Autentikasi gagal. Pastikan ingat surel dan kata sandi</span>
-        </div>
+        return "
         <div>
-        <span>Kehilangan kata sandi? <a href='".BASEURL."/app/customer/lostpwd.php'>Klik atau tekan tautan ini</a> untuk reset kata sandi.</span>
+        <span style='color: red;'>Autentikasi gagal. Akun ada tidak terdaftar</span>
         </div>";
     }
 }
