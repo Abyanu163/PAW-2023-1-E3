@@ -30,6 +30,7 @@ $data = selectData(
 						<th>Metode Pembayaran</th>
 						<th>Total</th>
 						<th>Detail</th>
+						<th>Aksi</th>
 					</tr>
 					<?php foreach($data as $ch): ?>
 						<tr>
@@ -37,6 +38,13 @@ $data = selectData(
 							<td><?= $ch['metode'] ?></td>
 							<td><?= $ch['total'] ?></td>
 							<td><a href="<?= BASEURL ?>/app/customer/transaction-detail.php?kodePesanan=<?= $ch['kodePesanan'] ?>">detail</a></td>
+							<td>
+								<div class="act-product">
+									<a href="<?= BASEURL  ?>/app/customer/transaction-edit.php?id=<?= $ch["kodePembayaran"]?>" class="prod-button">
+										<img src="<?= BASEURL  ?>/assets/img/edit.png" alt="cart">
+									</a>
+								</div>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 				</table>

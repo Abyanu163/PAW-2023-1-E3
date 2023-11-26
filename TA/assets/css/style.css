@@ -843,7 +843,7 @@ input[type=radio] {
   }
 
   .formin-container {
-    padding-bottom: 5rem;
+    /* padding-bottom: 5rem; */
   }
 
   .formin-container .input-field {
