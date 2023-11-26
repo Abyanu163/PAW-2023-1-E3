@@ -303,4 +303,54 @@ function isNotSignedIn() {
         header('Location: '.BASEURL.'/app/login.php');
     }
 }
+// Autentikasi admin + customer
+function loginAuth($PDO_USED, $username, $password) {
+    $remember = $_POST['remember'] ?? FALSE; // Admin dulu --> admin + manajer
+    $stateExecuting = $PDO_USED->prepare("SELECT `karyawan`.`kodeJabatan`, `usernameKaryawan` FROM `karyawan`, `jabatan`
+    WHERE `karyawan`.`kodeJabatan` = `jabatan`.`kodeJabatan` AND `usernameKaryawan` = :bindVal1 AND `passwordKaryawan` = SHA2(:bindVal2, 256);");
+    $stateExecuting->bindValue("bindVal1" , $username);
+    $stateExecuting->bindValue("bindVal2" , $password);
+    $stateExecuting->execute();
+    $getUser = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+    $rowCount = $stateExecuting->rowCount();
+    if ($rowCount >= 1) {
+        // session_start();
+        $_SESSION['userID'] = $getUser[0]['usernameKaryawan'];
+        $_SESSION['userType'] = 'admin';
+        $_SESSION['userRoleID'] = $getUser[0]['kodeJabatan'];
+        if ($remember == 'on') {
+            setcookie("userID", $getUser[0]['usernameKaryawan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+            setcookie("userType", 'admin', time() + (60 * 60 * 24 * 30), "/");
+            setcookie("userRoleID", $getUser[0]['kodeJabatan'], time() + (60 * 60 * 24 * 30), "/");
+        }
+        $stateExecuting = NULL;
+        return header ("Location: ".$_SERVER['PHP_SELF']);
+    } else { // Baru di sini kalau nggak ketemu di sini sebagai pelanggan
+        $stateExecuting = $PDO_USED->prepare("SELECT `kodePelanggan` FROM `customers`
+        WHERE `usernamePelanggan` = :bindVal1 AND `passwordPelanggan` = SHA2( :bindVal2 , 256) ");
+        $stateExecuting->bindValue("bindVal1" , $username);
+        $stateExecuting->bindValue("bindVal2" , $password);
+        $stateExecuting->execute();
+        $getUser = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+        $rowCount = $stateExecuting->rowCount();
+        if ($rowCount >= 1) {
+            // session_start();
+            $_SESSION['userID'] = $getUser[0]['kodePelanggan'];
+            $_SESSION['userType'] = 'customer';
+            $_SESSION['userRoleID'] = 0;
+            if ($remember == 'on') {
+                setcookie("userID", $getUser[0]['kodePelanggan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+                setcookie("userType", 'customer', time() + (60 * 60 * 24 * 30), "/");
+                setcookie("userRoleID", 0, time() + (60 * 60 * 24 * 30), "/");
+            }
+            $stateExecuting = NULL;
+            return header ("Location: ".$_SERVER['PHP_SELF']);
+        } else {
+            return "
+            <div>
+            <span style='color: red;'>Autentikasi gagal. Coba ingat-ingat atau biasanya kan di simpan di pengelola masuk.</span>
+            </div>"; // Autentikasi gagal karena input.
+        }
+    }
+}
 ?>
