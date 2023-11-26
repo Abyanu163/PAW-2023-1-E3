@@ -28,12 +28,12 @@ function adminAuth($PDO_USED, $adminusr, $adminpwd) { // Autentikasi untuk admin
     $stateExecuting->bindValue("bindVal1" , $adminusr);
     $stateExecuting->bindValue("bindVal2" , $adminpwd);
     $stateExecuting->execute();
-    $roleCode = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+    $userRoleID = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
     $rowCount = $stateExecuting->rowCount();
     if ($rowCount >= 1) {
         // session_start();
         $_SESSION['adminSignIn'] = TRUE;
-        $_SESSION['roleCode'] = $roleCode[0]['kodeJabatan'];
+        $_SESSION['userRoleID'] = $userRoleID[0]['kodeJabatan'];
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/app/admin/");
     } else {
@@ -238,48 +238,39 @@ function checkSignedIn() { // untuk pelanggan
     }
 }
 function checkAdminSignedIn() { // untuk admin
-    $adminSignIn = $_SESSION['adminSignIn'] ?? false;
-    if ($adminSignIn == FALSE) {
-        header('Location: '.BASEURL.'/app/admin/login.php');
-    }
+    $adminSignIn = $_SESSION['userType'] ?? false;
+    if ($adminSignIn == 'customer') {
+        header('Location: '.BASEURL.'/app/customer');
+    } else if ($adminSignIn == FALSE) {
+        header('Location: '.BASEURL.'/app/login.php')
 }
 // Semisal nih untuk manajer
 function whenIsManager() {
-    $roleCode = $_SESSION['roleCode'] ?? false;
-    if ($roleCode == 2) {
-        header('Location: '.BASEURL.'/app/manager');
+    $userRoleID = $_SESSION['userRoleID'] ?? false;
+    if ($userRoleID == 2) {
+        header('Location: '.BASEURL.'/app/login.php');
     }
 }
 // Jika bukan untuk manajer
 function whenIsNOTManager() {
-    $roleCode = $_SESSION['roleCode'] ?? false;
-    if ($roleCode != 2) {
-        header('Location: '.BASEURL.'/app/admin');
+    $userRoleID = $_SESSION['userRoleID'] ?? false;
+    if ($userRoleID != 2) {
+        header('Location: '.BASEURL.'/app/login.php');
     }
 }
 
 // Keluar dari akun ...
 function signOut () {
-    $signOut = $_GET['authSign'] ?? false;
+    $signOut = $_GET['Chongyun_x_REA_ATUH'] ?? false;
     if ($signOut == 'Redirect_Sign_Out_Enabled') {
-        unset($_SESSION['signedIn']);
         unset($_SESSION['userID']);
-        unset($_SESSION['kodePelanggan']);
+        unset($_SESSION['userType']);
+        unset($_SESSION['userRoleID']);
         setcookie("userID", "", time() - 9999, "/");
-        setcookie("userIDSaved", "", time() - 9999, "/");
+        setcookie("userType", "", time() - 9999, "/");
+        setcookie("userRoleID", "", time() - 9999, "/");
         session_destroy();
-        header ('Location: '.BASEURL. '/app');
-        return exit();
-    };
-}
-function ADMIN_AUTH_SignOut() {
-    $signOut = $_GET['ADMIN_AUTH'] ?? false;
-    if ($signOut == 'Redirect_Sign_Out_Enabled') {
-        unset($_SESSION['adminSignIn']);
-        unset($_SESSION['kodeKaryawan']);
-        unset($_SESSION['roleCode']);
-        header ('Location: '.BASEURL."/app/admin/login.php");
-        return exit();
+        return header ('Location: '.BASEURL. '/app');
     };
 }
 // Gunakan yang cek sudah masuk akun di halaman login
