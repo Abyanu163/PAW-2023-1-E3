@@ -4,6 +4,8 @@ require("../base.php");
 require("../fauth.php");
 require("../function.php");
 isNotSignedIn();
+checkAdminSignedIn();
+whenIsManager();
 ?>
 
 <!DOCTYPE html>

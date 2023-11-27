@@ -28,12 +28,12 @@ function adminAuth($PDO_USED, $adminusr, $adminpwd) { // Autentikasi untuk admin
     $stateExecuting->bindValue("bindVal1" , $adminusr);
     $stateExecuting->bindValue("bindVal2" , $adminpwd);
     $stateExecuting->execute();
-    $roleCode = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
+    $userRoleID = $stateExecuting->fetchAll(PDO::FETCH_ORI_FIRST);
     $rowCount = $stateExecuting->rowCount();
     if ($rowCount >= 1) {
         // session_start();
         $_SESSION['adminSignIn'] = TRUE;
-        $_SESSION['roleCode'] = $roleCode[0]['kodeJabatan'];
+        $_SESSION['userRoleID'] = $userRoleID[0]['kodeJabatan'];
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/app/admin/");
     } else {
@@ -237,49 +237,49 @@ function checkSignedIn() { // untuk pelanggan
         }
     }
 }
+// Tentang admin --> karyawan dan manajer
 function checkAdminSignedIn() { // untuk admin
-    $adminSignIn = $_SESSION['adminSignIn'] ?? false;
-    if ($adminSignIn == FALSE) {
-        header('Location: '.BASEURL.'/app/admin/login.php');
+    $userType = $_SESSION['userType'] ?? $_COOKIE['userType'] ?? false;
+    if ($userType == 'customer') {
+        header('Location: '.BASEURL.'/app/customer');
+    } else if ($userType == FALSE) {
+        header('Location: '.BASEURL.'/app/login.php');
+    }
+}
+// Bukan pelanggan?
+function whenIsNotCustomer() {
+    $userType = $_SESSION['userType'] ?? $_COOKIE['userType'] ?? FALSE;
+    if ($userType == 'admin' OR $userType == FALSE) {
+        header('Location: '.BASEURL.'/app/login.php');
     }
 }
 // Semisal nih untuk manajer
 function whenIsManager() {
-    $roleCode = $_SESSION['roleCode'] ?? false;
-    if ($roleCode == 2) {
-        header('Location: '.BASEURL.'/app/manager');
+    $userRoleID = $_SESSION['userRoleID'] ?? $_COOKIE['userRoleID'] ?? false;
+    if ($userRoleID == "2") {
+        header('Location: '.BASEURL.'/app/login.php');
     }
 }
 // Jika bukan untuk manajer
 function whenIsNOTManager() {
-    $roleCode = $_SESSION['roleCode'] ?? false;
-    if ($roleCode != 2) {
-        header('Location: '.BASEURL.'/app/admin');
+    $userRoleID = $_SESSION['userRoleID'] ?? $_COOKIE['userRoleID'] ?? false;
+    if ($userRoleID != "2") {
+        header('Location: '.BASEURL.'/app/login.php');
     }
 }
 
 // Keluar dari akun ...
 function signOut () {
-    $signOut = $_GET['authSign'] ?? false;
+    $signOut = $_GET['Chongyun_x_REA_ATUH'] ?? false;
     if ($signOut == 'Redirect_Sign_Out_Enabled') {
-        unset($_SESSION['signedIn']);
         unset($_SESSION['userID']);
-        unset($_SESSION['kodePelanggan']);
+        unset($_SESSION['userType']);
+        unset($_SESSION['userRoleID']);
         setcookie("userID", "", time() - 9999, "/");
-        setcookie("userIDSaved", "", time() - 9999, "/");
+        setcookie("userType", "", time() - 9999, "/");
+        setcookie("userRoleID", "", time() - 9999, "/");
         session_destroy();
-        header ('Location: '.BASEURL. '/app');
-        return exit();
-    };
-}
-function ADMIN_AUTH_SignOut() {
-    $signOut = $_GET['ADMIN_AUTH'] ?? false;
-    if ($signOut == 'Redirect_Sign_Out_Enabled') {
-        unset($_SESSION['adminSignIn']);
-        unset($_SESSION['kodeKaryawan']);
-        unset($_SESSION['roleCode']);
-        header ('Location: '.BASEURL."/app");
-        return exit();
+        return header ('Location: '.BASEURL. '/app');
     };
 }
 // Gunakan yang cek sudah masuk akun di halaman login
@@ -306,7 +306,7 @@ function isNotSignedIn() {
 // Autentikasi admin + customer
 function loginAuth($PDO_USED, $username, $password) {
     $remember = $_POST['remember'] ?? FALSE; // Admin dulu --> admin + manajer
-    $stateExecuting = $PDO_USED->prepare("SELECT `karyawan`.`kodeJabatan`, `usernameKaryawan` FROM `karyawan`, `jabatan`
+    $stateExecuting = $PDO_USED->prepare("SELECT `karyawan`.`kodeJabatan`, `kodeKaryawan` FROM `karyawan`, `jabatan`
     WHERE `karyawan`.`kodeJabatan` = `jabatan`.`kodeJabatan` AND `usernameKaryawan` = :bindVal1 AND `passwordKaryawan` = SHA2(:bindVal2, 256);");
     $stateExecuting->bindValue("bindVal1" , $username);
     $stateExecuting->bindValue("bindVal2" , $password);
@@ -315,11 +315,11 @@ function loginAuth($PDO_USED, $username, $password) {
     $rowCount = $stateExecuting->rowCount();
     if ($rowCount >= 1) {
         // session_start();
-        $_SESSION['userID'] = $getUser[0]['usernameKaryawan'];
+        $_SESSION['userID'] = $getUser[0]['kodeKaryawan'];
         $_SESSION['userType'] = 'admin';
         $_SESSION['userRoleID'] = $getUser[0]['kodeJabatan'];
         if ($remember == 'on') {
-            setcookie("userID", $getUser[0]['usernameKaryawan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
+            setcookie("userID", $getUser[0]['kodeKaryawan'], time() + (60 * 60 * 24 * 30), "/"); // 60 dtk, 60 mnt, 24 jam, 30 hari
             setcookie("userType", 'admin', time() + (60 * 60 * 24 * 30), "/");
             setcookie("userRoleID", $getUser[0]['kodeJabatan'], time() + (60 * 60 * 24 * 30), "/");
         }

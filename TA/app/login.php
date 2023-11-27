@@ -39,7 +39,7 @@ include('templates/header.php');
 					</div>
 				</div>
 				<div class="account-link">
-					<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {loginAuth(PDO_Connect, $_POST['username'], $_POST['passwd']);} ?>
+					<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(loginAuth(PDO_Connect, $_POST['username'], $_POST['passwd']));} ?>
 				</div>
 				<div class="account-link">
 					Tidak punya akun pelanggan?

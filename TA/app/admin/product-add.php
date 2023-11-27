@@ -7,8 +7,27 @@ $title = 'Add Product';
 <?php require_once 'templates/navbar.php' ?>
 
 <?php 
-$gagal = FALSE;
 $data=selectData("SELECT * FROM suplaier");
+
+// pemanggilan validasi
+$errors = [];
+if(isset($_POST["tambah"])){
+    validAll($errors, $_POST);
+    validAlfa($errors, $_POST,"namaProduk");
+    validNum($errors, $_POST,"harga");
+    validNum($errors, $_POST,"stok");
+    validAlfaNum($errors, $_POST, "deskripsi");
+}
+
+// pengecekan apakah tombol submit ditekan dan valisasi aman
+if(isset($_POST["tambah"]) && $errors==[]){
+	tambahProduk($_POST);
+	echo "<script>
+	alert('Data berhasil diupload');
+	window.location.href='product-data.php';
+	</script>";
+	exit();
+}
 ?>
 
 <section>
@@ -44,6 +63,7 @@ $data=selectData("SELECT * FROM suplaier");
 					<label for="namaProduk">Nama Produk</label>
         			<input type="text" name="namaProduk" id="namaProduk" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["namaProduk"]);} ?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"namaProduk");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
@@ -56,18 +76,21 @@ $data=selectData("SELECT * FROM suplaier");
 						<label for="harga">Harga Produk</label>
 						<input type="text" name="harga" id="harga" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["harga"]);} ?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"harga");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="stok">Stok Produk</label>
 						<input type="text" name="stok" id="stok" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["stok"]);} ?>">
 					</div>
+					<div class="error-msg"><?php cekError($errors,"stok");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="deskripsi">Deskripsi</label>
 						<textarea name="deskripsi" id="deskripsi"><?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo($_POST["deskripsi"]);} ?></textarea>
 					</div>
+					<div class="error-msg"><?php cekError($errors,"deskripsi");?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field button">
@@ -81,13 +104,4 @@ $data=selectData("SELECT * FROM suplaier");
 	</div>
 </section>
 
-<?php 
-if(isset($_POST["tambah"]) && $gagal == FALSE){
-	tambahProduk($_POST);
-	echo "<script>
-	alert('Data berhasil diupload');
-	window.location.href='product-data.php';
-	</script>";
-	exit();
-}
-require_once 'templates/footer.php'; ?>
+<?php require_once 'templates/footer.php'; ?>
