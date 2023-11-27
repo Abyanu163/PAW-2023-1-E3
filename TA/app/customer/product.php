@@ -12,7 +12,7 @@ $data = selectData(
 	"SELECT * FROM products p
 	JOIN categories c ON (p.kodeKategori = c.kodeKategori)"
 );
-$keranjang = selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['kodePelanggan']} AND keterangan='belum'");
+$keranjang = selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['userID']} AND keterangan='belum'");
 
 if(isset($_GET['kategori'])) {
 	$data = selectData(
