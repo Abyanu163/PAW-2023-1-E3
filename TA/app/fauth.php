@@ -278,7 +278,7 @@ function ADMIN_AUTH_SignOut() {
         unset($_SESSION['adminSignIn']);
         unset($_SESSION['kodeKaryawan']);
         unset($_SESSION['roleCode']);
-        header ('Location: '.BASEURL."/app/admin/login.php");
+        header ('Location: '.BASEURL."/app");
         return exit();
     };
 }
