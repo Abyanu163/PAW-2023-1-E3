@@ -13,8 +13,8 @@ $title = 'Halaman Utama'
   </div>
 
   <div class="link-login">
-    <a href="<?= BASEURL ?>/app/customer/">Login Customer</a>
-    <a href="<?= BASEURL ?>/app/admin/">Login Karyawan</a>
+    <a href="<?= BASEURL ?>/app/login.php">Login</a>
+    <!-- <a href="<?= BASEURL ?>/app/admin/">Login Karyawan</a> -->
   </div>
 
 </section>

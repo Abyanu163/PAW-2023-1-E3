@@ -24,19 +24,15 @@ if(isset($_POST["edit"])){
 // cek apakah sudah submit dan tidak ada yg error (validasi aman)
 if(isset($_POST["edit"]) && $errors==[]){
     if (editProduk($_POST)>0){
-        echo "
-        <script>
-            alert('Data Berhasil Diubah !!!');
-            document.location.href='product-data.php';
-        </script>
-        ";
+				echo '<div class="popup">
+					<span class="success">Data berhasil diubah</span>
+				</div>';
+				header('Refresh: 3, url=product-data.php');
     } else{
-        echo "
-        <script>
-            alert('Data Gagal Diubah !!!');
-            document.location.href='product-data.php';
-        </script>
-        ";
+				echo '<div class="popup">
+					<span class="danger">Data gagal diubah</span>
+				</div>';
+				header('Refresh: 3, url=product-data.php');
     };
 }
 ?>

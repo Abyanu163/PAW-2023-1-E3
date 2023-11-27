@@ -8,12 +8,14 @@ if(hapusOrderDetil($_GET["idProduk"],$_GET["idPesanan"])>0){
     document.location.href='cart.php';
     </script>
     ";
+    echo '<div class="popup">
+            <span class="success">Barang berhasil dihapus</span>
+        </div>';
+    header('Refresh: 3, url=cart.php');
 } else{
-    echo "
-    <script>
-    alert('Pesanan gagal dihapus !!!!');
-    document.location.href='cart.php';
-    </script>
-    ";
+    echo '<div class="popup">
+            <span class="danger">Barang gagal dihapus</span>
+        </div>';
+    header('Refresh: 3, url=cart.php');
 }
 ?>

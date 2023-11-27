@@ -22,12 +22,11 @@ if(isset($_POST["tambah"])){
 // pengecekan apakah tombol submit ditekan dan valisasi aman
 if(isset($_POST["tambah"]) && $errors==[]){
 	tambahProduk($_POST);
-	echo "<script>
-	alert('Data berhasil diupload');
-	window.location.href='product-data.php';
-	</script>";
-	exit();
-}
+	echo '<div class="popup">
+					<span class="success">Data berhasil ditambahkan</span>
+				</div>';
+	header('Refresh: 3');
+} 
 ?>
 
 <section>
@@ -94,7 +93,7 @@ if(isset($_POST["tambah"]) && $errors==[]){
 				</div>
 				<div class="form-element">
 					<div class="input-field button">
-						<button type="submit" value="Tambah" name="tambah">Add</button>
+						<button type="submit" value="tambah" name="tambah">Add</button>
 						<button onclick="location.href='product-data.php'" type="button" class="cancel">Cancel</button>
 					</div>
 				</div>

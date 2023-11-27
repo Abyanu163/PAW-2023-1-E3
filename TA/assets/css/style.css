@@ -30,7 +30,7 @@ section#homepage {
 .link-login {
   margin-top: 50px;
   display: flex;
-  width: 380px;
+  width: 250px;
   justify-content: space-between;
 }
 
@@ -38,7 +38,7 @@ section#homepage {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  width: 100%;
   height: 50px;
   border-radius: 10px;
   background-color: var(--success);
@@ -52,7 +52,7 @@ section#homepage {
 }
 
 section#deskripsi-toko {
-  padding: 5rem 0 10rem;
+  padding: 6rem 0 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,7 +74,6 @@ section#deskripsi-toko p {
   text-align: justify;
   margin-bottom: 1rem;
 }
-
 
 /* == MAIN == */
 /* == Product, Categories, Payment, Cart == */
@@ -648,6 +647,39 @@ input[type=radio] {
   text-align: center;
 }
 
+/* == POPUP == */
+.popup {
+  width: fit-content;
+  padding: 0.8rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.7rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  animation: popup ease 0.5s;
+}
+
+.popup span {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 0.6rem;
+}
+
+.popup span.success {
+  background-color: var(--success);
+}
+
+.popup span.danger {
+  background-color: var(--danger);
+}
 
 /* == CHART == */
 .chart-container {
@@ -687,7 +719,7 @@ input[type=radio] {
 
   .card-list.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 0.5rem;
     justify-items: center;
     justify-content: start;
@@ -716,9 +748,10 @@ input[type=radio] {
 
   .card {
     padding: 0.8rem;
-    min-width: 180px;
+    min-width: 160px;
     max-width: 210px;
     flex-direction: column;
+    margin: 0;
   }
 
   .card-pict {
@@ -879,4 +912,13 @@ input[type=radio] {
     width: 28rem;
   }
 
+}
+
+@keyframes popup {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 6rem;
+  }
 }

@@ -61,7 +61,6 @@ $data = selectData(
 <?php
 $labelChart = [];
 $valueChart = [];
-$penjualan = 0;
 
 $year = date('Y');
 $month =  date('m');
@@ -84,6 +83,7 @@ foreach ($data as $ch) :
 endforeach;
 
 $i = 0;
+$penjualan = 0;
 foreach ($data as $ch) :
 	$waktu = explode(' ', $ch['waktuBayar'])[0];
 	if ($waktu == $labelChart[$i]) {
