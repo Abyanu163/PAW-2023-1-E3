@@ -159,12 +159,12 @@ function editSuplaier($data)
 function makeOrder($data)
 {
     global $conn;
-    $query = "SELECT * FROM orders WHERE kodePelanggan={$data['kodePelanggan']} AND keterangan='belum'";
+    $query = "SELECT * FROM orders WHERE kodePelanggan={$data['userID']} AND keterangan='belum'";
     $hasil = selectData($query);
     if ($hasil == []) {
         $stmt = $conn->prepare("INSERT INTO orders(kodePelanggan, keterangan)
                                 VALUES (:kode,:ket)");
-        $stmt->bindvalue(":kode", $data["kodePelanggan"]);
+        $stmt->bindvalue(":kode", $data["userID"]);
         $stmt->bindValue(":ket", "belum");
         $stmt->execute();
         return $stmt->rowCount();

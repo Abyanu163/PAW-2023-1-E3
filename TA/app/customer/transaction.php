@@ -11,7 +11,7 @@ session_start();
 $data = selectData(
 	"SELECT * FROM pembayaran p
 	JOIN orders o ON (p.kodePesanan = o.kodePesanan)
-	WHERE o.kodePelanggan = {$_SESSION["kodePelanggan"]} AND o.keterangan = 'sudah'
+	WHERE o.kodePelanggan = {$_SESSION["userID"]} AND o.keterangan = 'sudah'
 	;"
 );
 

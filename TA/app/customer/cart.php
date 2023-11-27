@@ -11,7 +11,7 @@ session_start();
 $data=selectData("SELECT * FROM orders o
 JOIN orderdetail od ON (o.kodePesanan=od.kodePesanan)
 JOIN products p ON (od.kodeProduk=p.kodeProduk)
-WHERE o.kodePelanggan={$_SESSION['kodePelanggan']} AND o.keterangan='belum'
+WHERE o.kodePelanggan={$_SESSION['userID']} AND o.keterangan='belum'
 ");
 
 ?>
