@@ -279,7 +279,7 @@ function editWallet($kodePelanggan, $nomorDana, $nomorGopay, $nomorOvo) {
         $stmt->execute();
     }
 
-    header('location: profil.php');
+    header('Refresh:1');
 }
 
 

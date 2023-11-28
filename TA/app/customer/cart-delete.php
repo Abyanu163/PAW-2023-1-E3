@@ -2,12 +2,6 @@
 require "../function.php";
 session_start();
 if(hapusOrderDetil($_GET["idProduk"],$_GET["idPesanan"])>0){
-    echo "
-    <script>
-    alert('Pesanan berhasil dihapus !!!!');
-    document.location.href='cart.php';
-    </script>
-    ";
     echo '<div class="popup">
             <span class="success">Barang berhasil dihapus</span>
         </div>';

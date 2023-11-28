@@ -12,6 +12,10 @@ if (!$_GET['id']) {
   header('location: cart.php');
   exit();
 }
+$valid= selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['userID']} AND keterangan='belum'");
+if($valid==[]){
+  header("Location:product.php");
+}
 
 $produk = selectData("SELECT * FROM products WHERE kodeProduk={$_GET['id']}");
 

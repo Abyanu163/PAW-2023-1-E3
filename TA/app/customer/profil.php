@@ -8,16 +8,6 @@ $failUpdate = FALSE;
 <?php require_once 'templates/header.php'; getUserData(PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE)) ?>
 <?php require_once 'templates/navbar.php' ?>
 
-<?php 
-$errors = [];
-if (isset($_POST["tambah"])) {
-	validAll($errors, $_POST);
-	validWallet($errors, $_POST, "dana");
-	validWallet($errors, $_POST, "ovo");
-	validWallet($errors, $_POST, "gopay");
-}
-?>
-
 <section>
 	<div class="main-container profil">
 		<div class="formin-container">
@@ -72,6 +62,15 @@ if (isset($_POST["tambah"])) {
 
 		<?php 
 		$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION['userID']}");
+		$errors = [];
+		// var_dump($wallet);
+		// var_dump($_SESSION);
+		// var_dump($_POST);
+		if (isset($_POST["tambah"])) {
+			validWallet($errors, $_POST, "dana");
+			validWallet($errors, $_POST, "ovo");
+			validWallet($errors, $_POST, "gopay");
+		}
 		?>
 		
 		<div class="formin-container">
@@ -103,7 +102,7 @@ if (isset($_POST["tambah"])) {
 				<div class="form-element">
 					<div class="input-field">
 						<button type="submit" name="tambah">Tambah Wallet</button>
-						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST' && $errors=[]) editWallet($UIDFetched['kodePelanggan'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
+						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST' && $errors==[]) editWallet($_SESSION['userID'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
 					</div>
 				</div>
 			</form>
