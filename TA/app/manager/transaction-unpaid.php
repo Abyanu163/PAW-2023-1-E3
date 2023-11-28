@@ -26,7 +26,12 @@ $data = selectData(
 
 		<div class="card-container">
 			<h2>Transaksi Belum Dibayar:</h2>
-			<!-- <?php var_dump($data) ?> -->
+
+			<div class="print-link">
+				Print: 
+				<a href="<?= $_SERVER['PHP_SELF'] ?>" onclick="window.print()">PDF</a>
+				<a href="print-unpaid.php">Excel</a>
+			</div>
 			
 			<div class="chart-container">
 				<div class="chart">

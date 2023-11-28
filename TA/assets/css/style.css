@@ -477,6 +477,29 @@ a.back:hover {
   filter: brightness(80%);
 }
 
+.print-link {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.print-link a {
+  background-color: var(--success);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.print-link a:hover {
+  filter: brightness(80%);
+}
+
 
 /* == FORM == */
 /* Login, Register, Profil */
@@ -685,7 +708,7 @@ input[type=radio] {
 .chart-container {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1rem 0 2rem;
   background-color: white;
   padding: 1rem;
   border-radius: 1rem;
@@ -694,6 +717,12 @@ input[type=radio] {
 
 .chart {
   width: 600px;
+}
+
+@media print {
+  .print-link {
+    display: none;
+  }
 }
 
 
