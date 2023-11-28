@@ -14,6 +14,10 @@ JOIN products p ON (od.kodeProduk=p.kodeProduk)
 WHERE o.kodePelanggan={$_SESSION['userID']} AND o.keterangan='belum'
 ");
 
+// cek apakah sudah buat keranjang
+if($data==[]){
+	header("Location:product.php");
+}
 ?>
 
 <section>

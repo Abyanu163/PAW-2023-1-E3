@@ -24,7 +24,7 @@ if (isset($_POST['bayar'])) {
 		echo '<div class="popup">
 						<span class="success">Pembayaran berhasil</span>
 					</div>';
-		header('Refresh: 3, url=product.php');
+		header('Refresh: 2, url=product.php');
 	} else {
 		echo '<div class="popup">
 						<span class="danger">Pembayaran gagal</span>
@@ -71,8 +71,8 @@ if (isset($_POST['bayar'])) {
 
 		<form action="" method="post">
 			<div class="payment">
-				<h3>Jumlah Barang: <?= $totalHarga; ?></h3>
-				<h3>Total Bayar: <?= $jumlahBarang; ?></h3>
+				<h3>Jumlah Barang: <?= $jumlahBarang; ?></h3>
+				<h3>Total Bayar: <?=  $totalHarga; ?></h3>
 				<label for="payment-method">Metode Pembayaran:</label>
 				<?php if(empty($wallet)){ ?>
 					<input type="text" value="Anda belum memiliki wallet, tambahkan melalui halaman profil" disabled >

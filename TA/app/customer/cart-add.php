@@ -12,6 +12,10 @@ if (!$_GET['id']) {
   header('location: cart.php');
   exit();
 }
+$valid= selectData("SELECT * FROM orders WHERE kodePelanggan={$_SESSION['userID']} AND keterangan='belum'");
+if($valid==[]){
+  header("Location:product.php");
+}
 
 $produk = selectData("SELECT * FROM products WHERE kodeProduk={$_GET['id']}");
 
@@ -44,14 +48,14 @@ if ($cek == []) {
       echo '<div class="popup">
               <span class="success">Barang berhasil ditambahkan ke keranjang</span>
             </div>';
-      header('Refresh: 3, url=product.php');
+      header('Refresh: 2, url=product.php');
     }
   }
 } else {
   echo '<div class="popup">
           <span class="success">Barang sudah ada di keranjang</span>
         </div>';
-  header('Refresh: 3, url=cart.php');
+  header('Refresh: 2, url=cart.php');
 }
 ?>
 
