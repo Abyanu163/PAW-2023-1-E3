@@ -7,6 +7,11 @@ $title = 'Edit Product';
 <?php require_once 'templates/navbar.php' ?>
 
 <?php 
+// ketika tidak ada 
+if(!isset($_GET['id'])){
+	header("Location:product-data.php");
+}
+
 $data = selectData("SELECT * FROM products WHERE kodeProduk=$_GET[id]");
 $suplai = selectData("SELECT * FROM suplaier");
 $kategori = selectData("SELECT * FROM categories");
