@@ -1,20 +1,19 @@
+<?php $title = 'Hapus Supplier' ?>
 <?php require_once 'templates/header.php' ?>
 
 <?php 
 $kodeSuplaier=$_GET["id"];
 try{
     hapusSuplaier($kodeSuplaier)>0;
-    echo "<script>
-    alert('suplaier Berhasil Dihapus !!!');
-    document.location.href='supplier-data.php';
-    </script>
-    ";
+    echo '<div class="popup">
+            <span class="success">Supplier berhasil dihapus</span>
+        </div>';
+    header('Refresh: 3, url=supplier-data.php');
 }catch(Exception $e){
-    echo "<script>
-    alert('suplaier gagal Dihapus karena sedang mensuplai barang !!');
-    document.location.href='supplier-data.php';
-    </script>
-    ";
+    echo '<div class="popup">
+                    <span class="danger">Supplier gagal dihapus karena sedang menyuplai barang</span>
+                </div>';
+    header('Refresh: 3, url=supplier-data.php');
 }
 ?>
 

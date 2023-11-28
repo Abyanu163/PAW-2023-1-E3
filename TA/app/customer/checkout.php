@@ -26,18 +26,14 @@ $wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION["use
 <?php
 if (isset($_POST['bayar'])) {
 	if (addPembayaran($data[0]['kodePesanan'], $_POST['metode'])) {
-		echo "
-    <script>
-    alert('Pembayaran Berhasil');
-    document.location.href='product.php';
-    </script>
-    ";
+		echo '<div class="popup">
+						<span class="success">Pembayaran berhasil</span>
+					</div>';
+		header('Refresh: 3, url=product.php');
 	} else {
-		echo "
-    <script>
-    alert('Pembayaran Gagal');
-    </script>
-    ";
+		echo '<div class="popup">
+						<span class="danger">Pembayaran gagal</span>
+					</div>';
 	}
 }
 ?>

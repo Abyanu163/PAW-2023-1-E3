@@ -1,22 +1,22 @@
+<?php 
+$title = 'Hapus Produk';
+?>
+
 <?php require_once 'templates/header.php' ?>
 
 <?php 
 $kodeProduk=$_GET["id"];
 try {
     hapusProduk($kodeProduk);
-    echo "
-    <script>
-        alert('Data Berhasil Dihapus !!!');
-        document.location.href='product-data.php';
-    </script>
-    ";
+    echo '<div class="popup">
+            <span class="success">Data berhasil dihapus</span>
+        </div>';
+	header('Refresh: 3; url=product-data.php');
 } catch(Exception $e) {
-    echo "
-    <script>
-        alert('Data Gagal Dihapus !!!');
-        document.location.href='product-data.php';
-    </script>
-    ";
+    echo '<div class="popup">
+            <span class="danger">Data gagal dihapus</span>
+        </div>';
+	header('Refresh: 3; url=product-data.php');
 };
 ?>
 

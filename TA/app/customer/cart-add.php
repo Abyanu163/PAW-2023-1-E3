@@ -41,17 +41,17 @@ if ($cek == []) {
   if (isset($_POST["masukkan"])) {
     $tambah = addOrderDetail($_POST);
     if ($tambah > 0) {
-      echo "<script>
-            alert('BARANG BERHASIL DITAMBAHKAN KE KERANJANG !!!')
-            document.location.href='cart.php';
-            </script>";
+      echo '<div class="popup">
+              <span class="success">Barang berhasil ditambahkan ke keranjang</span>
+            </div>';
+      header('Refresh: 3, url=product.php');
     }
   }
 } else {
-  echo "<script>
-    alert('BARANG SUDAH ADA DI KERANJANG !!!')
-    document.location.href='cart.php';
-    </script>";
+  echo '<div class="popup">
+          <span class="success">Barang sudah ada di keranjang</span>
+        </div>';
+  header('Refresh: 3, url=cart.php');
 }
 ?>
 
