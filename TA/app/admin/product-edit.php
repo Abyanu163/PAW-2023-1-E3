@@ -27,12 +27,12 @@ if(isset($_POST["edit"]) && $errors==[]){
 				echo '<div class="popup">
 					<span class="success">Data berhasil diubah</span>
 				</div>';
-				header('Refresh: 3, url=product-data.php');
+				header('Refresh: 2, url=product-data.php');
     } else{
 				echo '<div class="popup">
 					<span class="danger">Data gagal diubah</span>
 				</div>';
-				header('Refresh: 3, url=product-data.php');
+				header('Refresh: 2, url=product-data.php');
     };
 }
 ?>

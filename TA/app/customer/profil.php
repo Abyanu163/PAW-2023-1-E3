@@ -8,6 +8,16 @@ $failUpdate = FALSE;
 <?php require_once 'templates/header.php'; getUserData(PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE)) ?>
 <?php require_once 'templates/navbar.php' ?>
 
+<?php 
+$errors = [];
+if (isset($_POST["tambah"])) {
+	validAll($errors, $_POST);
+	validWallet($errors, $_POST, "dana");
+	validWallet($errors, $_POST, "ovo");
+	validWallet($errors, $_POST, "gopay");
+}
+?>
+
 <section>
 	<div class="main-container profil">
 		<div class="formin-container">
@@ -72,28 +82,28 @@ $failUpdate = FALSE;
 				<div class="form-element">
 					<div class="input-field">
 						<label for="dana">DANA</label>
-						<input type="text" id="dana" name="dana" value="<?= $wallet[0]['nomorWallet'] ?>">
+						<input type="text" id="dana" name="dana" value="<?php if(!isset($_POST["tambah"])){echo $wallet[0]['nomorWallet'];}else{echo $_POST["dana"];} ?>">
 					</div>
-					<div class="error-msg"><!-- div error message --></div>
+					<div class="error-msg"><?php cekError($errors, "dana"); ?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="gopay">GOPAY</label>
-						<input type="text" id="gopay" name="gopay" value="<?= $wallet[1]['nomorWallet'] ?>">
+						<input type="text" id="gopay" name="gopay" value="<?php if(!isset($_POST["tambah"])){echo $wallet[1]['nomorWallet'];}else{echo $_POST["gopay"];} ?>">
 					</div>
-					<div class="error-msg"><!-- div error message --></div>
+					<div class="error-msg"><?php cekError($errors, "gopay"); ?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<label for="ovo">OVO</label>
-						<input type="text" id="ovo" name="ovo" value="<?= $wallet[2]['nomorWallet'] ?>">
+						<input type="text" id="ovo" name="ovo" value="<?php if(!isset($_POST["tambah"])){echo $wallet[2]['nomorWallet'];}else{echo $_POST["ovo"];} ?>">
 					</div>
-					<div class="error-msg"><!-- div error message --></div>
+					<div class="error-msg"><?php cekError($errors, "ovo"); ?></div>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
 						<button type="submit" name="tambah">Tambah Wallet</button>
-						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST') editWallet($UIDFetched['kodePelanggan'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
+						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST' && $errors=[]) editWallet($UIDFetched['kodePelanggan'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
 					</div>
 				</div>
 			</form>

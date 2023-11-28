@@ -25,12 +25,12 @@ if (isset($_POST["edit"])  && $errors == []) {
 		echo '<div class="popup">
 						<span class="success">Supplier berhasil diedit</span>
 					</div>';
-		header('Refresh: 3, url=supplier-data.php');
+		header('Refresh: 2, url=supplier-data.php');
 	} else {
 		echo '<div class="popup">
-						<span class="success">Supplier gagal diedit</span>
+						<span class="danger">Supplier gagal diedit</span>
 					</div>';
-		header('Refresh: 3');
+		header('Refresh: 2');
 	}
 }
 ?>
@@ -47,10 +47,10 @@ if (isset($_POST["edit"])  && $errors == []) {
 					<div class="input-field">
 						<label for="nama">Nama Supplier</label>
 						<input type="text" id="nama" name="nama" value="<?php if (!isset($_POST["edit"])) {
-																															echo $data[0]["namaSuplaier"];
-																														} else {
-																															echo $_POST["nama"];
-																														} ?>">
+							echo $data[0]["namaSuplaier"];
+						} else {
+							echo $_POST["nama"];
+						} ?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors, "nama"); ?></div>
 				</div>
@@ -58,10 +58,10 @@ if (isset($_POST["edit"])  && $errors == []) {
 					<div class="input-field">
 						<label for="alamat">Alamat Supplier</label>
 						<input type="text" id="alamat" name="alamat" value="<?php if (!isset($_POST["edit"])) {
-																																	echo $data[0]["alamatSuplaier"];
-																																} else {
-																																	echo $_POST["alamat"];
-																																} ?>">
+							echo $data[0]["alamatSuplaier"];
+						} else {
+							echo $_POST["alamat"];
+						} ?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors, "alamat"); ?></div>
 				</div>
@@ -69,10 +69,10 @@ if (isset($_POST["edit"])  && $errors == []) {
 					<div class="input-field">
 						<label for="nomor">No. telp Supplier</label>
 						<input type="text" id="nomor" name="nomor" value="<?php if (!isset($_POST["edit"])) {
-																																echo $data[0]["telpSuplaier"];
-																															} else {
-																																echo $_POST["nomor"];
-																															} ?>">
+							echo $data[0]["telpSuplaier"];
+						} else {
+							echo $_POST["nomor"];
+						} ?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors, "nomor"); ?></div>
 				</div>

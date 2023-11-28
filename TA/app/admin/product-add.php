@@ -25,7 +25,7 @@ if(isset($_POST["tambah"]) && $errors==[]){
 	echo '<div class="popup">
 					<span class="success">Data berhasil ditambahkan</span>
 				</div>';
-	header('Refresh: 3');
+	header('Refresh: 2, url=index.php');
 } 
 ?>
 
