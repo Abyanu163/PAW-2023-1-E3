@@ -44,14 +44,14 @@ if ($cek == []) {
       echo '<div class="popup">
               <span class="success">Barang berhasil ditambahkan ke keranjang</span>
             </div>';
-      header('Refresh: 3, url=product.php');
+      header('Refresh: 2, url=product.php');
     }
   }
 } else {
   echo '<div class="popup">
           <span class="success">Barang sudah ada di keranjang</span>
         </div>';
-  header('Refresh: 3, url=cart.php');
+  header('Refresh: 2, url=cart.php');
 }
 ?>
 

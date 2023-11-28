@@ -29,7 +29,7 @@ if (isset($_POST['bayar'])) {
 		echo '<div class="popup">
 						<span class="success">Pembayaran berhasil</span>
 					</div>';
-		header('Refresh: 3, url=product.php');
+		header('Refresh: 2, url=product.php');
 	} else {
 		echo '<div class="popup">
 						<span class="danger">Pembayaran gagal</span>
