@@ -103,7 +103,7 @@ if (isset($_POST["tambah"])) {
 				<div class="form-element">
 					<div class="input-field">
 						<button type="submit" name="tambah">Tambah Wallet</button>
-						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST' && $errors=[]) editWallet($UIDFetched['kodePelanggan'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
+						<?php if(isset($_POST['tambah']) && $_SERVER['REQUEST_METHOD'] == 'POST' && $errors=[]) editWallet($_SESSION['userID'], $_POST['dana'], $_POST['gopay'], $_POST['ovo']) ?>
 					</div>
 				</div>
 			</form>
