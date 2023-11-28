@@ -15,11 +15,6 @@ JOIN products p ON (od.kodeProduk=p.kodeProduk)
 WHERE o.kodePelanggan={$_SESSION['userID']} AND o.keterangan='belum'
 ");
 
-$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION['userID']}");
-if(empty($wallet)) {
-	addWallet($_SESSION['userID']);
-}
-
 $wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION["userID"]} AND nomorWallet <> ''");
 ?>
 
