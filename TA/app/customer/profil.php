@@ -71,10 +71,7 @@ if (isset($_POST["tambah"])) {
 		</div>
 
 		<?php 
-		$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$UIDFetched['kodePelanggan']}");
-		if(empty($wallet)) {
-			addWallet($UIDFetched['kodePelanggan']);
-		}
+		$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION['userID']}");
 		?>
 		
 		<div class="formin-container">
