@@ -372,6 +372,12 @@ function validNumLen(&$errors, $arr, $val){
         $errors[$val] = "Inputan harus angka (awalan 0 bukan +62) (tanpa '-' dan 'spasi') (berjumlah  10-13 digit) !!!";
     }
 }
+function validWallet(&$errors, $arr, $val){
+    $pattern = "/^[0-9]{10,13}+$/";
+    if (!preg_match($pattern, $arr[$val]) && $arr[$val]!=""){
+        $errors[$val] = "Inputan harus angka (berjumlah  10-13 digit) !!!";
+    }
+}
 
 // mengecek error
 function cekError($errors,$val){
