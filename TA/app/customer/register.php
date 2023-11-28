@@ -75,7 +75,7 @@ $failRegist = FALSE;
 				</div>
 				<div class="account-link">
 					Have an account?
-					<a href="login.php">Login</a>
+					<a href="../login.php">Login</a>
 				</div>
 			</div>
 		</form>
