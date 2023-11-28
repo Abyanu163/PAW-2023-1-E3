@@ -24,6 +24,12 @@ $data = selectData(
 		<div class="card-container">
 			<h2>Transaksi Sudah Dibayar:</h2>
 
+			<div class="print-link">
+				Print: 
+				<a href="<?= $_SERVER['PHP_SELF'] ?>" onclick="window.print()">PDF</a>
+				<a href="print-paid.php">Excel</a>
+			</div>
+
 			<div class="chart-container">
 				<div class="chart">
 					<canvas id="myChart"></canvas>
