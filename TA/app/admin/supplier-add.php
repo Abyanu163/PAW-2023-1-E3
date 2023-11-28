@@ -23,13 +23,13 @@ if (isset($_POST["tambah"]) && $errors == []) {
 		echo '<div class="popup">
 						<span class="success">Supplier berhasil ditambahkan</span>
 					</div>';
-		header('Refresh: 3, url=supplier-data.php');
+		header('Refresh: 2, url=supplier-data.php');
 		exit();
 	} else {
 		echo '<div class="popup">
 						<span class="danger">Supplier gagal ditambahkan</span>
 					</div>';
-		header('Refresh: 3');
+		header('Refresh: 2');
 	}
 }
 ?>
@@ -54,8 +54,8 @@ if (isset($_POST["tambah"]) && $errors == []) {
 					<div class="input-field">
 						<label for="alamat">Alamat Supplier</label>
 						<input type="text" name="alamat" id="alamat" value="<?php if (isset($_POST["tambah"])) {
-																																	echo ($_POST['alamat']);
-																																} ?>">
+							echo ($_POST['alamat']);
+						} ?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors, "alamat"); ?></div>
 				</div>
@@ -63,8 +63,8 @@ if (isset($_POST["tambah"]) && $errors == []) {
 					<div class="input-field">
 						<label for="no">No. Telp Supplier</label>
 						<input type="text" name="no" id="no" value="<?php if (isset($_POST["tambah"])) {
-																													echo ($_POST['no']);
-																												} ?>">
+							echo ($_POST['no']);
+						} ?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors, "no"); ?></div>
 				</div>

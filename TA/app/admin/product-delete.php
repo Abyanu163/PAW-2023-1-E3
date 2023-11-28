@@ -11,12 +11,12 @@ try {
     echo '<div class="popup">
             <span class="success">Data berhasil dihapus</span>
         </div>';
-	header('Refresh: 3; url=product-data.php');
+	header('Refresh: 2; url=product-data.php');
 } catch(Exception $e) {
     echo '<div class="popup">
             <span class="danger">Data gagal dihapus</span>
         </div>';
-	header('Refresh: 3; url=product-data.php');
+	header('Refresh: 2; url=product-data.php');
 };
 ?>
 

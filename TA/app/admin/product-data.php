@@ -37,7 +37,7 @@ $data = selectData(
 							<a href="product-edit.php?id=<?= $ch["kodeProduk"] ?>" class="prod-button">
 								<img src="<?= BASEURL  ?>/assets/img/edit.png" alt="cart">
 							</a>
-							<a href="product-delete.php?id=<?= $ch["kodeProduk"];?>" onclick="return confirm('DATA INGIN DIHAPUS ?')" class="prod-button delete">
+							<a href="product-delete.php?id=<?= $ch["kodeProduk"];?>" class="prod-button delete">
 								<img src="<?= BASEURL  ?>/assets/img/delete.png" alt="cart">
 							</a>
 						</div>

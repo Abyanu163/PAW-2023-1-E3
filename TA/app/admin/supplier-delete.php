@@ -8,12 +8,12 @@ try{
     echo '<div class="popup">
             <span class="success">Supplier berhasil dihapus</span>
         </div>';
-    header('Refresh: 3, url=supplier-data.php');
+    header('Refresh: 2, url=supplier-data.php');
 }catch(Exception $e){
     echo '<div class="popup">
                     <span class="danger">Supplier gagal dihapus karena sedang menyuplai barang</span>
                 </div>';
-    header('Refresh: 3, url=supplier-data.php');
+    header('Refresh: 2, url=supplier-data.php');
 }
 ?>
 
