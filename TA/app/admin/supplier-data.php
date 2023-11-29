@@ -11,13 +11,31 @@ $query="SELECT namaSuplaier, namaProduk FROM suplaier s
 JOIN products p ON (s.kodeSuplaier=p.kodeSuplaier)";
 $data = selectData("SELECT * FROM suplaier");
 $produk=selectData($query);
+
+if(isset($_GET['search'])) {
+	$keyword = $_GET['keyword'];
+	$data = selectData(
+		"SELECT * FROM suplaier
+		WHERE 
+		namaSuplaier LIKE '%$keyword%'
+		"
+	);
+}
 ?>
 
 <section>
 	<div class="main-container">
+		<form method="get">
+			<div class="search">
+				<input type="text" placeholder="Search supplier" name="keyword">
+				<button type="submit" name="search">
+					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
+				</button>
+			</div>
+		</form>
 
 		<div class="card-container">
-			<h2>Supplier List:</h2>
+			<h2>List Supplier:</h2>
 
 			<div class="table-container supplier">
 				<table>

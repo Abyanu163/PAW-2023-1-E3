@@ -6,13 +6,13 @@ $title = 'Customer Data';
 <?php require_once 'templates/header.php' ?>
 <?php require_once 'templates/navbar.php' ?>
 
-<?php $data=selectData("SELECT * FROM customers"); ?>
+<?php $data = selectData("SELECT * FROM customers"); ?>
 
 <section id="content">
 	<div class="main-container">
 
 		<div class="card-container">
-			<h2>Customer List:</h2>
+			<h2>List Customer:</h2>
 
 			<div class="table-container admin">
 				<table>
@@ -21,13 +21,15 @@ $title = 'Customer Data';
 						<th>Email</th>
 						<th>Alamat</th>
 					</tr>
-					<?php $i = 1; foreach($data as $ch): ?>
+					<?php $i = 1;
+					foreach ($data as $ch) : ?>
 						<tr>
 							<td><?= $i; ?></td>
 							<td><?= $ch["usernamePelanggan"] ?></td>
 							<td><?= $ch["alamatPelanggan"] ?></td>
 						</tr>
-					<?php $i++; endforeach; ?>
+					<?php $i++;
+					endforeach; ?>
 				</table>
 				<!-- end table -->
 			</div>

@@ -32,7 +32,7 @@ if(isset($_POST["tambah"]) && $errors==[]){
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="" method="post" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 				<div class="form-title">
 					<h2>Add Product</h2>
 				</div>
@@ -49,7 +49,7 @@ if(isset($_POST["tambah"]) && $errors==[]){
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="supplier">Supplier</label>
+						<label for="suplai">Supplier</label>
 						<select name="suplai" id="suplai">
 							<?php for($i = 0; $i<count($data); $i++){?>
 								<option value="<?= $data[$i]['kodeSuplaier']?>"><?= $data[$i]['namaSuplaier'] ?></option>

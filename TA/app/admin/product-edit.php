@@ -45,7 +45,7 @@ if(isset($_POST["edit"]) && $errors==[]){
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="" method="post" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<?= $data[0]['kodeProduk'];?>">
         <input type="hidden" name="gambarLama" value="<?= $data[0]["gambarProduk"];?>">
 				<div class="form-title">
@@ -83,7 +83,7 @@ if(isset($_POST["edit"]) && $errors==[]){
 				</div>
 				<div class="form-element">
 					<div class="input-field">
-						<label for="nama">Nama Produk</label>
+						<label for="namaProduk">Nama Produk</label>
 						<input type="text" name="namaProduk" id="namaProduk" value="<?php if(!isset($_POST["edit"])){echo $data[0]["namaProduk"];} else {echo $_POST["namaProduk"];}?>">
 					</div>
 					<div class="error-msg"><?php cekError($errors,"namaProduk");?></div>

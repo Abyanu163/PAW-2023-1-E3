@@ -11,7 +11,7 @@ $failUpdate = FALSE;
 <section>
 	<div class="main-container profil">
 		<div class="formin-container">
-			<form action="" method="POST">
+			<form method="POST">
 				<div class="form-title">
 					<h2>Customer Profile</h2>
 				</div>
@@ -56,7 +56,11 @@ $failUpdate = FALSE;
 						<button type="submit" name="edit">Edit Profil</button>
 					</div>
 				</div>
-				<?php if (isset($_POST['edit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {updateUserData($failUpdate, PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE), $_POST['customerEmail'], $_POST['customerpwdNEW'], $_POST['alamat']);} ?>
+				<div class="form-element">
+					<div class="success-msg">
+						<?php if (isset($_POST['edit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {updateUserData($failUpdate, PDO_Connect, ($_SESSION['userID'] ?? $_COOKIE['userID'] ?? FALSE), $_POST['customerEmail'], $_POST['customerpwdNEW'], $_POST['alamat']);} ?>
+					</div>
+				</div>
 			</form>
 		</div>
 
@@ -71,7 +75,7 @@ $failUpdate = FALSE;
 		?>
 		
 		<div class="formin-container">
-			<form action="" method="POST">
+			<form method="POST">
 				<div class="form-title">
 					<h2>Wallets</h2>
 				</div>
