@@ -30,7 +30,9 @@ if($data==[]){
 			<div class="card-list flex">
 				<?php foreach($data as $ch): ?>
 					<div class="card">
-						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
+						<div class="card-pict">
+							<img src="<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>" alt="product">
+						</div>
 						<div class="card-desc cart">
 							<h3><?= $ch["namaProduk"] ?></h3>
 							<p class="prod-desc"><?= $ch["deskripsiProduk"] ?></p>

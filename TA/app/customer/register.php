@@ -66,15 +66,17 @@ $failRegist = FALSE;
 					</div>
 				</div>
 				<div class="form-element">
+					<div class="error-msg">
 					<?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['customerEmail'] != "")) {
 						echo (isRegisteredCustomer($_POST['customerEmail'], PDO_Connect));
 					}
 					if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($failRegist == FALSE)) {
 						isOKRegistCustomer($failRegist, PDO_Connect, $_POST['customerEmail'], $_POST['customerpwd'], $_POST['customeraddr']);
 					} ?>
+					</div>
 				</div>
 				<div class="account-link">
-					Have an account?
+					Sudah punya akun?
 					<a href="../login.php">Login</a>
 				</div>
 			</div>

@@ -24,7 +24,7 @@ if(isset($_GET['search'])) {
 
 <section>
     <div class="main-container">
-      <form action="" method="get">
+      <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
         <div class="search">
           <input type="text" placeholder="Search categories" name="keyword">
           <button type="submit" name="search">
@@ -34,7 +34,7 @@ if(isset($_GET['search'])) {
       </form>
       
       <div class="card-container">
-        <h2>Category List:</h2>
+        <h2>List Kategori:</h2>
 
         <!-- Product List -->
         <div class="card-list grid">

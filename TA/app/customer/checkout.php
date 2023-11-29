@@ -43,11 +43,12 @@ if (isset($_POST['bayar'])) {
 				<?php
 				$totalHarga = 0;
 				$jumlahBarang = 0;
-				// var_dump($wallet);
 				?>
 				<?php foreach ($data as $ch) : ?>
 					<div class="card">
-						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch["gambarProduk"] ?>);"></div>
+						<div class="card-pict">
+							<img src="<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>" alt="product">
+						</div>
 						<div class="card-desc checkout">
 							<h3><?= $ch["namaProduk"] ?></h3>
 							<p class="prod-desc"><?= $ch["deskripsiProduk"] ?></p>
@@ -69,13 +70,13 @@ if (isset($_POST['bayar'])) {
 
 		</div>
 
-		<form action="" method="post">
+		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 			<div class="payment">
 				<h3>Jumlah Barang: <?= $jumlahBarang; ?></h3>
 				<h3>Total Bayar: <?=  $totalHarga; ?></h3>
-				<label for="payment-method">Metode Pembayaran:</label>
+				<label for="metode">Metode Pembayaran:</label>
 				<?php if(empty($wallet)){ ?>
-					<input type="text" value="Anda belum memiliki wallet, tambahkan melalui halaman profil" disabled >
+					<input type="text" id="metode" value="Anda belum memiliki wallet, tambahkan melalui halaman profil" disabled >
 				<?php } else { ?>
 					<select name="metode" id="metode">
 						<?php foreach ($wallet as $w) {

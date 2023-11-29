@@ -5,7 +5,7 @@ function isRegisteredAdmin($setValue, $PDO_USED) { // Apakah pengguna sudah regi
     $stateResult->execute();
     if ($stateResult->rowCount() >= 1) {
         $GLOBALS['failRegist'] = TRUE;
-        return "<span style='color: red;'>Nama pengguna sudah didaftarkan. Silahkan ditambakan atau ganti nama pengguna yang belum didaftarkan.</span>";
+        return "Nama pengguna sudah didaftarkan. Silahkan ditambakan atau ganti nama pengguna yang belum didaftarkan.";
     } else { return; }
 }
 function isRegisteredCustomer($setValue, $PDO_USED) { // Apakah pengguna sudah registrasi?
@@ -14,14 +14,14 @@ function isRegisteredCustomer($setValue, $PDO_USED) { // Apakah pengguna sudah r
     $stateResult->execute();
     if ($stateResult->rowCount() >= 1) {
         $GLOBALS['failRegist'] = TRUE;
-        return "<span style='color: red;'>Nama pengguna sudah didaftarkan. Silahkan ditambakan atau ganti nama pengguna yang belum didaftarkan.</span>";
+        return "Nama pengguna sudah didaftarkan. Silahkan ditambakan atau ganti nama pengguna yang belum didaftarkan.";
     } else { return; }
 }
 
 function isSetValue($methodSend,$inValue) { // $methodSend adalah POST, GET, maupun HEAD ; $inValue adalah key dari suatu $methodSend
     if (!isset($methodSend[$inValue]) || ($methodSend[$inValue] == "")) { // Apakah bidang ini kosong?
         $GLOBALS['failRegist'] = TRUE;
-        return "<span style='color: red;'>Seharusnya wajib diisi</span>";
+        return "Seharusnya wajib diisi";
     } else {
         return validatingValue($methodSend,$inValue);
     }
@@ -31,34 +31,34 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
         case 'adminusr':
             if (!preg_match("/^[a-zA-Z0-9]+$/", $methodSend[$inValue])) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Nama pengguna hanya huruf dan/atau angka</span>";
+                return "Nama pengguna hanya huruf dan/atau angka";
             } else {
                 break;
             }
         case 'adminpwd':
             if (strlen($methodSend[$inValue]) < 8 || (strlen($methodSend[$inValue]) > 99)) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi</span>";
+                return "Kata sandi kurang dari 8 karakter.Atau terlalu banyak karakter akan bingung untuk Qiqi";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $methodSend[$inValue])) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
+                return "Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).";
             } else {
                 break;
             }
         case 'customerEmail':
             if (!filter_var($methodSend[$inValue], FILTER_VALIDATE_EMAIL)) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Surel tidak absah/valid. Kadang @localhost tidak diizinkan.</span>";
+                return "Surel tidak absah/valid. Kadang @localhost tidak diizinkan.";
             } else {
                 break;
             }
         case 'customerpwd':
             if (strlen($methodSend[$inValue]) < 8) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Kata sandi kuranag dari 8 karakter</span>";
+                return "Kata sandi kuranag dari 8 karakter";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $methodSend[$inValue])) {
                 $GLOBALS['failRegist'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
+                return "Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).";
             } else {
                 break;
             }
@@ -68,7 +68,7 @@ function validatingValue($methodSend, $inValue) { // Mengabsahan/validasi suatu 
 }
 function setSameDiffValue($Value1, $Value2) {
     if ($Value1 != $Value2) {
-        return "<br/><span style='color: red;'>Konfirmasi ulang tidak sama.</span>";
+        return "Konfirmasi ulang tidak sama.";
     }
 }
 // Eksekusi dan pastikan aman

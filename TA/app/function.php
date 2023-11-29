@@ -287,7 +287,7 @@ function editWallet($kodePelanggan, $nomorDana, $nomorGopay, $nomorOvo) {
 function terisikan($metodeKirim, $dalamIsian) { // Apakah sudah terisi?
 	if (!isset($metodeKirim[$dalamIsian]) || $metodeKirim[$dalamIsian] == '') {
         $GLOBALS['gagal'] = TRUE;
-		return "<span style='color: red;'>Harusnya diisi</span>"; // Kembali jika tidak terisi
+		return "Harusnya diisi"; // Kembali jika tidak terisi
 	} else {
 		return validasiSesuatu_1($metodeKirim, $dalamIsian); // Lanjut ke...
 	}
@@ -297,32 +297,32 @@ function validasiSesuatu_1($metodeKirim, $dalamIsian) { // ... fungsi validasi v
 		case 'nama':
 			if (preg_match("/[\^<,\"@\/\{\}\(\)\*\$%\?=>:\|;#]+/i", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Kesalahan dalam nama supplier/pemasok</span>";
+                return "Kesalahan dalam nama supplier/pemasok";
             } break;
 		case 'namaProduk':
 			if (preg_match("/[\^<,\"@\/\{\}\(\)\*\$%\?=>:\|;#]+/i", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Kesalahan dalam nama produk</span>";
+                return "Kesalahan dalam nama produk";
             } break;
 		case 'no':
             if (!preg_match("/^[0-9]{10,15}$/", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Biasanya nomor telepon hanya lokal (Indonesia) 10-15 karakter</span>";
+                return "Biasanya nomor telepon hanya lokal (Indonesia) 10-15 karakter";
             } break;
         case 'harga':
 			if (!preg_match("/^[0-9]$/", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Hanya diisi angka. Jadi sudah termasuk \"IDR\"</span>";
+                return "Hanya diisi angka. Jadi sudah termasuk \"IDR\"";
             } break;
         case 'stok':
 			if (!preg_match("/^[0-9]$/", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Stok yang diisikan hanyalah angka</span>";
+                return "Stok yang diisikan hanyalah angka";
             } break;
         case 'deskripsi':
 			if (!preg_match("/^[\w\-\d\.\!\%\&]$/", $metodeKirim[$dalamIsian])) {
                 $GLOBALS['gagal'] = TRUE;
-                return "<span style='color: red;'>Biasanya deskripsi yang singkat dan teks latin</span>";
+                return "Biasanya deskripsi yang singkat dan teks latin";
             } break;
 		default:
 			break;

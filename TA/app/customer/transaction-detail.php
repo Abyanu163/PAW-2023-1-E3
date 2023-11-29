@@ -25,17 +25,9 @@ $data = selectData(
 
 <section id="content">
 	<div class="main-container">
-		<form action="#" method="get">
-			<div class="search">
-				<input type="text" placeholder="Search date, method, total">
-				<button type="submit">
-					<img src="<?= BASEURL  ?>/assets/img/search.png" alt="search">
-				</button>
-			</div>
-		</form>
 
 		<div class="card-container">
-			<h2>Transaction Detail:</h2>
+			<h2>Detail Transaksi:</h2>
 
 			<div class="table-container detail">
 				<table>

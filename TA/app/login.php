@@ -38,8 +38,10 @@ include('templates/header.php');
 						<button type="submit" name="login">Masuk</button>
 					</div>
 				</div>
-				<div class="account-link">
-					<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(loginAuth(PDO_Connect, $_POST['username'], $_POST['passwd']));} ?>
+				<div class="form-element">
+					<div class="error-msg">
+						<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {echo(loginAuth(PDO_Connect, $_POST['username'], $_POST['passwd']));} ?>
+					</div>
 				</div>
 				<div class="account-link">
 					Tidak punya akun pelanggan?

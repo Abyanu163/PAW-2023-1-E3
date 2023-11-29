@@ -14,12 +14,11 @@ $title = 'Halaman Utama'
 
   <div class="link-login">
     <a href="<?= BASEURL ?>/app/login.php">Login</a>
-    <!-- <a href="<?= BASEURL ?>/app/admin/">Login Karyawan</a> -->
   </div>
 
 </section>
 
-<section id="deskripsi-toko">
+<main>
 
   <div class="p1">
     <img src="../assets/img/meat.jpg" alt="meat">
@@ -36,7 +35,7 @@ $title = 'Halaman Utama'
   Di MeatMaster, kepuasan pelanggan adalah prioritas utama kami. Tim ahli kami selalu siap memberikan panduan dan rekomendasi untuk memastikan Anda mendapatkan daging sesuai keinginan dan kebutuhan Anda. Kami mengutamakan transparansi dan kejujuran dalam setiap transaksi, sehingga Anda dapat berbelanja dengan percaya diri, mengetahui bahwa setiap potongan daging yang Anda pilih telah melewati standar ketat kami untuk keamanan dan kualitas. Dengan MeatMaster, Anda tidak hanya membeli daging, tetapi juga membangun pengalaman kuliner yang istimewa dan tak terlupakan di meja makan Anda. Sambut kelezatan dengan MeatMaster, di mana kualitas dan pelayanan tak tertandingi menjadi kebiasaan.
   </p>
 
-</section>
+</main>
 
 
 

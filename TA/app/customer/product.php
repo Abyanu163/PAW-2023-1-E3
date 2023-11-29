@@ -38,7 +38,7 @@ if(isset($_GET['search'])) {
 
 <section id="content">
 	<div class="main-container">
-		<form action="" method="get">
+		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
 			<div class="search">
 				<input type="text" placeholder="Search product, categories" name="keyword">
 				<button type="submit" name="search">
@@ -49,12 +49,15 @@ if(isset($_GET['search'])) {
 
 		<div class="card-container">
 			<h2>List Produk:</h2>
+			<?php var_dump($_SESSION) ?>
 
 			<!-- Product List -->
 			<div class="card-list grid">
 				<?php foreach ($data as $ch) : ?>
 					<div class="card">
-						<div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>);"></div>
+						<div class="card-pict">
+							<img src="<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>" alt="product">
+						</div>
 						<div class="card-desc">
 							<h3><?= $ch["namaProduk"] ?></h3>
 							<p class="prod-cate"><?= $ch["namaKategori"] ?></p>

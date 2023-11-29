@@ -37,7 +37,7 @@ function adminAuth($PDO_USED, $adminusr, $adminpwd) { // Autentikasi untuk admin
         $stateExecuting = NULL;
         return header ("Location: ".BASEURL."/app/admin/");
     } else {
-        return "<p style='color: red;'>Autentikasi gagal. Apakah pengguna sudah terdaftar?</p>";
+        return "Autentikasi gagal. Apakah pengguna sudah terdaftar?";
     }
 }
 function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autentikasi untuk pelanggan dengan menyertakan kode pelanggan agar dapat dipahami.
@@ -60,9 +60,9 @@ function authIn($PDO_USED, $customerEmail, $customerpwd, $remember) { // Autenti
         return header ("Location: ".BASEURL."/app/customer");
     } else {
         return "
-        <div>
-        <span style='color: red;'>Autentikasi gagal. Akun ada tidak terdaftar</span>
-        </div>";
+        
+        Autentikasi gagal. Akun ada tidak terdaftar
+        ";
     }
 }
 function managerAuthRedirect($rolebased) { // Jika ditemukan sebagai manajer
@@ -79,10 +79,10 @@ function matchingCustomerResetPWD($PDO_USED, $customerEmail, $newCustomerPWD, $c
     $rowCount = $stateExecuting->rowCount();
     if ($rowCount != 1) { // Cek apakah surel ini cuma satu yang ketemu
         $failResetCustomPWD = TRUE;
-        echo "<div><span style='color: red;'>Surel tidak ketemu.<br/><i>HATI-HATI! BISA SAJA TIDAK AMAN JIKA CEROBOH DALAM URUSAN PRIVASI</i></span></div>";
+        echo "Surel tidak ketemu. <i>HATI-HATI! BISA SAJA TIDAK AMAN JIKA CEROBOH DALAM URUSAN PRIVASI</i>";
     }
     if ($newCustomerPWD != $confirmNewCustomerPWD) { // Persaman kata sandi direset dengan konfirmasi kata sandi direset
-        return "<div><span style='color: red;'>Gagal dalam konfirmasi ulang kata sandi tidak sama</span></div>";
+        return "Gagal dalam konfirmasi ulang kata sandi tidak sama";
     } else if ($failResetCustomPWD == TRUE) {
         return;
     } else {
@@ -107,10 +107,10 @@ function matchingAdminResetPWD($PDO_USED, $adminusr, $newAdminPWD, $confirmNewAd
     $rowCount = $stateExecuting->rowCount();
     if ($rowCount != 1) { // Cek apakah surel ini cuma satu yang ketemu
         $failResetCustomPWD = TRUE;
-        echo "<div><span style='color: red;'>Nama pengguna tidak ketemu.<br/><i>HATI-HATI! BISA SAJA TIDAK AMAN JIKA CEROBOH DALAM URUSAN PRIVASI</i></span></div>";
+        echo "Nama pengguna tidak ketemu. <i>HATI-HATI! BISA SAJA TIDAK AMAN JIKA CEROBOH DALAM URUSAN PRIVASI</i>";
     }
     if ($newAdminPWD != $confirmNewAdminPWD) { // Persaman kata sandi direset dengan konfirmasi kata sandi direset
-        return "<div><span style='color: red;'>Gagal dalam konfirmasi ulang kata sandi tidak sama</span></div>";
+        return "Gagal dalam konfirmasi ulang kata sandi tidak sama";
     } else if ($failResetCustomPWD == TRUE) {
         return;
     } else {
@@ -141,7 +141,7 @@ function getUserData($PDO_USED, $userID) { // Ambil salah satu data pengguna pel
 function setted($METHOD, $arrayIn) { // apakah ini sudah diisi?
     if (!isset($METHOD[$arrayIn]) or $METHOD[$arrayIn] == "" or $METHOD[$arrayIn] == NULL) {
         $GLOBALS['failUpdate'] = TRUE;
-        return "<span style='color: red;'>Harusnya diisi</span>";
+        return "Harusnya diisi";
     }
     return validatingUpdate($METHOD, $arrayIn); // Sudah terisi, cek...
 }
@@ -150,24 +150,24 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
         case 'adminusr':
             if (!preg_match("/^[a-zA-Z0-9]+$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Nama pengguna hanya huruf dan/atau angka</span>";
+                return "Nama pengguna hanya huruf dan/atau angka";
             } else {
                 break;
             }
         case 'adminpwd':
             if (strlen($METHOD[$arrayIn]) < 8 || (strlen($METHOD[$arrayIn]) > 99)) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi</span>";
+                return "Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
+                return "Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).";
             } else {
                 break;
             }
         case 'confirmAdminPwd':
             if ($METHOD[$arrayIn] != $_POST['adminpwd']) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Konfirmasi kata sandi tidak sama</span>";
+                return "Konfirmasi kata sandi tidak sama";
             }
         case 'customerEmail':
             $surel = $GLOBALS['UIDFetched']['usernamePelanggan'] ?? FALSE;
@@ -176,17 +176,17 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
             }
             if (!filter_var($METHOD[$arrayIn], FILTER_VALIDATE_EMAIL)) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Surel tidak absah/valid. Kadang @localhost tidak diizinkan.</span>";
+                return "Surel tidak absah/valid. Kadang @localhost tidak diizinkan.";
             } else {
                 break;
             }
         case 'customerpwdNEW':
             if (strlen($METHOD[$arrayIn]) < 8) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi kuranag dari 8 karakter</span>";
+                return "Kata sandi kuranag dari 8 karakter";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).</span>";
+                return "Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).";
             } else {
                 break;
             }
@@ -200,8 +200,8 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
             $stateExecute->execute();
             if ($stateExecute->rowCount() < 1) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Sayangnya salah. Apa lupa kata sandi lama? Qiqi sering begitu.</span><br/>
-                <span>Jika lupa kata sandi, klik <a href='".BASEURL."/app/customer/lostpwd.php' title='PASTIKAN BENAR-BENAR PEMILIK AKUN'>di sini</a>.</span>";
+                return "Sayangnya salah. Apa lupa kata sandi lama? Qiqi sering begitu.
+                <span>Jika lupa kata sandi, klik <a href='".BASEURL."/app/customer/lostpwd.php' title='PASTIKAN BENAR-BENAR PEMILIK AKUN'>di sini</a></span>.";
             }
         default:
             break;
@@ -219,7 +219,7 @@ function updateUserData($inFailUpdate, $PDO_USED, $userID, $customerEmail, $cust
         $stateExecute->bindValue(":bindVar4", $customerEmail);
         $stateExecute->execute();
         $stateExecute = NULL;
-        return "<span style='color: green;'>Data pengguna sudah diperbarui. Pastikan mengingat kata sandi yang sudah diperbarukan.</span>";
+        return "Data pengguna sudah diperbarui. Pastikan mengingat kata sandi yang sudah diperbarukan.";
     }
 }
 
@@ -347,9 +347,9 @@ function loginAuth($PDO_USED, $username, $password) {
             return header ("Location: ".$_SERVER['PHP_SELF']);
         } else {
             return "
-            <div>
-            <span style='color: red;'>Autentikasi gagal. Coba ingat-ingat atau biasanya kan di simpan di pengelola masuk.</span>
-            </div>"; // Autentikasi gagal karena input.
+            
+            Autentikasi gagal. Coba ingat-ingat atau biasanya kan di simpan di pengelola masuk.
+            "; // Autentikasi gagal karena input.
         }
     }
 }

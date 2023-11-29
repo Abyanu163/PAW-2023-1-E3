@@ -72,11 +72,13 @@ if($produk[0]["stokProduk"]<=0){
 
     <div class="card-container">
       <h2>Jumlah Produk:</h2>
-      <form action="" method="post">
+      <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
         <!-- Product List -->
         <div class="card-list flex">
           <div class="card">
-            <div class="card-pict" style="background-image: url(<?= BASEURL ?>/assets/img/product/<?= $produk[0]['gambarProduk'] ?>);"></div>
+            <div class="card-pict">
+            <img src="<?= BASEURL ?>/assets/img/product/<?= $produk[0]['gambarProduk'] ?>" alt="product">
+            </div>
             <div class="card-desc cart">
               <h3><?= $produk[0]['namaProduk'] ?></h3>
               <p class="prod-desc"><?= $produk[0]["deskripsiProduk"] ?></p>
