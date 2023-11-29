@@ -200,8 +200,7 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
             $stateExecute->execute();
             if ($stateExecute->rowCount() < 1) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "<span style='color: red;'>Sayangnya salah. Apa lupa kata sandi lama? Qiqi sering begitu.</span><br/>
-                <span>Jika lupa kata sandi, klik <a href='".BASEURL."/app/customer/lostpwd.php' title='PASTIKAN BENAR-BENAR PEMILIK AKUN'>di sini</a>.</span>";
+                return "<span style='color: red;'>Kata sandi salah</span>";
             }
         default:
             break;

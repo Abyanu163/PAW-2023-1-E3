@@ -63,9 +63,6 @@ $failUpdate = FALSE;
 		<?php 
 		$wallet = selectData("SELECT * FROM wallet WHERE kodePelanggan = {$_SESSION['userID']}");
 		$errors = [];
-		// var_dump($wallet);
-		// var_dump($_SESSION);
-		// var_dump($_POST);
 		if (isset($_POST["tambah"])) {
 			validWallet($errors, $_POST, "dana");
 			validWallet($errors, $_POST, "ovo");
