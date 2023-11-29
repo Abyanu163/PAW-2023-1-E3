@@ -38,7 +38,7 @@ if (isset($_POST["edit"])  && $errors == []) {
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+			<form method="post">
 				<input type="hidden" name="id" value="<?= $id ?>">
 				<div class="form-title">
 					<h2>Edit Supplier</h2>

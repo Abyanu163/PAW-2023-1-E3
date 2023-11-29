@@ -70,7 +70,7 @@ if (isset($_POST['bayar'])) {
 
 		</div>
 
-		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+		<form method="post">
 			<div class="payment">
 				<h3>Jumlah Barang: <?= $jumlahBarang; ?></h3>
 				<h3>Total Bayar: <?=  $totalHarga; ?></h3>

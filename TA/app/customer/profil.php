@@ -11,7 +11,7 @@ $failUpdate = FALSE;
 <section>
 	<div class="main-container profil">
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+			<form method="POST">
 				<div class="form-title">
 					<h2>Customer Profile</h2>
 				</div>
@@ -75,7 +75,7 @@ $failUpdate = FALSE;
 		?>
 		
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+			<form method="POST">
 				<div class="form-title">
 					<h2>Wallets</h2>
 				</div>

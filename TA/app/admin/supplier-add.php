@@ -37,7 +37,7 @@ if (isset($_POST["tambah"]) && $errors == []) {
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+			<form method="POST">
 				<div class="form-title">
 					<h2>Add Supplier</h2>
 				</div>

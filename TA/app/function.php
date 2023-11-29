@@ -279,7 +279,7 @@ function editWallet($kodePelanggan, $nomorDana, $nomorGopay, $nomorOvo) {
         $stmt->execute();
     }
 
-    header('Refresh:1');
+    // header('Refresh:1');
 }
 
 

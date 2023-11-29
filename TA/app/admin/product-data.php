@@ -30,7 +30,7 @@ if(isset($_GET['search'])) {
 
 <section id="content">
 	<div class="main-container">
-		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
+		<form method="get">
 			<div class="search">
 				<input type="text" placeholder="Search product, categories, supplier" name="keyword">
 				<button type="submit" name="search">

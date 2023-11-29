@@ -72,7 +72,7 @@ if($produk[0]["stokProduk"]<=0){
 
     <div class="card-container">
       <h2>Jumlah Produk:</h2>
-      <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+      <form method="post">
         <!-- Product List -->
         <div class="card-list flex">
           <div class="card">

@@ -45,7 +45,7 @@ if(isset($_POST["edit"]) && $errors==[]){
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<?= $data[0]['kodeProduk'];?>">
         <input type="hidden" name="gambarLama" value="<?= $data[0]["gambarProduk"];?>">
 				<div class="form-title">

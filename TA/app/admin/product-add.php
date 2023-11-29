@@ -32,7 +32,7 @@ if(isset($_POST["tambah"]) && $errors==[]){
 <section>
 	<div class="main-container">
 		<div class="formin-container">
-			<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 				<div class="form-title">
 					<h2>Add Product</h2>
 				</div>
