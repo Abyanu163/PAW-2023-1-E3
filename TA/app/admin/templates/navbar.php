@@ -5,9 +5,9 @@
 			<h1>MeatMaster<span>(admin)</span></h1>
 		</a>
 		<ul class="link-list">
-			<li><a href="<?= BASEURL ?>/app/admin/product-data.php" class="<?php if ($page == 'product') echo 'link-active' ?>">Product Data</a></li>
-			<li><a href="<?= BASEURL ?>/app/admin/supplier-data.php" class="<?php if ($page == 'supplier') echo 'link-active' ?>">Supplier Data</a></li>
-			<li><a href="<?= BASEURL ?>/app/admin/customer-data.php" class="<?php if ($page == 'customer') echo 'link-active' ?>">Customer Data</a></li>
+			<li><a href="<?= BASEURL ?>/app/admin/product-data.php" class="<?php if ($page == 'product') echo 'link-active' ?>">Data Produk</a></li>
+			<li><a href="<?= BASEURL ?>/app/admin/supplier-data.php" class="<?php if ($page == 'supplier') echo 'link-active' ?>">Data Supplier</a></li>
+			<li><a href="<?= BASEURL ?>/app/admin/customer-data.php" class="<?php if ($page == 'customer') echo 'link-active' ?>">Data Customer </a></li>
 			<li><a href="?Chongyun_x_REA_ATUH=Redirect_Sign_Out_Enabled" class="logout">Log out</a></li>
 		</ul>
 		<div class="hamburger-menu">

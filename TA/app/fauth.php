@@ -157,7 +157,7 @@ function validatingUpdate($METHOD, $arrayIn) { //... di sini
         case 'adminpwd':
             if (strlen($METHOD[$arrayIn]) < 8 || (strlen($METHOD[$arrayIn]) > 99)) {
                 $GLOBALS['failUpdate'] = TRUE;
-                return "Kata sandi kurang dari 8 karakter.<br/>Atau terlalu banyak karakter akan bingung untuk Qiqi";
+                return "Kata sandi kurang dari 8 karakter. Atau terlalu banyak karakter akan bingung untuk Qiqi";
             } else if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/", $METHOD[$arrayIn])) {
                 $GLOBALS['failUpdate'] = TRUE;
                 return "Kata sandi seminimal ada huruf kecil, besar, angka, dan simbol tertentu (Misal # ? ! @ $ % ^ & * - . ).";

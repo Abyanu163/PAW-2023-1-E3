@@ -16,8 +16,6 @@ $data = selectData(
 );
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
 <section id="content">
 	<div class="main-container">
 
@@ -104,6 +102,7 @@ endforeach;
 $valueChart[] = $penjualan;
 ?>
 
+<script src="<?= BASEURL ?>/assets/chartjs/dist/chart.umd.js"></script>
 <script>
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {

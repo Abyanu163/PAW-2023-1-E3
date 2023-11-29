@@ -37,7 +37,7 @@ if(isset($_GET['search'])) {
         <h2>List Kategori:</h2>
 
         <!-- Product List -->
-        <div class="card-list grid">
+        <div class="card-list flex">
           <?php foreach($data as $ch): ?>
           <div class="card categories">
             <div class="card-desc no-pict">

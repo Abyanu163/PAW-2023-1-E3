@@ -13,7 +13,7 @@ $failUpdate = FALSE;
 		<div class="formin-container">
 			<form method="POST">
 				<div class="form-title">
-					<h2>Customer Profile</h2>
+					<h2>Profil Customer</h2>
 				</div>
 				<div class="form-element">
 					<div class="input-field">
