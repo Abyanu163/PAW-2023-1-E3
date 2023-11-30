@@ -55,7 +55,7 @@ if(isset($_GET['search'])) {
 				<?php foreach ($data as $ch) : ?>
 					<div class="card">
 						<div class="card-pict">
-							<img src="<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>" alt="product">
+							<img src="<?= BASEURL ?>/assets/img/product/<?= $ch['gambarProduk'] ?>" alt="<?= $ch["namaProduk"] ?>">
 						</div>
 						<div class="card-desc">
 							<h3><?= $ch["namaProduk"] ?></h3>
