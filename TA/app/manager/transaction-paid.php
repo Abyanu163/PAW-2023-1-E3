@@ -12,6 +12,7 @@ $data = selectData(
 	JOIN orders o ON (p.kodePesanan = o.kodePesanan)
 	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
 	WHERE o.keterangan = 'sudah'
+	ORDER BY p.waktuBayar ASC
 	;"
 );
 ?>
@@ -76,6 +77,7 @@ $data = selectData(
 	JOIN orders o ON (p.kodePesanan = o.kodePesanan)
 	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
 	WHERE o.keterangan = 'sudah' AND p.waktuBayar BETWEEN '$year-$month-1 00:00:01' AND '$year-$month-$lastDate 23:59:59'
+	ORDER BY p.waktuBayar ASC
 	;"
 );
 

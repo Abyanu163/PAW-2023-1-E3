@@ -14,6 +14,7 @@ $data = selectData(
 	FROM orders o
 	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
 	WHERE o.keterangan = 'belum'
+	ORDER BY o.tanggalPesan ASC
 	;"
 );
 ?>
@@ -80,6 +81,7 @@ $data = selectData(
 	FROM orders o
 	JOIN customers c ON (o.kodePelanggan = c.kodePelanggan)
 	WHERE o.keterangan = 'belum' AND o.tanggalPesan BETWEEN '$year-$month-1 00:00:01' AND '$year-$month-$lastDate 23:59:59'
+	ORDER BY o.tanggalPesan ASC
 	;"
 );
 
