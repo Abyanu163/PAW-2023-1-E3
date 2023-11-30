@@ -6,7 +6,7 @@ checkAdminTable(PDO_Connect);
 checkCustomerTable(PDO_Connect);
 session_start();
 isSignedIn();
-include('templates/header.php');
+require('templates/header.php');
 ?>
 <div id="login">
 	<div class="login-container">
@@ -51,5 +51,4 @@ include('templates/header.php');
 		</form>
 	</div>
 </div>
-</body>
-</html>
+<?php require('templates/footer.php'); ?>
